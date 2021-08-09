@@ -25,12 +25,15 @@
 <meta property="og:site_name" content="Yitao&#39;s Blog">
 <meta property="og:description" content="ZooKeeper(To be continuely updated)  Introduction  ZooKeeper is a very popular service for coordinating processes of distributed applications, it provides a simple and high performance kernel for buil">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-8.ZooKeeper/ZooKeeper_namespace.png">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-8.ZooKeeper/Znode_stat.png">
 <meta property="article:published_time" content="2021-08-09T09:07:17.945Z">
-<meta property="article:modified_time" content="2021-08-09T10:05:11.379Z">
+<meta property="article:modified_time" content="2021-08-09T10:44:13.292Z">
 <meta property="article:author" content="Wang Yitao">
 <meta property="article:tag" content="Distributed Systems">
 <meta property="article:tag" content="ZooKeeper">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjuytw.github.io/2021/08/09/6.824-8.ZooKeeper/ZooKeeper_namespace.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://zjuytw.github.io/2021/08/09/6.824-8.ZooKeeper/index.html">
   
@@ -417,7 +420,7 @@
 <h2>Implementation</h2>
 
 <p>The node in the tree is called <em>znode</em>, which stores data and node information. The main task for ZK is to coordinate but not file storage, so znode’s file size is smaller than 1MB</p>
-<p>![ZooKeeper namespace](ZooKeeper namespace.png)</p>
+<p><img src="/2021/08/09/6.824-8.ZooKeeper/ZooKeeper_namespace.png" alt="ZooKeeper namespace"></p>
 <p>There are two types of znode</p>
 <ul>
 <li>Ephemeral : ZK will automated delete it, after session finishes</li>
@@ -426,7 +429,7 @@
 <h3>Node information</h3>
 
 <p>Znode has a <em>sequential</em> flag, it will be issued a monotonically increased number  if flag is true when created, to mark the global sequential order of the znode. It also maintains a state information table call <em>Stat</em>.</p>
-<p>![Znode stat](Znode stat.png)</p>
+<p><img src="/2021/08/09/6.824-8.ZooKeeper/Znode_stat.png" alt="Znode stat"></p>
 <h3>Sequential Consistency</h3>
 
 <p>To achieve sequential consistency, ZK uses its own ZAB consensus algorithm, like Raft and Paxos in implementation but different in some details.</p>

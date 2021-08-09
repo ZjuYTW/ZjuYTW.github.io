@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-lab4/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-14.OCC(FaRM)/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-8.ZooKeeper/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zjuytw.github.io/2021/08/09/6.824-lab4-Conclusion/</loc>
     
     <lastmod>2021-08-09</lastmod>
@@ -37,13 +65,6 @@
   </url>
   
   <url>
-    <loc>https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/</loc>
-    
-    <lastmod>2021-08-09</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://zjuytw.github.io/2021/08/09/6.824-19.%20Bitcoin/</loc>
     
     <lastmod>2021-08-09</lastmod>
@@ -72,13 +93,6 @@
   </url>
   
   <url>
-    <loc>https://zjuytw.github.io/2021/08/09/6.824-14.OCC(FaRM)/</loc>
-    
-    <lastmod>2021-08-09</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://zjuytw.github.io/2021/08/09/6.824-13.Spanner(Strong%20Consistency%20RW)/</loc>
     
     <lastmod>2021-08-09</lastmod>
@@ -101,20 +115,6 @@
   
   <url>
     <loc>https://zjuytw.github.io/2021/08/09/6.824-10.Aurora/</loc>
-    
-    <lastmod>2021-08-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/2021/08/09/6.824-8.ZooKeeper/</loc>
-    
-    <lastmod>2021-08-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/2021/08/09/6.824-lab4/</loc>
     
     <lastmod>2021-08-09</lastmod>
     
