@@ -3,11 +3,11 @@
   <title>Yitao&#39;s Blog</title>
   
   
-  <link href="https://github.com/ZjuYTW/atom.xml" rel="self"/>
+  <link href="https://github.com/ZjuYTW.github.io/atom.xml" rel="self"/>
   
-  <link href="https://github.com/ZjuYTW/"/>
+  <link href="https://github.com/ZjuYTW.github.io/"/>
   <updated>2021-08-09T04:07:37.526Z</updated>
-  <id>https://github.com/ZjuYTW/</id>
+  <id>https://github.com/ZjuYTW.github.io/</id>
   
   <author>
     <name>Wang Yitao</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://github.com/ZjuYTW/2021/08/09/hello-world/"/>
-    <id>https://github.com/ZjuYTW/2021/08/09/hello-world/</id>
+    <link href="https://github.com/ZjuYTW.github.io/2021/08/09/hello-world/"/>
+    <id>https://github.com/ZjuYTW.github.io/2021/08/09/hello-world/</id>
     <published>2021-08-09T03:10:31.995Z</published>
     <updated>2021-08-09T04:07:37.526Z</updated>
     
@@ -38,8 +38,8 @@
   
   <entry>
     <title>5841. Find the Longest Valid Obstacle Course at Each Position</title>
-    <link href="https://github.com/ZjuYTW/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/"/>
-    <id>https://github.com/ZjuYTW/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/</id>
+    <link href="https://github.com/ZjuYTW.github.io/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/"/>
+    <id>https://github.com/ZjuYTW.github.io/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/</id>
     <published>2021-08-08T17:04:57.677Z</published>
     <updated>2021-08-09T05:44:37.460Z</updated>
     
@@ -56,21 +56,21 @@
     
     
     
-    <category term="Leetcode" scheme="https://github.com/ZjuYTW/categories/Leetcode/"/>
+    <category term="Leetcode" scheme="https://github.com/ZjuYTW.github.io/categories/Leetcode/"/>
     
     
-    <category term="monotone-stack" scheme="https://github.com/ZjuYTW/tags/monotone-stack/"/>
+    <category term="monotone-stack" scheme="https://github.com/ZjuYTW.github.io/tags/monotone-stack/"/>
     
-    <category term="greedy" scheme="https://github.com/ZjuYTW/tags/greedy/"/>
+    <category term="greedy" scheme="https://github.com/ZjuYTW.github.io/tags/greedy/"/>
     
-    <category term="maximum increasing subsequence" scheme="https://github.com/ZjuYTW/tags/maximum-increasing-subsequence/"/>
+    <category term="maximum increasing subsequence" scheme="https://github.com/ZjuYTW.github.io/tags/maximum-increasing-subsequence/"/>
     
   </entry>
   
   <entry>
     <title>5840. Minimum Number of Swaps to Make the String Balanced</title>
-    <link href="https://github.com/ZjuYTW/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/"/>
-    <id>https://github.com/ZjuYTW/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/</id>
+    <link href="https://github.com/ZjuYTW.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/"/>
+    <id>https://github.com/ZjuYTW.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/</id>
     <published>2021-08-08T17:00:27.810Z</published>
     <updated>2021-08-09T05:43:33.628Z</updated>
     
@@ -89,19 +89,19 @@
     
     
     
-    <category term="Leetcode" scheme="https://github.com/ZjuYTW/categories/Leetcode/"/>
+    <category term="Leetcode" scheme="https://github.com/ZjuYTW.github.io/categories/Leetcode/"/>
     
     
-    <category term="greedy" scheme="https://github.com/ZjuYTW/tags/greedy/"/>
+    <category term="greedy" scheme="https://github.com/ZjuYTW.github.io/tags/greedy/"/>
     
-    <category term="stack" scheme="https://github.com/ZjuYTW/tags/stack/"/>
+    <category term="stack" scheme="https://github.com/ZjuYTW.github.io/tags/stack/"/>
     
   </entry>
   
   <entry>
     <title>1792.Maximum Average Pass Ratio</title>
-    <link href="https://github.com/ZjuYTW/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/"/>
-    <id>https://github.com/ZjuYTW/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/</id>
+    <link href="https://github.com/ZjuYTW.github.io/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/"/>
+    <id>https://github.com/ZjuYTW.github.io/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/</id>
     <published>2021-08-08T16:54:36.226Z</published>
     <updated>2021-08-09T05:42:12.238Z</updated>
     
@@ -120,19 +120,19 @@
     
     
     
-    <category term="Leetcode" scheme="https://github.com/ZjuYTW/categories/Leetcode/"/>
+    <category term="Leetcode" scheme="https://github.com/ZjuYTW.github.io/categories/Leetcode/"/>
     
     
-    <category term="No AC first time" scheme="https://github.com/ZjuYTW/tags/No-AC-first-time/"/>
+    <category term="No AC first time" scheme="https://github.com/ZjuYTW.github.io/tags/No-AC-first-time/"/>
     
-    <category term="Heap" scheme="https://github.com/ZjuYTW/tags/Heap/"/>
+    <category term="Heap" scheme="https://github.com/ZjuYTW.github.io/tags/Heap/"/>
     
   </entry>
   
   <entry>
     <title>1036. Escape a Large Maze</title>
-    <link href="https://github.com/ZjuYTW/2021/08/07/1036.%20Escape%20a%20Large%20Maze/"/>
-    <id>https://github.com/ZjuYTW/2021/08/07/1036.%20Escape%20a%20Large%20Maze/</id>
+    <link href="https://github.com/ZjuYTW.github.io/2021/08/07/1036.%20Escape%20a%20Large%20Maze/"/>
+    <id>https://github.com/ZjuYTW.github.io/2021/08/07/1036.%20Escape%20a%20Large%20Maze/</id>
     <published>2021-08-07T14:12:50.626Z</published>
     <updated>2021-08-09T06:02:08.072Z</updated>
     
@@ -151,19 +151,19 @@
     
     
     
-    <category term="Leetcode" scheme="https://github.com/ZjuYTW/categories/Leetcode/"/>
+    <category term="Leetcode" scheme="https://github.com/ZjuYTW.github.io/categories/Leetcode/"/>
     
     
-    <category term="BFS" scheme="https://github.com/ZjuYTW/tags/BFS/"/>
+    <category term="BFS" scheme="https://github.com/ZjuYTW.github.io/tags/BFS/"/>
     
-    <category term="No AC first time" scheme="https://github.com/ZjuYTW/tags/No-AC-first-time/"/>
+    <category term="No AC first time" scheme="https://github.com/ZjuYTW.github.io/tags/No-AC-first-time/"/>
     
   </entry>
   
   <entry>
     <title>1671. Minimum Number of Removals to Make Mountain Array</title>
-    <link href="https://github.com/ZjuYTW/2021/08/07/1671.%20Minimum%20Number%20of%20Removals%20to%20Make%20Mountain%20Array/"/>
-    <id>https://github.com/ZjuYTW/2021/08/07/1671.%20Minimum%20Number%20of%20Removals%20to%20Make%20Mountain%20Array/</id>
+    <link href="https://github.com/ZjuYTW.github.io/2021/08/07/1671.%20Minimum%20Number%20of%20Removals%20to%20Make%20Mountain%20Array/"/>
+    <id>https://github.com/ZjuYTW.github.io/2021/08/07/1671.%20Minimum%20Number%20of%20Removals%20to%20Make%20Mountain%20Array/</id>
     <published>2021-08-07T13:13:10.709Z</published>
     <updated>2021-08-09T05:44:43.910Z</updated>
     
@@ -182,23 +182,23 @@
     
     
     
-    <category term="Leetcode" scheme="https://github.com/ZjuYTW/categories/Leetcode/"/>
+    <category term="Leetcode" scheme="https://github.com/ZjuYTW.github.io/categories/Leetcode/"/>
     
     
-    <category term="No AC first time" scheme="https://github.com/ZjuYTW/tags/No-AC-first-time/"/>
+    <category term="No AC first time" scheme="https://github.com/ZjuYTW.github.io/tags/No-AC-first-time/"/>
     
-    <category term="monotone-stack" scheme="https://github.com/ZjuYTW/tags/monotone-stack/"/>
+    <category term="monotone-stack" scheme="https://github.com/ZjuYTW.github.io/tags/monotone-stack/"/>
     
-    <category term="greedy" scheme="https://github.com/ZjuYTW/tags/greedy/"/>
+    <category term="greedy" scheme="https://github.com/ZjuYTW.github.io/tags/greedy/"/>
     
-    <category term="DP" scheme="https://github.com/ZjuYTW/tags/DP/"/>
+    <category term="DP" scheme="https://github.com/ZjuYTW.github.io/tags/DP/"/>
     
   </entry>
   
   <entry>
     <title>457. Circular Array Loop</title>
-    <link href="https://github.com/ZjuYTW/2021/08/07/457.%20Circular%20Array%20Loop/"/>
-    <id>https://github.com/ZjuYTW/2021/08/07/457.%20Circular%20Array%20Loop/</id>
+    <link href="https://github.com/ZjuYTW.github.io/2021/08/07/457.%20Circular%20Array%20Loop/"/>
+    <id>https://github.com/ZjuYTW.github.io/2021/08/07/457.%20Circular%20Array%20Loop/</id>
     <published>2021-08-07T04:17:12.129Z</published>
     <updated>2021-08-09T05:39:23.991Z</updated>
     
@@ -217,19 +217,19 @@
     
     
     
-    <category term="Leetcode" scheme="https://github.com/ZjuYTW/categories/Leetcode/"/>
+    <category term="Leetcode" scheme="https://github.com/ZjuYTW.github.io/categories/Leetcode/"/>
     
     
-    <category term="No AC first time" scheme="https://github.com/ZjuYTW/tags/No-AC-first-time/"/>
+    <category term="No AC first time" scheme="https://github.com/ZjuYTW.github.io/tags/No-AC-first-time/"/>
     
-    <category term="Fast-Slow pointers" scheme="https://github.com/ZjuYTW/tags/Fast-Slow-pointers/"/>
+    <category term="Fast-Slow pointers" scheme="https://github.com/ZjuYTW.github.io/tags/Fast-Slow-pointers/"/>
     
   </entry>
   
   <entry>
     <title>847. Shortest Path Visiting All Nodes</title>
-    <link href="https://github.com/ZjuYTW/2021/08/07/847.%20Shortest%20Path%20Visiting%20All%20Nodes/"/>
-    <id>https://github.com/ZjuYTW/2021/08/07/847.%20Shortest%20Path%20Visiting%20All%20Nodes/</id>
+    <link href="https://github.com/ZjuYTW.github.io/2021/08/07/847.%20Shortest%20Path%20Visiting%20All%20Nodes/"/>
+    <id>https://github.com/ZjuYTW.github.io/2021/08/07/847.%20Shortest%20Path%20Visiting%20All%20Nodes/</id>
     <published>2021-08-07T02:42:37.295Z</published>
     <updated>2021-08-09T05:40:01.338Z</updated>
     
@@ -248,14 +248,14 @@
     
     
     
-    <category term="Leetcode" scheme="https://github.com/ZjuYTW/categories/Leetcode/"/>
+    <category term="Leetcode" scheme="https://github.com/ZjuYTW.github.io/categories/Leetcode/"/>
     
     
-    <category term="BFS" scheme="https://github.com/ZjuYTW/tags/BFS/"/>
+    <category term="BFS" scheme="https://github.com/ZjuYTW.github.io/tags/BFS/"/>
     
-    <category term="No AC first time" scheme="https://github.com/ZjuYTW/tags/No-AC-first-time/"/>
+    <category term="No AC first time" scheme="https://github.com/ZjuYTW.github.io/tags/No-AC-first-time/"/>
     
-    <category term="State Compression" scheme="https://github.com/ZjuYTW/tags/State-Compression/"/>
+    <category term="State Compression" scheme="https://github.com/ZjuYTW.github.io/tags/State-Compression/"/>
     
   </entry>
   
