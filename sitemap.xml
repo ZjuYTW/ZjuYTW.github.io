@@ -184,14 +184,14 @@
   </url>
   
   <url>
-    <loc>https://zjuytw.github.io/2021/08/07/1036.%20Escape%20a%20Large%20Maze/</loc>
+    <loc>https://zjuytw.github.io/2021/08/07/1671.%20Minimum%20Number%20of%20Removals%20to%20Make%20Mountain%20Array/</loc>
     
     <lastmod>2021-08-09</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zjuytw.github.io/2021/08/07/1671.%20Minimum%20Number%20of%20Removals%20to%20Make%20Mountain%20Array/</loc>
+    <loc>https://zjuytw.github.io/2021/08/07/1036.%20Escape%20a%20Large%20Maze/</loc>
     
     <lastmod>2021-08-09</lastmod>
     
@@ -214,20 +214,6 @@
 
   
   <url>
-    <loc>https://zjuytw.github.io/tags/BFS/</loc>
-    <lastmod>2021-08-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/tags/No-AC-first-time/</loc>
-    <lastmod>2021-08-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://zjuytw.github.io/tags/monotone-stack/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
@@ -243,6 +229,20 @@
   
   <url>
     <loc>https://zjuytw.github.io/tags/DP/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/No-AC-first-time/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/BFS/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -298,13 +298,6 @@
   </url>
   
   <url>
-    <loc>https://zjuytw.github.io/tags/Spark/</loc>
-    <lastmod>2021-08-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://zjuytw.github.io/tags/Spanner/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
@@ -313,6 +306,13 @@
   
   <url>
     <loc>https://zjuytw.github.io/tags/FaRM/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Spark/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -347,6 +347,13 @@
   </url>
   
   <url>
+    <loc>https://zjuytw.github.io/tags/ZooKeeper/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zjuytw.github.io/tags/CRAQ/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
@@ -362,13 +369,6 @@
   
   <url>
     <loc>https://zjuytw.github.io/tags/Lab-Note/</loc>
-    <lastmod>2021-08-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/tags/ZooKeeper/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

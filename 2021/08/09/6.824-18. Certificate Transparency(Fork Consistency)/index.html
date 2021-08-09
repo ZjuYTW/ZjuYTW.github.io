@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>6.824 CT lecture note | Yitao&#39;s Blog</title>
+  <meta name="description" content="Certificate Transparency  Introduce  First review the vulnerability of HTTP and an example of  Man in the Middle Attack.  HTTP   HTTP is a request response protocol to communicate asynchronously betw">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.824 CT lecture note">
+<meta property="og:url" content="https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/index.html">
+<meta property="og:site_name" content="Yitao&#39;s Blog">
+<meta property="og:description" content="Certificate Transparency  Introduce  First review the vulnerability of HTTP and an example of  Man in the Middle Attack.  HTTP   HTTP is a request response protocol to communicate asynchronously betw">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/man-in-the-middle-mitm-attack.png">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/https-connection-sequence-diagram.png">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/CT_work_flow.png">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/MerkleTree.png">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/ForkConsistencyEg.png">
+<meta property="article:published_time" content="2021-08-09T09:13:23.356Z">
+<meta property="article:modified_time" content="2021-08-09T10:45:57.253Z">
+<meta property="article:author" content="Wang Yitao">
+<meta property="article:tag" content="Distributed Systems">
+<meta property="article:tag" content="Certificate Transparency">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/man-in-the-middle-mitm-attack.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Yitao&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/ZjuYTW" target="_blank">
+          <img class="img-circle img-rotate" src="/images/ichigo1.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yitao</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Bug Creator</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Singapore</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ZjuYTW" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>My personal website, writing for fun and sharding knowledge</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/6-824/">6.824</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Leetcode/">Leetcode</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Aurora/" rel="tag">Aurora</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bitcoin/" rel="tag">Bitcoin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COPS/" rel="tag">COPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRAQ/" rel="tag">CRAQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Certificate-Transparency/" rel="tag">Certificate Transparency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/" rel="tag">DP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Systems/" rel="tag">Distributed Systems</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FaRM/" rel="tag">FaRM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fast-Slow-pointers/" rel="tag">Fast-Slow pointers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Frangipani/" rel="tag">Frangipani</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heap/" rel="tag">Heap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KV-Raft/" rel="tag">KV Raft</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lab-Note/" rel="tag">Lab Note</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MapReduce/" rel="tag">MapReduce</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Memcache-FB/" rel="tag">Memcache@FB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/No-AC-first-time/" rel="tag">No AC first time</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raft/" rel="tag">Raft</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShardKV-Storage/" rel="tag">ShardKV Storage</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spanner/" rel="tag">Spanner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/" rel="tag">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/State-Compression/" rel="tag">State Compression</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ZooKeeper/" rel="tag">ZooKeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/" rel="tag">greedy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maximum-increasing-subsequence/" rel="tag">maximum increasing subsequence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monotone-stack/" rel="tag">monotone-stack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stack/" rel="tag">stack</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Aurora/" style="font-size: 13px;">Aurora</a> <a href="/tags/BFS/" style="font-size: 13.2px;">BFS</a> <a href="/tags/Bitcoin/" style="font-size: 13px;">Bitcoin</a> <a href="/tags/COPS/" style="font-size: 13px;">COPS</a> <a href="/tags/CRAQ/" style="font-size: 13px;">CRAQ</a> <a href="/tags/Certificate-Transparency/" style="font-size: 13px;">Certificate Transparency</a> <a href="/tags/DP/" style="font-size: 13px;">DP</a> <a href="/tags/Distributed-Systems/" style="font-size: 14px;">Distributed Systems</a> <a href="/tags/FaRM/" style="font-size: 13px;">FaRM</a> <a href="/tags/Fast-Slow-pointers/" style="font-size: 13px;">Fast-Slow pointers</a> <a href="/tags/Frangipani/" style="font-size: 13px;">Frangipani</a> <a href="/tags/Heap/" style="font-size: 13px;">Heap</a> <a href="/tags/KV-Raft/" style="font-size: 13.2px;">KV Raft</a> <a href="/tags/Lab-Note/" style="font-size: 13.8px;">Lab Note</a> <a href="/tags/MapReduce/" style="font-size: 13px;">MapReduce</a> <a href="/tags/Memcache-FB/" style="font-size: 13px;">Memcache@FB</a> <a href="/tags/No-AC-first-time/" style="font-size: 13.6px;">No AC first time</a> <a href="/tags/Raft/" style="font-size: 13.2px;">Raft</a> <a href="/tags/ShardKV-Storage/" style="font-size: 13.2px;">ShardKV Storage</a> <a href="/tags/Spanner/" style="font-size: 13px;">Spanner</a> <a href="/tags/Spark/" style="font-size: 13px;">Spark</a> <a href="/tags/State-Compression/" style="font-size: 13px;">State Compression</a> <a href="/tags/ZooKeeper/" style="font-size: 13px;">ZooKeeper</a> <a href="/tags/greedy/" style="font-size: 13.4px;">greedy</a> <a href="/tags/maximum-increasing-subsequence/" style="font-size: 13px;">maximum increasing subsequence</a> <a href="/tags/monotone-stack/" style="font-size: 13.2px;">monotone-stack</a> <a href="/tags/stack/" style="font-size: 13px;">stack</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/6-824/">6.824</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/09/6.824-19.%20Bitcoin/" class="title">6.824 Bitcoin lecture note</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-09T09:13:23.361Z" itemprop="datePublished">2021-08-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/6-824/">6.824</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/" class="title">6.824 CT lecture note</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-09T09:13:23.356Z" itemprop="datePublished">2021-08-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/6-824/">6.824</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/09/6.824-17.COPS(Causal%20Consistency)/" class="title">6.824 COPS lecture note</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-09T09:13:23.348Z" itemprop="datePublished">2021-08-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/6-824/">6.824</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/09/6.824-16.Memcache(Cache%20Consistency)/" class="title">6.824 Memcache lecture note</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-09T09:13:23.342Z" itemprop="datePublished">2021-08-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/6-824/">6.824</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/09/6.824-15.Spark(Big%20Data%20Process)/" class="title">6.824 Spark lecture note</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-09T09:13:23.335Z" itemprop="datePublished">2021-08-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"> Certificate Transparency</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">Introduce</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.0.1.</span> <span class="toc-text"> HTTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.0.2.</span> <span class="toc-text"> Man in the Middle Attack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">Certificate, SSL, TLS, HTTPS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">Certificate Transparency</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">Implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text"> Fork Attack (Fork Consistency)</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-6.824-18. Certificate Transparency(Fork Consistency)" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      6.824 CT lecture note
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/" class="article-date">
+	  <time datetime="2021-08-09T09:13:23.356Z" itemprop="datePublished">2021-08-09</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/6-824/">6.824</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Certificate-Transparency/" rel="tag">Certificate Transparency</a>, <a class="article-tag-link-link" href="/tags/Distributed-Systems/" rel="tag">Distributed Systems</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1> Certificate Transparency</h1>
+
+<h2>Introduce</h2>
+
+<p>First review the vulnerability of HTTP and an example of  Man in the Middle Attack.</p>
+<h4> HTTP</h4>
+
+<blockquote>
+<p>HTTP is a request response protocol to communicate asynchronously between client and server.</p>
+<p>For websites and pages the browser acts as a client and a web-server like Apache or IIS acts as server. The server hosts the files (like html , audio , video files etc) and returns are responds to client requests with the data. Depending on the request a response contains the status of the request.</p>
+<p>The process involves a series of messages that go back and forth between the client and server. The process starts with initiating a connection. After that a process known as TCP slow start kicks in. At this point data is passed between the two parties via data packets and often requires multiple round trips.</p>
+<p>TCP slow start is designed to gradually expand the amount of data traversing the wire each round trip. The initial packet size is 16kb and doubles on subsequent round trips until a max size is reached. This can vary, but tends to be around 4MB for most connections.</p>
+<p>This process is used because the server does not know how much bandwidth the client can handle. Rather than overflowing the client the server uses a gentle size and continues to increase until a limit is found.</p>
+<p>As data or request bodies move between the client and the server it is done using clear or plain text. This is viewable by anyone or software watching the network traffic.</p>
+<p>This is not that important for general content. However, today even when you don’t think sensitive data is moving between the two parties more sessions do transport identifying information. This is why every website should use TLS to secure HTTP connections.</p>
+</blockquote>
+<h4> Man in the Middle Attack</h4>
+
+<p><img src="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/man-in-the-middle-mitm-attack.png" alt="man-in-the-middle-mitm-attack"></p>
+<p>A third-party may easily hijack the connection towards target website and redirect to its own rogue web, for no further check mechanism in HTTP.</p>
+<h4>Certificate, SSL, TLS, HTTPS</h4>
+
+<p><strong>HTTPS work flow:</strong></p>
+<p><img src="https-connection-sequence-diagram.png" alt="https-connection-sequence-diagram"></p>
+<p>Particularly, server should request a certificate from <em>CA(Certificate Authority)</em>. Whenever client send a connection request to server, it will receive a CERT from server.</p>
+<table>
+<thead>
+<tr>
+<th>Certificate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Server name, eg: “gmail.com”</td>
+</tr>
+<tr>
+<td>Public Key of server</td>
+</tr>
+<tr>
+<td>CA’s Signature</td>
+</tr>
+</tbody></table>
+<p>CA’s unique signature ensures that just CA can issue the certificate to server that no one else can counterfeit.</p>
+<p><strong>NOTE:</strong> A vulnerability of this scheme is that once a CA was broken into or something else happened and caused CA issued a malicious certificate. Client may have chance to talk to a rogue web and info may get leaked.</p>
+<h2>Certificate Transparency</h2>
+
+<p>Certificate Transparency is a system that stores certificate logs which are stored distributed and append-only on CT. CT can provide user certificate verification to keep CA from issuing malicious certificate and the certificate even keep in CA for longer time.</p>
+<p><img src="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/CT_work_flow.png" alt="CT work flow"></p>
+<p>CT promises following:</p>
+<ul>
+<li>Certificates are deposited in public, transparent logs</li>
+<li>Logs are cryptographically monitored</li>
+</ul>
+<h3>Implementation</h3>
+
+<p>Each certificates are stored as a node in Merkle Tree in CT. <img src="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/MerkleTree.png" alt="Merkle Tree"></p>
+<p>Each node in each level is the value of the output of <em>cryptographic hash function</em> that maps an arbitrary-size message <em>M</em> to a small fixed-size output H(<em>M</em>), with the property that it is infeasible in practice to produce any pair of distinct messages <em>M1</em> ≠ <em>M2</em> with identical hashes H(<em>M1</em>) = H(<em>M2</em>). And the we have</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h(0, K) = H(record K)</span><br><span class="line">h(L+1, K) = H(h(L, 2 K), h(L, 2 K+1))</span><br></pre></td></tr></table></figure>
+
+<p>With the property of above, we can determine whether a specific certificate stored in the tree, we can recompute hash(<em>the certificate</em>) and the hash value of its siblings and relatives to finally get the top-level’s hash. If H(4,0) == recomputed H(4,0), then proved.</p>
+<p><strong>Example:</strong></p>
+<p>For example, suppose we want to prove that a certain bit string <em>B</em> is in fact record 9 in a tree of 16 records with top-level hash <em>T</em>. We can provide those bits along with the other hash inputs needed to reconstruct the overall tree hash using those bits. Specifically, the client can derive as well as we can that:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">T = h(4, 0)</span><br><span class="line">= H(h(3, 0), h(3, 1))</span><br><span class="line">= H(h(3, 0), H(h(2, 2), h(2, 3)))</span><br><span class="line">= H(h(3, 0), H(H(h(1, 4), h(1, 5)), h(2, 3)))</span><br><span class="line">= H(h(3, 0), H(H(H(h(0, 8), h(0, 9)), h(1, 5)), h(2, 3)))</span><br><span class="line">= H(h(3, 0), H(H(H(h(0, 8), H(record 9)), h(1, 5)), h(2, 3)))</span><br><span class="line">= H(h(3, 0), H(H(H(h(0, 8), H(B)), h(1, 5)), h(2, 3)))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3> Fork Attack (Fork Consistency)</h3>
+
+<p>The proof of fork consistency, image a log servers have a chain of logs and once the log server wants to fork (like, to trick a user for a malicious certificate but not seen by other monitors etc.) CT has a mechanism to detect the inconsistency by <em>gossip</em></p>
+<p><img src="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/ForkConsistencyEg.png" alt="Fork Consistency eg"></p>
+<p>Like the example, once a log server has a fork line that starts with B for bogus and have a current STH(signed tree head, the top-level hash value). We can simply calculate if STH1’s log a prefix log of STH2’s log by the same way prove if STH1’s log is inside STH2’s log tree.</p>
+<p>If return a false, which means STH1 is on a different fork.</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/" title="6.824 CT lecture note" target="_blank" rel="external">https://zjuytw.github.io/2021/08/09/6.824-18. Certificate Transparency(Fork Consistency)/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/ZjuYTW" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/ichigo1.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/ZjuYTW" target="_blank"><span class="text-dark">Yitao</span><small class="ml-1x">Bug Creator</small></a></h3>
+        <div>A graduate student currently pursuing MS in Computer Science at Nantional University of Singapore. BSc at Zhejiang University.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/08/09/6.824-19.%20Bitcoin/" title="6.824 Bitcoin lecture note"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/08/09/6.824-17.COPS(Causal%20Consistency)/" title="6.824 COPS lecture note"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ZjuYTW" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
