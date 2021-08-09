@@ -25,16 +25,16 @@
 <meta property="og:site_name" content="Yitao&#39;s Blog">
 <meta property="og:description" content="1792.Maximum Average Pass Ratio  tag : Heap, No AC first time Description    Solution  I feel shamed for I failed to AC it at first time… Use a heap to store the whole develop rate for each class, and">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/ZjuYTW/ZjuYTW/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-1.png">
-<meta property="og:image" content="https://github.com/ZjuYTW/ZjuYTW/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-2.png">
-<meta property="og:image" content="https://github.com/ZjuYTW/ZjuYTW/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-3.png">
+<meta property="og:image" content="https://github.com/ZjuYTW.github.io/ZjuYTW.github.io/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-1.png">
+<meta property="og:image" content="https://github.com/ZjuYTW.github.io/ZjuYTW.github.io/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-2.png">
+<meta property="og:image" content="https://github.com/ZjuYTW.github.io/ZjuYTW.github.io/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-3.png">
 <meta property="article:published_time" content="2021-08-08T16:54:36.226Z">
 <meta property="article:modified_time" content="2021-08-09T05:42:12.238Z">
 <meta property="article:author" content="Wang Yitao">
 <meta property="article:tag" content="No AC first time">
 <meta property="article:tag" content="Heap">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/ZjuYTW/ZjuYTW/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-1.png">
+<meta name="twitter:image" content="https://github.com/ZjuYTW.github.io/ZjuYTW.github.io/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-1.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://github.com/ZjuYTW.github.io/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/index.html">
   
@@ -403,8 +403,8 @@
 <p>tag : Heap, No AC first time</p>
 <h2>Description</h2>
 
-<p><img src="/ZjuYTW/ZjuYTW/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-1.png" alt="1792-1"></p>
-<p><img src="/ZjuYTW/ZjuYTW/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-2.png" alt="1792-2"></p>
+<p><img src="/ZjuYTW.github.io/ZjuYTW.github.io/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-1.png" alt="1792-1"></p>
+<p><img src="/ZjuYTW.github.io/ZjuYTW.github.io/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-2.png" alt="1792-2"></p>
 <h2>Solution</h2>
 
 <p>I feel shamed for I failed to AC it at first time…</p>
@@ -414,7 +414,7 @@
 
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">maxAverageRatio</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; classes, <span class="keyword">int</span> extraStudents)</span> </span>&#123;</span><br><span class="line">        priority_queue&lt;pair&lt;<span class="keyword">double</span>, <span class="keyword">int</span>&gt;, vector&lt;pair&lt;<span class="keyword">double</span>, <span class="keyword">int</span>&gt;&gt;, less&lt;&gt;&gt; pq;</span><br><span class="line">        <span class="keyword">double</span> passrate = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; classes.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            passrate += <span class="number">1.0</span> * classes[i][<span class="number">0</span>] / classes[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">double</span> pr = <span class="built_in">calPR</span>(classes[i][<span class="number">0</span>]++,classes[i][<span class="number">1</span>]++);</span><br><span class="line">            pq.<span class="built_in">emplace</span>(pr, i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(extraStudents--)&#123;</span><br><span class="line">            <span class="keyword">auto</span> [dr, index] = pq.<span class="built_in">top</span>();</span><br><span class="line">            pq.<span class="built_in">pop</span>();</span><br><span class="line">            passrate += dr;</span><br><span class="line">            pq.<span class="built_in">emplace</span>(<span class="built_in">calPR</span>(classes[index][<span class="number">0</span>]++, classes[index][<span class="number">1</span>]++), index);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> passrate/classes.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">calPR</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1.0</span> * (p + <span class="number">1</span>) / (t + <span class="number">1</span>) - <span class="number">1.0</span> * p / t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/ZjuYTW/ZjuYTW/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-3.png" alt="1792-3"></p>
+<p><img src="/ZjuYTW.github.io/ZjuYTW.github.io/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/1792-3.png" alt="1792-3"></p>
 
       
     </div>
