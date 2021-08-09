@@ -2,6 +2,125 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-lab4-Conclusion/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-lab3-Conclusion/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-Lab3/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/06/15/6.824-lab2-Raft/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-lab1-MapReduce/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-19.%20Bitcoin/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-15.Spark(Big%20Data%20Process)/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-17.COPS(Causal%20Consistency)/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-16.Memcache(Cache%20Consistency)/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-14.OCC(FaRM)/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-13.Spanner(Strong%20Consistency%20RW)/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-11.Frangipani(Cache%20Consitency)/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-9.CRAQ/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-10.Aurora/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-8.ZooKeeper/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-lab4/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/</loc>
     
     <lastmod>2021-08-09</lastmod>
@@ -151,7 +270,84 @@
   </url>
   
   <url>
-    <loc>https://zjuytw.github.io/tags/Raft/</loc>
+    <loc>https://zjuytw.github.io/tags/Aurora/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Distributed-Systems/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Frangipani/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Spark/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Spanner/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/FaRM/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Memcache-FB/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/COPS/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Certificate-Transparency/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Bitcoin/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/CRAQ/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/KV-Raft/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -159,6 +355,34 @@
   
   <url>
     <loc>https://zjuytw.github.io/tags/Lab-Note/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/ZooKeeper/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/MapReduce/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Raft/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/ShardKV-Storage/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
