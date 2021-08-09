@@ -2,35 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zjuytw.github.io/2021/08/07/457.%20Circular%20Array%20Loop/</loc>
+    <loc>https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/</loc>
     
     <lastmod>2021-08-09</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zjuytw.github.io/categories/index.html</loc>
-    
-    <lastmod>2021-08-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/about/index.html</loc>
-    
-    <lastmod>2021-08-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/2021/08/07/1036.%20Escape%20a%20Large%20Maze/</loc>
-    
-    <lastmod>2021-08-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/2021/08/07/1671.%20Minimum%20Number%20of%20Removals%20to%20Make%20Mountain%20Array/</loc>
+    <loc>https://zjuytw.github.io/2021/08/09/new/6.824-lab2-Conclusion/</loc>
     
     <lastmod>2021-08-09</lastmod>
     
@@ -38,6 +17,13 @@
   
   <url>
     <loc>https://zjuytw.github.io/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/07/847.%20Shortest%20Path%20Visiting%20All%20Nodes/</loc>
     
     <lastmod>2021-08-09</lastmod>
     
@@ -58,7 +44,35 @@
   </url>
   
   <url>
-    <loc>https://zjuytw.github.io/2021/08/07/847.%20Shortest%20Path%20Visiting%20All%20Nodes/</loc>
+    <loc>https://zjuytw.github.io/2021/08/07/1036.%20Escape%20a%20Large%20Maze/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/07/1671.%20Minimum%20Number%20of%20Removals%20to%20Make%20Mountain%20Array/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/07/457.%20Circular%20Array%20Loop/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/categories/index.html</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/about/index.html</loc>
     
     <lastmod>2021-08-09</lastmod>
     
@@ -150,10 +164,31 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://zjuytw.github.io/tags/Raft/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Lab-Note/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
     <loc>https://zjuytw.github.io/categories/Leetcode/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/categories/6-824/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

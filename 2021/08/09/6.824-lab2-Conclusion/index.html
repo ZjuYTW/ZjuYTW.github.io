@@ -17,26 +17,25 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>5840. Minimum Number of Swaps to Make the String Balanced | Yitao&#39;s Blog</title>
-  <meta name="description" content="5840. Minimum Number of Swaps to Make the String Balanced  tag: stack, greedy Description    Solution  In each switch, brackets are reduced mostly 2, at least 1. 123&#x2F;&#x2F;Just swap the first dismatched ]">
+  <title>6.824 Lab2 Conclusion | Yitao&#39;s Blog</title>
+  <meta name="description" content="Conclusion After finish 3 parts of Lab, I have implemented a basic raft protocol and it can used to build a  K-V storage server. It is fascinating for its understandability and straight idea to build">
 <meta property="og:type" content="article">
-<meta property="og:title" content="5840. Minimum Number of Swaps to Make the String Balanced">
-<meta property="og:url" content="https://zjuytw.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/index.html">
+<meta property="og:title" content="6.824 Lab2 Conclusion">
+<meta property="og:url" content="https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/index.html">
 <meta property="og:site_name" content="Yitao&#39;s Blog">
-<meta property="og:description" content="5840. Minimum Number of Swaps to Make the String Balanced  tag: stack, greedy Description    Solution  In each switch, brackets are reduced mostly 2, at least 1. 123&#x2F;&#x2F;Just swap the first dismatched ]">
+<meta property="og:description" content="Conclusion After finish 3 parts of Lab, I have implemented a basic raft protocol and it can used to build a  K-V storage server. It is fascinating for its understandability and straight idea to build">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/5840-1.png">
-<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/5840-2.png">
-<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/5840-3.png">
-<meta property="article:published_time" content="2021-08-08T17:00:27.810Z">
-<meta property="article:modified_time" content="2021-08-09T08:34:33.476Z">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/Test.png">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/Test2.png">
+<meta property="article:published_time" content="2021-08-09T08:41:55.508Z">
+<meta property="article:modified_time" content="2021-08-09T09:32:32.334Z">
 <meta property="article:author" content="Wang Yitao">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="stack">
+<meta property="article:tag" content="Raft">
+<meta property="article:tag" content="Lab Note">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zjuytw.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/5840-1.png">
+<meta name="twitter:image" content="https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/Test.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://zjuytw.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/index.html">
+  <link rel="canonical" href="https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Yitao&#39;s Blog" type="application/atom+xml">
   
@@ -351,21 +350,23 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">5840. Minimum Number of Swaps to Make the String Balanced</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">Solution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">Code</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Conclusion</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.0.1.</span> <span class="toc-text">
+    Features of Raft
+</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">TODO (ALL DONE)</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-5840. Minimum Number of Swaps to Make the String Balanced" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-6.824-lab2-Conclusion" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      5840. Minimum Number of Swaps to Make the String Balanced
+      6.824 Lab2 Conclusion
     </h1>
   
 
@@ -373,50 +374,94 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/" class="article-date">
-	  <time datetime="2021-08-08T17:00:27.810Z" itemprop="datePublished">2021-08-09</time>
+	<a href="/2021/08/09/6.824-lab2-Conclusion/" class="article-date">
+	  <time datetime="2021-08-09T08:41:55.508Z" itemprop="datePublished">2021-08-09</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
+    <a class="article-category-link" href="/categories/6-824/">6.824</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/greedy/" rel="tag">greedy</a>, <a class="article-tag-link-link" href="/tags/stack/" rel="tag">stack</a>
+	<a class="article-tag-link-link" href="/tags/Lab-Note/" rel="tag">Lab Note</a>, <a class="article-tag-link-link" href="/tags/Raft/" rel="tag">Raft</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/08/09/6.824-lab2-Conclusion/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1>5840. Minimum Number of Swaps to Make the String Balanced</h1>
-
-<p>tag: stack, greedy</p>
-<h2>Description</h2>
-
-<p><img src="/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/5840-1.png" alt="5840-1"></p>
-<p><img src="/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/5840-2.png" alt="5840-2"></p>
-<h2>Solution</h2>
-
-<p>In each switch, brackets are reduced mostly 2, at least 1.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//Just swap the first dismatched ] with second dismatched [</span><br><span class="line">2 for: ]]] [[[ -&gt; []] [][. </span><br><span class="line">1 for just 1 pair left, switch them then all done</span><br></pre></td></tr></table></figure>
+        <h1>Conclusion</h1>
+After finish 3 parts of Lab, I have implemented a basic raft protocol and it can used to build a  K-V storage server. It is fascinating for its understandability and straight idea to build this consensus system. In past 3 parts, I achieved timeout election, append entries, persist and many subtle details to ensure the consistency. My implementation may seem somehow ungraceful especially when I looked the tutorial course 'Go thread and Raft', so I do recommend you to have a look at it before you start your first line of code.
 
 
 
-<h2>Code</h2>
 
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minSwaps</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//只要[的右边有对应个数个]即可</span></span><br><span class="line">        stack&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">&#x27;[&#x27;</span>)&#123;</span><br><span class="line">                stk.<span class="built_in">push</span>(i);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(stk.<span class="built_in">empty</span>())</span><br><span class="line">                    res++;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    stk.<span class="built_in">pop</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res - res/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="center">storage server 1</th>
+<th align="center">storage server 2</th>
+<th align="center">storage server 3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">K/V service</td>
+<td align="center">K/V service</td>
+<td align="center">K/V service</td>
+</tr>
+<tr>
+<td align="center">Raft</td>
+<td align="center">Raft</td>
+<td align="center">Raft</td>
+</tr>
+</tbody></table>
+<p>In this distributed storage system, clients talk to application layer like K/V service, and application send <command> info to Raft to make distribute replicas. <em>Usually, Raft is a library to be included and easy used</em> </p>
+<h3>
+    Features of Raft
+</h3>
 
-<p><img src="/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/5840-3.png" alt="5840-3"></p>
+<ul>
+<li><p>Fault Tolerance(using 2n + 1 servers)</p>
+<ul>
+<li><p>To avoid <strong>split brain</strong>, adapt majority voting strategy. The basic logic is if there is a split brain, can not have both partitions own majority server. </p>
+<p>In Raft’s detail, it means that for new leader, it will assemble at least one server’s vote which from previous majority. We should use one of those previous majority servers as new leader because we should ensure new leader must know what happened before(What term is before). </p>
+</li>
+</ul>
+</li>
+</ul>
+<h2>TODO (ALL DONE)</h2> 
+
+<p><del>I still have some issues need to be addressed, some are performance related and some are many bugs(I don’t know for sure, for me, I’d rather blame these FAIL to too strict test time restriction…)</del>  </p>
+<ul>
+<li>Some time, many 1 out of 10 the test will fail, for the program can not reach agreement. And the reason is easy, timeout election can sometime spend much time to elect a leader. And followings are solutions, from my point.<ul>
+<li>Check if two peer are racing like, <em>one elected in Term x but in Term x + 1, another timeout and start a new round election</em>. For this situation, consider if timer triggers before you reset it</li>
+<li>Sleep time is a mysterious number I’ve changed them for many times but still have some problem… Currently a fair sleep time is [200, 400] for heartbeat timeout and <del>[50, 100] for election timeout</del> </li>
+<li>Some threads’ synchronization is implemented heavily so need a more soft way to achieve it(As I will describe afterwards)</li>
+</ul>
+</li>
+<li>Some terrible codes need refactoring like substitute all channel by using condition variable and merge analogous code into one function. Especially, primary should become leader as long as it receives majority votes, not until all RPC calls return.</li>
+</ul>
+<p>Now I have revised my Raft and uses <a target="_blank" rel="noopener" href="https://gist.github.com/jonhoo/f686cacb4b9fe716d5aa">Test Script</a> to test Lab 2 A + B + C 90 times, and result is passed all 90 tests.(I revised my code and continued my test from 10th test, <em>2 failed</em> is past recorded)</p>
+<p><img src="/2021/08/09/6.824-lab2-Conclusion/Test.png" alt="Test"></p>
+<p>This time, I have some new things to write about</p>
+<ul>
+<li>In fact, we do not need to set extract timer for RequestVote RPC, I once set [50,100]ms range to wait for RPC return, but test result turned out not so well. What we actually need to do is reset timer before start a new election round (So if RPC not return on time, timer will just start next election)</li>
+<li>Apply interval time need to be considered carefully, because I once set 1000ms to apply new log to state machine, result are worse than 200ms’</li>
+<li>When you are encountered with a livelock, check your RequestVote handler. I implemented this function mistakenly and led to the follower with up-to-data log cannot win the election on time. (Specifically, you need to make sure your peer convert to follower whenever it receives a RPC whose term is greater than currentTerm)</li>
+<li>Check if your output channels are blocked and without receivers. Just uses channel with buffer(<strong>Can anybody tell me if go can GC unused channel buffer after both sender and receiver quit?</strong>)</li>
+<li>Oh, I finally did not revise my election part using condition variable, just used channel.</li>
+</ul>
+<p><img src="/2021/08/09/6.824-lab2-Conclusion/Test2.png" alt="Test2"></p>
+<p>​                                                            Result of a new 100 tests</p>
 
       
     </div>
@@ -426,7 +471,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://zjuytw.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/" title="5840. Minimum Number of Swaps to Make the String Balanced" target="_blank" rel="external">https://zjuytw.github.io/2021/08/09/5840. Minimum Number of Swaps to Make the String Balanced/</a>
+      <a href="https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/" title="6.824 Lab2 Conclusion" target="_blank" rel="external">https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -473,12 +518,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/" title="5841. Find the Longest Valid Obstacle Course at Each Position"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2021/08/09/new/6.824-lab2-Conclusion/" title="6.824 Lab2 Conclusion"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2021/08/09/1792.%20Maximum%20Average%20Pass%20Ratio/" title="1792.Maximum Average Pass Ratio"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/08/09/hello-world/" title="Hello World"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
