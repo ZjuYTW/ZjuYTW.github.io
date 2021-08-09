@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zjuytw.github.io/2021/08/10/1353.%20Maximum%20Number%20of%20Events%20That%20Can%20Be%20Attended/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/10/313.%20Super%20Ugly%20Number/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/10/727.%20Minimum%20Window%20Subsequence/</loc>
+    
+    <lastmod>2021-08-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zjuytw.github.io/categories/index.html</loc>
     
     <lastmod>2021-08-09</lastmod>
@@ -397,6 +418,20 @@
   
   <url>
     <loc>https://zjuytw.github.io/tags/State-Compression/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Priority-Queue/</loc>
+    <lastmod>2021-08-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Finite-State-Machine/</loc>
     <lastmod>2021-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

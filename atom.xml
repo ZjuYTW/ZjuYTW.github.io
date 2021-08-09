@@ -6,7 +6,7 @@
   <link href="https://zjuytw.github.io/atom.xml" rel="self"/>
   
   <link href="https://zjuytw.github.io/"/>
-  <updated>2021-08-09T10:06:13.523Z</updated>
+  <updated>2021-08-09T16:37:26.337Z</updated>
   <id>https://zjuytw.github.io/</id>
   
   <author>
@@ -15,6 +15,94 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>727. Minimum Window Subsequence</title>
+    <link href="https://zjuytw.github.io/2021/08/10/727.%20Minimum%20Window%20Subsequence/"/>
+    <id>https://zjuytw.github.io/2021/08/10/727.%20Minimum%20Window%20Subsequence/</id>
+    <published>2021-08-09T16:39:05.536Z</published>
+    <updated>2021-08-09T16:37:26.337Z</updated>
+    
+    <content type="html"><![CDATA[<h1>727. Minimum Window Subsequence</h1><h2>Description</h2><p><img src="/2021/08/10/727.%20Minimum%20Window%20Subsequence/457-1.png" alt="457-1"></p><h2>Solution</h2><p>There are two solutions, one is original DP(very common solution that must think of it when encounter a string problem), another is Finite State Machine solution.</p><h3>DP</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DP[i][j] = the minimum subsequence length k</span><br><span class="line">//e.g, s2[0 : j] is a subsequence of s1[i - k + 1: i]</span><br><span class="line"></span><br><span class="line">if s1[i] == s2[j]</span><br><span class="line">dp[i][j] = dp[i-1][j-1] + 1</span><br><span class="line">else</span><br><span class="line">dp[i][j] = dp[i-1][j] + 1</span><br><span class="line"></span><br><span class="line">return min&#123;dp[i][N]&#125; for i= 1,2,3..M</span><br></pre></td></tr></table></figure><h3>Finite State Machine</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Define a array next[i][ch]: look right from position i, the pos of the nearest ch</span><br><span class="line"></span><br><span class="line">With the next[][], we directly jump into next nearest matched postion without iterate.</span><br><span class="line"></span><br><span class="line">And the way to calculate next is DP, we see from back to front</span><br><span class="line"></span><br><span class="line">next[i][ch] = next[i+1][ch](except next[i][s[i+1] - &#x27;a&#x27;] = i+1)</span><br></pre></td></tr></table></figure><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">minWindow</span><span class="params">(string s1, string s2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s1.<span class="built_in">size</span>() &lt; s2.<span class="built_in">size</span>())</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="comment">//DP</span></span><br><span class="line">        <span class="comment">// vector&lt;vector&lt;int&gt;&gt; dp(s1.size() + 1, vector&lt;int&gt;(s2.size() + 1, INT_MAX));</span></span><br><span class="line">        <span class="comment">// for(int i = 0; i &lt;= s1.size(); i++)</span></span><br><span class="line">        <span class="comment">//     dp[i][0] = 0;</span></span><br><span class="line">        <span class="comment">// for(int i = 1; i &lt;= s1.size(); i++)&#123;</span></span><br><span class="line">        <span class="comment">//     for(int j = 1; j &lt;= s2.size() &amp;&amp; j &lt;= i; j++)&#123;</span></span><br><span class="line">        <span class="comment">//         if(s1[i-1] == s2[j-1] &amp;&amp; dp[i-1][j-1] != INT_MAX)</span></span><br><span class="line">        <span class="comment">//             dp[i][j] = dp[i-1][j-1] + 1;</span></span><br><span class="line">        <span class="comment">//         else if(s1[i-1] != s2[j-1] &amp;&amp; dp[i-1][j] != INT_MAX)</span></span><br><span class="line">        <span class="comment">//             dp[i][j] = dp[i-1][j] + 1;</span></span><br><span class="line">        <span class="comment">//     &#125;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="comment">// string res = &quot;&quot;;</span></span><br><span class="line">        <span class="comment">// for(int i = 1; i &lt;= s1.size(); i++)&#123;</span></span><br><span class="line">        <span class="comment">//     if((res == &quot;&quot; &amp;&amp; dp[i][s2.size()] != INT_MAX) || res.size() &gt; dp[i][s2.size()])&#123;</span></span><br><span class="line">        <span class="comment">//         res = s1.substr(i-dp[i][s2.size()], dp[i][s2.size()]);</span></span><br><span class="line">        <span class="comment">//     &#125;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//Finite-State-Machine</span></span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">next</span>(s1.<span class="built_in">size</span>(), vector&lt;<span class="keyword">int</span>&gt;(<span class="number">26</span>,<span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)&#123;</span><br><span class="line">            next[s1.<span class="built_in">size</span>()<span class="number">-1</span>][i] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = s1.<span class="built_in">size</span>()<span class="number">-2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">26</span>; j++)</span><br><span class="line">                next[i][j] = next[i+<span class="number">1</span>][j];</span><br><span class="line">            next[i][s1[i+<span class="number">1</span>] - <span class="string">&#x27;a&#x27;</span>] = i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        string res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">int</span> length = INT_MAX, start;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s1.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s1[i] == s2[<span class="number">0</span>])&#123;</span><br><span class="line">                <span class="keyword">int</span> j = i, s2i = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span>(s2i &lt; s2.<span class="built_in">size</span>() &amp;&amp; next[j][s2[s2i] - <span class="string">&#x27;a&#x27;</span>] != <span class="number">-1</span>)&#123;</span><br><span class="line">                    j = next[j][s2[s2i++] - <span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(s2i == s2.<span class="built_in">size</span>())&#123;</span><br><span class="line">                    <span class="keyword">if</span>(length &gt; j - i + <span class="number">1</span>)&#123;</span><br><span class="line">                        start = i;</span><br><span class="line">                        length = j - i + <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(length != INT_MAX)</span><br><span class="line">            res = s1.<span class="built_in">substr</span>(start, length);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/10/727.%20Minimum%20Window%20Subsequence/457-2.png" alt="457-2"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;727. Minimum Window Subsequence&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/10/727.%20Minimum%20Window%20Subsequence/457-1.png&quot; al</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="DP" scheme="https://zjuytw.github.io/tags/DP/"/>
+    
+    <category term="No AC first time" scheme="https://zjuytw.github.io/tags/No-AC-first-time/"/>
+    
+    <category term="Finite State Machine" scheme="https://zjuytw.github.io/tags/Finite-State-Machine/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>313. Super Ugly Number</title>
+    <link href="https://zjuytw.github.io/2021/08/10/313.%20Super%20Ugly%20Number/"/>
+    <id>https://zjuytw.github.io/2021/08/10/313.%20Super%20Ugly%20Number/</id>
+    <published>2021-08-09T16:39:05.535Z</published>
+    <updated>2021-08-09T16:38:11.209Z</updated>
+    
+    <content type="html"><![CDATA[<h1>313. Super Ugly Number</h1><h2>Description</h2><p><img src="/2021/08/10/313.%20Super%20Ugly%20Number/313-1.png" alt="image-20210810003242724"></p><h2>Solution</h2><p>Use priority_queue to find the smallest number</p><p>Be careful about integer overflow.</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">nthSuperUglyNumber</span><span class="params">(<span class="keyword">int</span> n, vector&lt;<span class="keyword">int</span>&gt;&amp; primes)</span> </span>&#123;</span><br><span class="line">        priority_queue&lt;<span class="keyword">long</span>, vector&lt;<span class="keyword">long</span>&gt;, greater&lt;&gt;&gt; pq;</span><br><span class="line">        <span class="keyword">long</span> top;</span><br><span class="line">        pq.<span class="built_in">push</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">            top = pq.<span class="built_in">top</span>();</span><br><span class="line">            <span class="keyword">while</span>(!pq.<span class="built_in">empty</span>() &amp;&amp; pq.<span class="built_in">top</span>() == top)</span><br><span class="line">                pq.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> prime: primes)</span><br><span class="line">                pq.<span class="built_in">push</span>(top * prime);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)top;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/10/313.%20Super%20Ugly%20Number/313-3.jpg" alt="313-3"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;313. Super Ugly Number&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/10/313.%20Super%20Ugly%20Number/313-1.png&quot; alt=&quot;image-202108100</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="Priority Queue" scheme="https://zjuytw.github.io/tags/Priority-Queue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>1353. Maximum Number of Events That Can Be Attended</title>
+    <link href="https://zjuytw.github.io/2021/08/10/1353.%20Maximum%20Number%20of%20Events%20That%20Can%20Be%20Attended/"/>
+    <id>https://zjuytw.github.io/2021/08/10/1353.%20Maximum%20Number%20of%20Events%20That%20Can%20Be%20Attended/</id>
+    <published>2021-08-09T16:39:05.516Z</published>
+    <updated>2021-08-09T16:38:24.239Z</updated>
+    
+    <content type="html"><![CDATA[<h1>1353. Maximum Number of Events That Can Be Attended</h1><h2>Description</h2><p><img src="/2021/08/10/1353.%20Maximum%20Number%20of%20Events%20That%20Can%20Be%20Attended/1353-1.png" alt="image-20210810002606817"></p><p><img src="/2021/08/10/1353.%20Maximum%20Number%20of%20Events%20That%20Can%20Be%20Attended/1353-2.jpg" alt="1353-2"></p><h2>Solution</h2><p>Use priority_queue to find the closed DDL’s event and handle it in the day.</p><p>There is are tricky programming point that we can directly iterate the whole [earliest start time, latest finish time] to find each day’s best strategy or we can also iterate every sorted event.</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp;a, vector&lt;<span class="keyword">int</span>&gt; &amp;b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[<span class="number">0</span>] == b[<span class="number">0</span>])</span><br><span class="line">            <span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">0</span>] &lt; b[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxEvents</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; events)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(events.<span class="built_in">begin</span>(), events.<span class="built_in">end</span>(), cmp);</span><br><span class="line">        priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, greater&lt;&gt;&gt; pq;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>, i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> day = <span class="number">1</span>; day &lt;= <span class="number">1E5</span>; day++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(i &lt; events.<span class="built_in">size</span>() &amp;&amp; events[i][<span class="number">0</span>] == day)&#123;</span><br><span class="line">                pq.<span class="built_in">push</span>(events[i++][<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(!pq.<span class="built_in">empty</span>() &amp;&amp; pq.<span class="built_in">top</span>() &lt; day)</span><br><span class="line">                pq.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span>(!pq.<span class="built_in">empty</span>() &amp;&amp; pq.<span class="built_in">top</span>() &gt;= day)&#123;</span><br><span class="line">                pq.<span class="built_in">pop</span>();</span><br><span class="line">                res++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// int curt = events[0][0];</span></span><br><span class="line">        <span class="comment">// int res = 0;</span></span><br><span class="line">        <span class="comment">// for(int i = 0; i &lt; events.size(); i++)&#123;</span></span><br><span class="line">        <span class="comment">//     if(curt == events[i][0])&#123;</span></span><br><span class="line">        <span class="comment">//         pq.push(events[i][1]);</span></span><br><span class="line">        <span class="comment">//     &#125;else&#123;</span></span><br><span class="line">        <span class="comment">//         while(!pq.empty() &amp;&amp; curt &lt; events[i][0])&#123;</span></span><br><span class="line">        <span class="comment">//             curt++;</span></span><br><span class="line">        <span class="comment">//             res++;</span></span><br><span class="line">        <span class="comment">//             pq.pop();</span></span><br><span class="line">        <span class="comment">//             while(!pq.empty() &amp;&amp; pq.top() &lt; curt)</span></span><br><span class="line">        <span class="comment">//                 pq.pop();</span></span><br><span class="line">        <span class="comment">//         &#125;</span></span><br><span class="line">        <span class="comment">//         curt = events[i][0];</span></span><br><span class="line">        <span class="comment">//         pq.push(events[i][1]);</span></span><br><span class="line">        <span class="comment">//     &#125;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="comment">// while(!pq.empty() &amp;&amp; pq.top() &gt;= curt)&#123;</span></span><br><span class="line">        <span class="comment">//     curt++;</span></span><br><span class="line">        <span class="comment">//     res++;</span></span><br><span class="line">        <span class="comment">//     pq.pop();</span></span><br><span class="line">        <span class="comment">//     while(!pq.empty() &amp;&amp; pq.top() &lt; curt)</span></span><br><span class="line">        <span class="comment">//         pq.pop();</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/10/1353.%20Maximum%20Number%20of%20Events%20That%20Can%20Be%20Attended/1353-3.jpg" alt="1353-3"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;1353. Maximum Number of Events That Can Be Attended&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/10/1353.%20Maximum%20Number%20of%2</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="Priority Queue" scheme="https://zjuytw.github.io/tags/Priority-Queue/"/>
+    
+  </entry>
   
   <entry>
     <title>6.824 Bitcoin lecture note</title>
@@ -520,88 +608,6 @@ After finish 3 parts of Lab, I have implemented a basic raft protocol and it can
     <category term="Lab Note" scheme="https://zjuytw.github.io/tags/Lab-Note/"/>
     
     <category term="MapReduce" scheme="https://zjuytw.github.io/tags/MapReduce/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://zjuytw.github.io/2021/08/09/hello-world/"/>
-    <id>https://zjuytw.github.io/2021/08/09/hello-world/</id>
-    <published>2021-08-09T03:10:31.995Z</published>
-    <updated>2021-08-09T04:07:37.526Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>5841. Find the Longest Valid Obstacle Course at Each Position</title>
-    <link href="https://zjuytw.github.io/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/"/>
-    <id>https://zjuytw.github.io/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/</id>
-    <published>2021-08-08T17:04:57.677Z</published>
-    <updated>2021-08-09T08:34:33.477Z</updated>
-    
-    <content type="html"><![CDATA[<h1>5841. Find the Longest Valid Obstacle Course at Each Position</h1><p>tag: monotone-stack, greedy, Maximum Increasing Subsequence</p><h2>Description</h2><p><img src="/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/5841-1.png" alt="5841-1"></p><p><img src="/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/5841-2.png" alt="5841-2"></p><h2>Solution</h2><p>Use monotone-stack to find the longest subsequence end with <code>obstacles[i]</code></p><p>Greedily replace the very <code>obstacles[j], j &lt; i</code> that exactly greater than <code>obstacles[i]</code>, other elements in the stack just remain</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 3 5 7 4</span><br><span class="line"></span><br><span class="line">stack : 1 3 5 7</span><br><span class="line">after : 1 3 4 7</span><br></pre></td></tr></table></figure><p><strong>Just be careful about the same number should also be inclueded, so just binary search for (obstacle[i] + 1)</strong></p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">longestObstacleCourseAtEachPosition</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; obstacles)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; dp;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obstacles.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">auto</span> pos = <span class="built_in">lower_bound</span>(dp.<span class="built_in">begin</span>(), dp.<span class="built_in">end</span>(), obstacles[i]+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(pos != dp.<span class="built_in">end</span>())&#123;</span><br><span class="line">                *pos = obstacles[i];</span><br><span class="line">                res.<span class="built_in">push_back</span>(pos - dp.<span class="built_in">begin</span>() + <span class="number">1</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                dp.<span class="built_in">push_back</span>(obstacles[i]);</span><br><span class="line">                res.<span class="built_in">push_back</span>(dp.<span class="built_in">size</span>());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/09/5841.%20Find%20the%20Longest%20Valid%20Obstacle%20Course%20at%20Each%20Position/5841-3.png" alt="5841-3"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;5841. Find the Longest Valid Obstacle Course at Each Position&lt;/h1&gt;
-
-&lt;p&gt;tag: monotone-stack, greedy, Maximum Increasing Subsequence&lt;/p&gt;
-&lt;</summary>
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="monotone-stack" scheme="https://zjuytw.github.io/tags/monotone-stack/"/>
-    
-    <category term="greedy" scheme="https://zjuytw.github.io/tags/greedy/"/>
-    
-    <category term="maximum increasing subsequence" scheme="https://zjuytw.github.io/tags/maximum-increasing-subsequence/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>5840. Minimum Number of Swaps to Make the String Balanced</title>
-    <link href="https://zjuytw.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/"/>
-    <id>https://zjuytw.github.io/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/</id>
-    <published>2021-08-08T17:00:27.810Z</published>
-    <updated>2021-08-09T08:34:33.476Z</updated>
-    
-    <content type="html"><![CDATA[<h1>5840. Minimum Number of Swaps to Make the String Balanced</h1><p>tag: stack, greedy</p><h2>Description</h2><p><img src="/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/5840-1.png" alt="5840-1"></p><p><img src="/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/5840-2.png" alt="5840-2"></p><h2>Solution</h2><p>In each switch, brackets are reduced mostly 2, at least 1.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//Just swap the first dismatched ] with second dismatched [</span><br><span class="line">2 for: ]]] [[[ -&gt; []] [][. </span><br><span class="line">1 for just 1 pair left, switch them then all done</span><br></pre></td></tr></table></figure><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minSwaps</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//只要[的右边有对应个数个]即可</span></span><br><span class="line">        stack&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">&#x27;[&#x27;</span>)&#123;</span><br><span class="line">                stk.<span class="built_in">push</span>(i);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(stk.<span class="built_in">empty</span>())</span><br><span class="line">                    res++;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    stk.<span class="built_in">pop</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res - res/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/09/5840.%20Minimum%20Number%20of%20Swaps%20to%20Make%20the%20String%20Balanced/5840-3.png" alt="5840-3"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;5840. Minimum Number of Swaps to Make the String Balanced&lt;/h1&gt;
-
-&lt;p&gt;tag: stack, greedy&lt;/p&gt;
-&lt;h2&gt;Description&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/2021/08/09</summary>
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="greedy" scheme="https://zjuytw.github.io/tags/greedy/"/>
-    
-    <category term="stack" scheme="https://zjuytw.github.io/tags/stack/"/>
     
   </entry>
   
