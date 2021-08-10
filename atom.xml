@@ -6,7 +6,7 @@
   <link href="https://zjuytw.github.io/atom.xml" rel="self"/>
   
   <link href="https://zjuytw.github.io/"/>
-  <updated>2021-08-09T16:37:26.337Z</updated>
+  <updated>2021-08-10T16:13:21.379Z</updated>
   <id>https://zjuytw.github.io/</id>
   
   <author>
@@ -15,6 +15,94 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>133. Clone Graph</title>
+    <link href="https://zjuytw.github.io/2021/08/11/133.%20Clone%20Graph/"/>
+    <id>https://zjuytw.github.io/2021/08/11/133.%20Clone%20Graph/</id>
+    <published>2021-08-10T16:15:38.395Z</published>
+    <updated>2021-08-10T16:13:21.379Z</updated>
+    
+    <content type="html"><![CDATA[<h1>133. Clone Graph</h1><h2>Description</h2><p><img src="/2021/08/11/133.%20Clone%20Graph/133-1.png" alt="image-20210811000504275"></p><p><img src="/2021/08/11/133.%20Clone%20Graph/133-2.jpg" alt="133-2"></p><p><img src="/2021/08/11/133.%20Clone%20Graph/133-4.jpg" alt="133-4"><img src="/2021/08/11/133.%20Clone%20Graph/133-3.jpg" alt="133-3"></p><h2>Solution</h2><p>I uses two map to store the <code>visited</code> and <code>waiting</code> nodes, then BFS for the next node be copied.</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">// Definition for a Node.</span></span><br><span class="line"><span class="comment">class Node &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int val;</span></span><br><span class="line"><span class="comment">    vector&lt;Node*&gt; neighbors;</span></span><br><span class="line"><span class="comment">    Node() &#123;</span></span><br><span class="line"><span class="comment">        val = 0;</span></span><br><span class="line"><span class="comment">        neighbors = vector&lt;Node*&gt;();</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    Node(int _val) &#123;</span></span><br><span class="line"><span class="comment">        val = _val;</span></span><br><span class="line"><span class="comment">        neighbors = vector&lt;Node*&gt;();</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    Node(int _val, vector&lt;Node*&gt; _neighbors) &#123;</span></span><br><span class="line"><span class="comment">        val = _val;</span></span><br><span class="line"><span class="comment">        neighbors = _neighbors;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    unordered_map&lt;<span class="keyword">int</span>, Node*&gt; visited;</span><br><span class="line">    unordered_map&lt;<span class="keyword">int</span>, Node*&gt; waited;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">cloneGraph</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> node;</span><br><span class="line">        queue&lt;Node*&gt; q;</span><br><span class="line">        Node* root = <span class="keyword">new</span> <span class="built_in">Node</span>(node-&gt;val, node-&gt;neighbors);</span><br><span class="line">        q.<span class="built_in">push</span>(root);</span><br><span class="line">        waited[root-&gt;val] = root;</span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="keyword">int</span> size = q.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)&#123;</span><br><span class="line">                <span class="keyword">auto</span> top = q.<span class="built_in">front</span>();</span><br><span class="line">                q.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; top-&gt;neighbors.<span class="built_in">size</span>(); i ++)&#123;</span><br><span class="line">                    <span class="keyword">auto</span> nbor = top-&gt;neighbors[i];</span><br><span class="line">                    <span class="keyword">if</span>(visited.<span class="built_in">find</span>(nbor-&gt;val) == visited.<span class="built_in">end</span>())&#123;</span><br><span class="line">                        Node *next = <span class="literal">nullptr</span>;</span><br><span class="line">                        <span class="keyword">if</span>(waited.<span class="built_in">find</span>(nbor-&gt;val) == waited.<span class="built_in">end</span>())&#123;</span><br><span class="line">                            next = <span class="keyword">new</span> <span class="built_in">Node</span>(nbor-&gt;val, nbor-&gt;neighbors);</span><br><span class="line">                            waited[nbor-&gt;val] = next;</span><br><span class="line">                        &#125;<span class="keyword">else</span></span><br><span class="line">                            next = waited[nbor-&gt;val];</span><br><span class="line">                        top-&gt;neighbors[i] = next;</span><br><span class="line">                        q.<span class="built_in">push</span>(top-&gt;neighbors[i]);</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        top-&gt;neighbors[i] = visited[nbor-&gt;val];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                visited[top-&gt;val] = top;</span><br><span class="line">                waited.<span class="built_in">erase</span>(top-&gt;val);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/11/133.%20Clone%20Graph/133-5.jpg" alt="133-5"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;133. Clone Graph&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/11/133.%20Clone%20Graph/133-1.png&quot; alt=&quot;image-20210811000504275&quot;&gt;&lt;/p&gt;</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="BFS" scheme="https://zjuytw.github.io/tags/BFS/"/>
+    
+    <category term="DFS" scheme="https://zjuytw.github.io/tags/DFS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>491.Increasing Subsequences</title>
+    <link href="https://zjuytw.github.io/2021/08/11/491.%20Increasing%20Subsequences/"/>
+    <id>https://zjuytw.github.io/2021/08/11/491.%20Increasing%20Subsequences/</id>
+    <published>2021-08-10T16:15:38.362Z</published>
+    <updated>2021-08-10T16:15:08.836Z</updated>
+    
+    <content type="html"><![CDATA[<h1>491.Increasing Subsequences</h1><h2>Description</h2><p><img src="/2021/08/11/491.%20Increasing%20Subsequences/491-1.png" alt="image-20210810235346772"></p><h2>Solution</h2><p>Two solutions:</p><ul><li>DP, use <code>set&lt;vector&lt;int&gt;&gt;</code> to deduplicate</li><li>Back Tracking, don’t forget deduplicating</li></ul><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">findSubsequences</span>(vector&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&gt; <span class="built_in">dp</span>(nums.<span class="built_in">size</span>());</span><br><span class="line">        set&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; Set;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i ++)&#123;</span><br><span class="line">            dp[i].<span class="built_in">push_back</span>(&#123;nums[i]&#125;);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i] &gt;= nums[j])&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">auto</span> sequence: dp[j])&#123;</span><br><span class="line">                        <span class="comment">//sequence -&gt; vector&lt;int&gt;</span></span><br><span class="line">                        dp[i].<span class="built_in">push_back</span>(sequence);</span><br><span class="line">                        dp[i].<span class="built_in">back</span>().<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">                        Set.<span class="built_in">insert</span>(dp[i].<span class="built_in">back</span>());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> seq : Set)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(seq);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>Solution2 :</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">findSubsequences</span>(vector&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; curRes;</span><br><span class="line">        <span class="built_in">backtrack</span>(nums, <span class="number">0</span>, curRes);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> curPos, vector&lt;<span class="keyword">int</span>&gt;&amp; curres)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curres.<span class="built_in">size</span>() &gt; <span class="number">1</span>)</span><br><span class="line">            res.<span class="built_in">push_back</span>(curres);</span><br><span class="line">        <span class="keyword">if</span>(curPos == nums.<span class="built_in">size</span>())</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        unordered_set&lt;<span class="keyword">int</span>&gt; seen;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = curPos; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curres.<span class="built_in">size</span>()&gt;<span class="number">0</span> &amp;&amp; nums[i] &lt; curres.<span class="built_in">back</span>())</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(seen.<span class="built_in">count</span>(nums[i]))</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            curres.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            <span class="built_in">backtrack</span>(nums, i+<span class="number">1</span>, curres);</span><br><span class="line">            curres.<span class="built_in">pop_back</span>();</span><br><span class="line">            seen.<span class="built_in">insert</span>(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/11/491.%20Increasing%20Subsequences/491-2.jpg" alt="491-2"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;491.Increasing Subsequences&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/11/491.%20Increasing%20Subsequences/491-1.png&quot; alt=&quot;image-</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="DP" scheme="https://zjuytw.github.io/tags/DP/"/>
+    
+    <category term="Back Tracking" scheme="https://zjuytw.github.io/tags/Back-Tracking/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>413. Arithmetic Slices</title>
+    <link href="https://zjuytw.github.io/2021/08/11/413.%20Arithmetic%20Slices/"/>
+    <id>https://zjuytw.github.io/2021/08/11/413.%20Arithmetic%20Slices/</id>
+    <published>2021-08-10T16:15:38.359Z</published>
+    <updated>2021-08-10T16:12:47.366Z</updated>
+    
+    <content type="html"><![CDATA[<h1>413. Arithmetic Slices</h1><h2>Description</h2><p><img src="/2021/08/11/413.%20Arithmetic%20Slices/413-1.png" alt="image-20210811000154179"></p><h2>Solution</h2><p>Iteration to find <code>start &amp; end</code> of each <code>Arithmetic</code></p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() &lt; <span class="number">3</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">diff</span><span class="params">(nums.size()<span class="number">-1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            diff[i<span class="number">-1</span>] = nums[i] - nums[i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> prev = diff[<span class="number">0</span>], count = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; diff.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(prev == diff[i])&#123;</span><br><span class="line">                count++;</span><br><span class="line">                res += count;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                count = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            prev = diff[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/11/413.%20Arithmetic%20Slices/413-2.jpg" alt="413-2"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;413. Arithmetic Slices&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/11/413.%20Arithmetic%20Slices/413-1.png&quot; alt=&quot;image-20210811000</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="Iteration" scheme="https://zjuytw.github.io/tags/Iteration/"/>
+    
+  </entry>
   
   <entry>
     <title>727. Minimum Window Subsequence</title>
@@ -515,99 +603,6 @@
     <category term="KV Raft" scheme="https://zjuytw.github.io/tags/KV-Raft/"/>
     
     <category term="Lab Note" scheme="https://zjuytw.github.io/tags/Lab-Note/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 Lab3 KVRaft</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-Lab3/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-Lab3/</id>
-    <published>2021-08-09T08:53:03.692Z</published>
-    <updated>2021-08-09T10:06:36.028Z</updated>
-    
-    <content type="html"><![CDATA[<h1> Lab3 </h1><h2>Overview</h2><p>In this Lab, we are gonna build a Key/Value storage system based on raft, AKA KVRaft. In part A, just maintain a in memory Hashmap of Key -&gt; Value and In part B, we need to deal with the growing Hashmap and use Snapshot to discard old log entries. Some details may be discussed in each section.</p><h2>Lab3A</h2><p>To implement a KVRaft, we use <em>clerk</em> to denote a interface the client calls to use K/V storage, <em>server</em> to denote  a peer among  K/V storage system which is based on Raft protocol. </p><p>Particularly, we need to address of some detailed problems</p><ul><li>Leader find<ul><li>Whether make server report to clerk which is leader(Not applicable for this lab)</li></ul></li><li>Repeat request<ul><li>Like, send <em>append</em> request to a raft while due to the unreliable RPC, before receiving a commit server receives a “timeout”. So when you are trying append secondly, you should  be careful not to append twice.</li></ul></li><li>Be careful of deadlock</li></ul><h3>Implementation</h3><ul><li><p>To find leader, clerk just use randomized generate server_id to query for true leader, and once get positive response <em>clerk</em> will record this id for later use. </p><p>Furthermore, I want to explain why server not send a leader_id to clerk. In this lab3a,  the server list every clerk maintains are different as I <em>Dprint(ck.leader)</em> shows, which means there are not a standard leader_id for all clerk</p></li><li><p>Generate a random id for each clerk and mark each operation a monotonic increasing sequence number to erase repeat.</p><p>The erase repeating step should be processed in <em>server</em> level, not in <em>raft</em> level. </p><p>For these out-dated operation, because the sequence number for each clerk is monotonically increasing, server just skip manipulating the data but instead return positive</p></li></ul><p><img src="/2021/08/09/6.824-Lab3/Test3A.png" alt="Test3A"></p><h2>Lab3B</h2><p>This time, we are gonna add snapshot feature to make raft discard old log entries. It requires us to modify our original Raft design and implement some new functions and <em>InstallSnapshot</em>.</p><p>In my structure,  KV server will tell Raft <em>maxRaftSize</em> , so when log’s size is greater than this, Raft will notify server and require for a snaphot for <em>current_Index</em> (a tricky point is, because KV server receive msg from channel one after another, there won’t be concurrency problem). And once KV server send a snapshot to Raft, Raft just save it and discard old entries.</p><p>When crash happens, Raft should send the newest snapshot to server.</p><h3> Implementation</h3><ul><li>Interface design<ul><li>Raft :: SendMaxRaftState(), (To be called by Server)</li><li>Raft :: applyMsg{} :: Command -&gt; “Require Snapshot”</li><li>Raft :: SendSnapshot(), (To be called by Server to send snapshot to Raft)</li><li>Raft :: applyMsg{} :: Command -&gt; “Commit Snapshot”</li></ul></li><li> Index convert</li><li>To discard old log,  we should keep <strong>last Snapshoted Index</strong>, I use <em>lastIncludedIndex</em> to denote it. When we do Snapshot or Install Snapshot, we all need reset <em>lastIncludedIndex</em></li><li>Do index convert modification in each code uses rf.log</li><li>Usage of snapshot<ul><li>when Raft crashed and reboots, it should send KV server its snapshot and restart at <em>lastIncluded</em> index</li><li>if a leader detects one follower’s nextindex falls too behind and its nextIndex is lower than truncated leader’s index, Leader should send it a snapshot.</li><li>Every snapshot is accompanied with truncated index, if receiver’s <em>lastIncludedIndex</em> is larger than the truncated index, then just return</li></ul></li><li>Some detailed hints<ul><li>Raft need persist <em>lastInculudedIndex</em> just for restart use. <strong>When lastIncludedIndex changed, lastApplied need to be updated as well</strong></li><li>Chitchat point between KVServer and Raft.  <ul><li>Raft will send appMsg to KVServer to keep in synch. overall</li><li>To send snapshot, KVServer calls Raft’s public interface</li><li>I will describe these in detail in <strong>Conclusion</strong>.md</li></ul></li></ul></li></ul><p>Test Results:</p><p><img src="/2021/08/09/6.824-Lab3/Lab3SingleTest.png" alt="Lab3SingleTest"></p><p>100 times batch test:</p><p><img src="/2021/08/09/6.824-Lab3/Lab3BTest.png" alt="Lab3BTest"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt; Lab3 &lt;/h1&gt;
-
-&lt;h2&gt;Overview&lt;/h2&gt;
-
-&lt;p&gt;In this Lab, we are gonna build a Key/Value storage system based on raft, AKA KVRaft. In part A, just</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="KV Raft" scheme="https://zjuytw.github.io/tags/KV-Raft/"/>
-    
-    <category term="Lab Note" scheme="https://zjuytw.github.io/tags/Lab-Note/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 Lab2 Conclusion</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-lab2-Conclusion/</id>
-    <published>2021-08-09T08:41:55.508Z</published>
-    <updated>2021-08-09T10:03:38.200Z</updated>
-    
-    <content type="html"><![CDATA[<h1>Conclusion</h1>After finish 3 parts of Lab, I have implemented a basic raft protocol and it can used to build a  K-V storage server. It is fascinating for its understandability and straight idea to build this consensus system. In past 3 parts, I achieved timeout election, append entries, persist and many subtle details to ensure the consistency. My implementation may seem somehow ungraceful especially when I looked the tutorial course 'Go thread and Raft', so I do recommend you to have a look at it before you start your first line of code.<table><thead><tr><th align="center">storage server 1</th><th align="center">storage server 2</th><th align="center">storage server 3</th></tr></thead><tbody><tr><td align="center">K/V service</td><td align="center">K/V service</td><td align="center">K/V service</td></tr><tr><td align="center">Raft</td><td align="center">Raft</td><td align="center">Raft</td></tr></tbody></table><p>In this distributed storage system, clients talk to application layer like K/V service, and application send <command> info to Raft to make distribute replicas. <em>Usually, Raft is a library to be included and easy used</em> </p><h3>    Features of Raft</h3><ul><li><p>Fault Tolerance(using 2n + 1 servers)</p><ul><li><p>To avoid <strong>split brain</strong>, adapt majority voting strategy. The basic logic is if there is a split brain, can not have both partitions own majority server. </p><p>In Raft’s detail, it means that for new leader, it will assemble at least one server’s vote which from previous majority. We should use one of those previous majority servers as new leader because we should ensure new leader must know what happened before(What term is before). </p></li></ul></li></ul><h2>TODO (ALL DONE)</h2> <p><del>I still have some issues need to be addressed, some are performance related and some are many bugs(I don’t know for sure, for me, I’d rather blame these FAIL to too strict test time restriction…)</del>  </p><ul><li>Some time, many 1 out of 10 the test will fail, for the program can not reach agreement. And the reason is easy, timeout election can sometime spend much time to elect a leader. And followings are solutions, from my point.<ul><li>Check if two peer are racing like, <em>one elected in Term x but in Term x + 1, another timeout and start a new round election</em>. For this situation, consider if timer triggers before you reset it</li><li>Sleep time is a mysterious number I’ve changed them for many times but still have some problem… Currently a fair sleep time is [200, 400] for heartbeat timeout and <del>[50, 100] for election timeout</del> </li><li>Some threads’ synchronization is implemented heavily so need a more soft way to achieve it(As I will describe afterwards)</li></ul></li><li>Some terrible codes need refactoring like substitute all channel by using condition variable and merge analogous code into one function. Especially, primary should become leader as long as it receives majority votes, not until all RPC calls return.</li></ul><p>Now I have revised my Raft and uses <a href="https://gist.github.com/jonhoo/f686cacb4b9fe716d5aa">Test Script</a> to test Lab 2 A + B + C 90 times, and result is passed all 90 tests.(I revised my code and continued my test from 10th test, <em>2 failed</em> is past recorded)</p><p><img src="/2021/08/09/6.824-lab2-Conclusion/Test.png" alt="Test"></p><p>This time, I have some new things to write about</p><ul><li>In fact, we do not need to set extract timer for RequestVote RPC, I once set [50,100]ms range to wait for RPC return, but test result turned out not so well. What we actually need to do is reset timer before start a new election round (So if RPC not return on time, timer will just start next election)</li><li>Apply interval time need to be considered carefully, because I once set 1000ms to apply new log to state machine, result are worse than 200ms’</li><li>When you are encountered with a livelock, check your RequestVote handler. I implemented this function mistakenly and led to the follower with up-to-data log cannot win the election on time. (Specifically, you need to make sure your peer convert to follower whenever it receives a RPC whose term is greater than currentTerm)</li><li>Check if your output channels are blocked and without receivers. Just uses channel with buffer(<strong>Can anybody tell me if go can GC unused channel buffer after both sender and receiver quit?</strong>)</li><li>Oh, I finally did not revise my election part using condition variable, just used channel.</li></ul><p><img src="/2021/08/09/6.824-lab2-Conclusion/Test2.png" alt="Test2"></p><p>​                                                            Result of a new 100 tests</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;Conclusion&lt;/h1&gt;
-After finish 3 parts of Lab, I have implemented a basic raft protocol and it can used to build a  K-V storage server. It</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="Lab Note" scheme="https://zjuytw.github.io/tags/Lab-Note/"/>
-    
-    <category term="Raft" scheme="https://zjuytw.github.io/tags/Raft/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 Lab1 MapReduce</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-lab1-MapReduce/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-lab1-MapReduce/</id>
-    <published>2021-08-09T08:40:40.263Z</published>
-    <updated>2021-08-09T10:06:23.719Z</updated>
-    
-    <content type="html"><![CDATA[<h1> MapReduce </h1><h2>Summary</h2><h3>Topics about Distributed Systems </h3><ul><li><p>Infrastructure</p><ul><li>Storage</li><li>Communication</li><li>Computation</li></ul></li><li><p>Performance</p><ul><li>Scalability</li></ul></li><li><p>Fault Tolerance</p></li><li><p>Consistency</p><ul><li>strong consistency</li><li>weak consistency</li></ul></li><li><p>MapReduce</p></li></ul><h3> About MapReduce<p>TL;DR – Google’s engineers build a model that implements the split and dispatch process to make large scale computation tasks easy programmed. (Just need to write map() and reduce() function)</p><p><img src="/2021/08/09/6.824-lab1-MapReduce/MapReduce.png" alt="MapReduce"></p><p>​    </p><p>You can find the detailed model description in <strong>MapReduce: Simplified Data Processing on Large Clusters</strong></p><h4>Brief Execution flow<ol><li>Split the <em>input files</em> into M splits, which is generally 16-64 MB in size. And they are the basic unit one worker handles</li><li>We set up a <strong>master</strong> process to schedule the workflows of each worker, it will pass the <em>split</em> to idle worker (In fact the true process should be worker calls the master for a job)</li><li>Worker do their Map() job, and  the output of Map() should be &lt;key, value&gt; pair. </li><li> Store the <em>Intermediate output</em> on local disks (like json,etc).  AND!! Here is a trick that usually we need have R final reduced files, so we have to partition these &lt;key,value&gt; pairs into R parts. (Use hash(key) <strong>mod</strong> R)</li><li>Master received the <em>intermediate files</em> locations and once all the input files are processed. Master will assign Reduce() job to workers</li><li>Workers do the Reduce() job and output the final result on disk</li></ol><p>​    </p><h3>Some Hints on Lab1</h3><p>Claim: Below is all my own solution, and maybe happen to pass all tests. :)</p><ul><li><p>Enviornment Requirement</p><ul><li>GOLANG, <strong>You shall have basic golang knowledge like slice, map ‘s insert, delete, find… Also should know a little bit concurrency programming(just know what mutex mean hah), RPC programming…</strong></li><li>linux 64bit</li><li>For Chinese mainland students, if you are using vscode, you may have trouble install golang extensions in vscode. <strong>Google the problem, CSDN sucks</strong></li></ul></li><li><p>About master.go</p><ul><li>Checked input files <strong>map</strong> when a worker calls for job, also applicable for reduce job</li><li><strong>Recovery Problem</strong>: in master, I run a timecount gorountine for each assigned job, if the worker does not report on time, just modify todo list and assign it to the later worker( of course the former worker’s job is abandoned) </li><li>If all map tasks are assigned, but not completed, just tell idle workers WAIT.</li><li>If reduced tasks are all done, tell idle workers QUIT</li><li>Don’t forget to lock up the critical area</li></ul></li><li><p>About worker.go</p><ul><li>use a loop to constantly getJob, and if master tells worker QUIT,  then quit(Also WAIT, then wait)</li><li>Because each worker just read the seperate file, there is no synchronize problem when read</li><li>But for these worker on write, there is chance that abandoned worker is write the same file alone with new assigned worker<strong>You should be careful when write the intermediate/output file</strong></li></ul></li><li><p>About lambda function with goroutine</p><p><img src="/2021/08/09/6.824-lab1-MapReduce/exampleCode.png" alt="exampleCode"></p><p>​                                             Use my goroutine function for example*</p><p>When write lamda function, there is a trick that <strong>you should write these variable which you don’t want them be changed outside the lambda funtion as function’s parameter</strong> This is because that compiler will put the local variable(these used in lambda function) on heap NOT STACK, so once the variable is changed outside, the thread will read the changed variable. This is sometimes you don’t wanna see. </p></li></ul></h4></h3>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt; MapReduce &lt;/h1&gt;
-
-&lt;h2&gt;Summary&lt;/h2&gt;
-
-&lt;h3&gt;Topics about Distributed Systems &lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Infrastructure&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Storage&lt;/li&gt;
-&lt;li</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="Lab Note" scheme="https://zjuytw.github.io/tags/Lab-Note/"/>
-    
-    <category term="MapReduce" scheme="https://zjuytw.github.io/tags/MapReduce/"/>
     
   </entry>
   
