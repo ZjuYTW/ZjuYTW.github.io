@@ -17,26 +17,26 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>6.824 Lab4 | Yitao&#39;s Blog</title>
-  <meta name="description" content="Lab4   Overview   Finally, we make it to the final lab, no doubt that it’s the most challenging work among 4 labs. In this part, we gonna implement two main K-V storage system, one is shardmaster and">
+  <title>446. Arithmetic Slices II - Subsequence | Yitao&#39;s Blog</title>
+  <meta name="description" content="446. Arithmetic Slices II - Subsequence  Description    Solution  DP to check out the previous subsequence number satisfied requirement. 1dp[i][d] &#x3D; In position i, the number satisfied requirement tha">
 <meta property="og:type" content="article">
-<meta property="og:title" content="6.824 Lab4">
-<meta property="og:url" content="https://zjuytw.github.io/2021/08/09/6.824-lab4/index.html">
+<meta property="og:title" content="446. Arithmetic Slices II - Subsequence">
+<meta property="og:url" content="https://zjuytw.github.io/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/index.html">
 <meta property="og:site_name" content="Yitao&#39;s Blog">
-<meta property="og:description" content="Lab4   Overview   Finally, we make it to the final lab, no doubt that it’s the most challenging work among 4 labs. In this part, we gonna implement two main K-V storage system, one is shardmaster and">
+<meta property="og:description" content="446. Arithmetic Slices II - Subsequence  Description    Solution  DP to check out the previous subsequence number satisfied requirement. 1dp[i][d] &#x3D; In position i, the number satisfied requirement tha">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-lab4/Lab4SingleTest.png">
-<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-lab4/lab4TestA.png">
-<meta property="og:image" content="https://zjuytw.github.io/2021/08/09/6.824-lab4/lab4TestB.png">
-<meta property="article:published_time" content="2021-08-09T08:55:23.224Z">
-<meta property="article:modified_time" content="2021-08-09T10:47:25.908Z">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/446-1.png">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/446-2.png">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/446-3.png">
+<meta property="article:published_time" content="2021-08-11T15:42:52.096Z">
+<meta property="article:modified_time" content="2021-08-11T15:42:18.197Z">
 <meta property="article:author" content="Wang Yitao">
-<meta property="article:tag" content="Lab Note">
-<meta property="article:tag" content="ShardKV Storage">
+<meta property="article:tag" content="No AC first time">
+<meta property="article:tag" content="DP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zjuytw.github.io/2021/08/09/6.824-lab4/Lab4SingleTest.png">
+<meta name="twitter:image" content="https://zjuytw.github.io/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/446-1.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://zjuytw.github.io/2021/08/09/6.824-lab4/index.html">
+  <link rel="canonical" href="https://zjuytw.github.io/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Yitao&#39;s Blog" type="application/atom+xml">
   
@@ -351,21 +351,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Lab4</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text"> Overview </span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text"> Lab4A</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">Implementation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text"> Lab4B</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Config Update</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">ShardMigration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">ShardGC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.4.</span> <span class="toc-text"> Hints</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">446. Arithmetic Slices II - Subsequence</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">Solution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">Code</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-6.824-lab4" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-446. Arithmetic Slices II - Subsequence" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      6.824 Lab4
+      446. Arithmetic Slices II - Subsequence
     </h1>
   
 
@@ -373,116 +373,49 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2021/08/09/6.824-lab4/" class="article-date">
-	  <time datetime="2021-08-09T08:55:23.224Z" itemprop="datePublished">2021-08-09</time>
+	<a href="/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/" class="article-date">
+	  <time datetime="2021-08-11T15:42:52.096Z" itemprop="datePublished">2021-08-11</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/6-824/">6.824</a>
+    <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Lab-Note/" rel="tag">Lab Note</a>, <a class="article-tag-link-link" href="/tags/ShardKV-Storage/" rel="tag">ShardKV Storage</a>
+	<a class="article-tag-link-link" href="/tags/DP/" rel="tag">DP</a>, <a class="article-tag-link-link" href="/tags/No-AC-first-time/" rel="tag">No AC first time</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/08/09/6.824-lab4/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1>Lab4</h1>
+        <h1>446. Arithmetic Slices II - Subsequence</h1>
 
-<h2> Overview </h2>
+<h2>Description</h2>
 
-<p>Finally, we make it to the final lab, no doubt that it’s the most challenging work among 4 labs. In this part, we gonna implement two main K-V storage system, one is shardmaster and one is shardkv. The specific service of them will be discussed in FRAMEWORK part, let’s talk how much workload this lab may take first.</p>
-<p>Compared with former labs, we have no paper to refer to  and no framework to follow. This lab emphasizes more on real producing environment that we need balance load (<strong>so shard comes</strong>) and make shard movable among muti-raft. So <em>shardmaster</em> is a configuration center that decides which raft group servers which shards, and <em>shardkv</em> is exactly one raft group that need to provide <em>PUT/APPEND/GET</em> service to their served shards. (I will put a figure in **conclusion **to make you easier to understanding)</p>
-<h2> Lab4A</h2>
+<p><img src="/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/446-1.png" alt="image-20210811233829175"></p>
+<p><img src="/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/446-2.png" alt="image-20210811233842286"></p>
+<h2>Solution</h2>
 
-<p>Now we are to build shardmaster, which is a group consensus configuration center and records current serving raft groups and which shards one raft group servers. Our task is to adjust shards and dispatch every configuration it receives. The whole design frame is alike as <em>lab3</em>, so we can just copy lab3’s code and revise some part to satisfy the need of <strong>Rebalance Shards</strong> in each raft group.</p>
-<p>So what we gonna do is:</p>
-<ul>
-<li>Build the basic K/V storage system based on lab3</li>
-<li>Design a Shard Rebalance mechanism that meet the lab’s request that <em>The shardmaster should react by creating a new configuration that includes the new replica groups. The new configuration should divide the shards as evenly as possible among the full set of groups, and should move as few shards as possible to achieve that goal. The shardmaster should allow re-use of a GID if it’s not part of the current configuration</em></li>
-<li>Implement <em>Join( ), Leave(), Move(), Query()</em> </li>
-</ul>
-<h3>Implementation</h3>
-
-<p>The whole design is similar to <em>kvraft</em>, because we have implemented consistency and deduplicated underlayer, we can just mainly focus on <em>Join() &amp; Leave( )</em>. I just simply use the strategy that move one shard from largest group (which owns most shards) to smallest group. The boundary condition is:</p>
-<ul>
-<li>Group 0 should have no shards, which means once group 0 has shard, we should select it as largest group and no select it when its shards is least.</li>
-<li>Every raft group’s shards disparity should &lt;= 1</li>
-</ul>
-<p>So let’s consider query() and move() first:  For query(<em>idx int</em>), just return <em>idx-th</em> index’s config and return latest config if <em>idx</em> == -1. <strong>Note : If idx exceeds the array length,  we should return a invalid config for upper layer’s double check rather than throwing a exception and exit</strong>. For <em>move()</em>, we just move one shard from one raft group to another. No more adjusting needed.</p>
-<p>Then Join() and Leave(), these two function have both <em>Rebalance Shards</em> part which need we think carefully before coding. There is two allocation strategies: one is that I formerly described and another is <em>consistent hash</em>, it is a more realistic way to address <em>load balance</em>. (But I just use the straightforward way). Once we decided the <em>rebalance strategy</em>, what left is much easier that to handle Join(), we can just append a group has no shard then call <em>rebalance()</em>, to handle Leave(), we can just assign left group’s shards to group 0 then call rebalance().</p>
-<p>Once one of <em>join, leave, move</em> is done, append a new config corresponding to it to <em>configs</em>.</p>
-<h2> Lab4B</h2>
-
-<p>This part takes me longest time to consider whole logic and the same time to debug. So I hope there are some problem to be addressed before programming.</p>
-<p>First, what should one <em>shardKV</em> do. <em>shardKV</em> is a raft group which <em>shardMaster</em> previously recorded in config, to make you easier to understand, the normal format is like: “[server-101-0 server-101-1 server-101-2]” which means raft group 101 has 3 raft peers from 0 - 2. So these 3 servers is required to provide Key/Value service for their served shards. So simply speaking, if shards are statistic, a shardKV is just like kvraft.</p>
-<p>Second, shards movement. Because shards are not fixed on one group, we should move shard from one group to another, so problem comes that <strong>which information should be delivered and how to make all group remains consistence.</strong></p>
-<p>Third, which operations should be asynchronized in a group. If you haven’t have a figure of the whole frame in your head it’s OK, but let’s image first what we should do in this program. Start with configuration fetch, we should routinely check if there is a newer config then try to update. Then the migration method, it is unwise that once you need to get or send one shard’s data, you just stuck and wait for a reply. Third the GC thread, (optional)</p>
-<p>Finally, how to achieve consistency on moving shards. It’s not hard to answer, we should just use leader to launch every request, use <em>rf.Start() to record</em>, once received command in <em>AppCh</em>, then start to process the command.</p>
-<h3>Implementation</h3>
-
-<p>To pass all test, we should consider Garbage Collection and Non-Stuck service when other shards are pulling. In whole program, we mainly implement ConfigFetch(), ShardMigration(), ShardGC(). All data structure and data stored is involved with these 3 main functions.</p>
-<h4>Config Update</h4>
-
-<p>As we discussed above, we will launch a thread to routinely fetch new config. Once we get a new config whose version number is <strong>exactly</strong> current number + 1, then we should set current config as new one. <strong>But here is the problem, how to deal with old data?</strong>  No matter we are gonna fetch shard from shrink group or push shard to escalated group, we both need to know the RPC address by <em>make_end(server_name string)</em>. So we need at least one previous config to send RPC call, **but do we need more previous config? ** If we apply every config once we detect a new one, it is likely we haven’t pull or push data before config change. So we need to save all previous config, and make sure one version’s shard data is all transported then we can recollect the memory. But it is much tremendous compared with another implementation I learned from <a target="_blank" rel="noopener" href="http://tanxinyu.work/6-824/">Xinyu Tan’s Repo</a>that, we just wait till all group’s all shards are ready. So we can make sure that all group which apply new config are clear with previous shards’ data.</p>
-<h4>ShardMigration</h4>
-
-<p>For one shard move from one group to another, it is both OK that we can choose pull or push from either side. In my implementation, I choose to pull from shrink group. Now we can consider what data should be stored, like previous lab, we need both <em>kvtable &amp; ClerkRecord</em> to deduplicate. It is a general thought we can store these info. for every shard and migrate with shard. Also, we need a status id to notify current status. We need 4 status to mark different states.</p>
-<ul>
-<li>Serving (ready state)</li>
-<li>Pulling (Config changes and this shard is prepared to serve after pulling data from previous one)</li>
-<li>BePulling(Config changes and this shard is prepared to be pulled data by new group)</li>
-<li>GCing (After fetch shard’s data, we need a new RPC call to tell previous one to delete shard)</li>
-</ul>
-<h4>ShardGC</h4>
-
-<p>For those shards shrunk from previous config to current one, we are respond to recollect these memory. So we design a new mechanism to process GC, which means once new group successfully fetched shard data from previous one, (Pulling -&gt; GCing), there are a thread routinely check <em>GCing</em> state and send GC signal to other group to tell it, it’s OK to delete data.</p>
-<h4> Hints</h4>
-
-<ul>
-<li><p>Every shard can receive request from client if they are in <em>Serving</em> and <em>GCing</em></p>
-</li>
-<li><p>All Thread should check if it’s leader, then begin to process formal job</p>
-</li>
-<li><p> To deal with unreliable network, we should use configure number to check if is the right request.</p>
-</li>
-<li><p>In GC step, the GCed group should first use Raft record the GC command then delete and send reply.(Or once this time it crashed, no one will notify it to GC again, because the current shard’s group has received the reply and turn GCing to Serving)</p>
-</li>
-<li><p>Time to detect <em>Wrong Group</em></p>
-<ul>
-<li>In previous design, we just exam <em>Sequence number</em>, but now we should do group exam to block those not serving shard’s request</li>
-<li>It is not enough to exam it at first, just imagine a situation</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(kv *ShardKV)</span> <span class="title">putAndAppend</span><span class="params">(cmd *Op)</span></span>&#123;</span><br><span class="line">	key, value, op, cid, seq := cmd.Key, cmd.Value, cmd.Op, cmd.Cid, cmd.Seq</span><br><span class="line">	kv.mu.Lock()</span><br><span class="line">	<span class="keyword">defer</span> kv.mu.Unlock()</span><br><span class="line">	<span class="comment">//shard := key2shard(key)</span></span><br><span class="line">	<span class="comment">//if ok := kv.checkShard(shard); !ok&#123;</span></span><br><span class="line">	<span class="comment">//	cmd.Err = ErrWrongGroup</span></span><br><span class="line">	<span class="comment">//	return</span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line">	ok := kv.updateClerkMap(cid, seq, shard)</span><br><span class="line">	<span class="keyword">if</span> ok&#123;</span><br><span class="line">		then ...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>DP to check out the previous subsequence number satisfied requirement.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][d] = In position i, the number satisfied requirement that difference is d</span><br></pre></td></tr></table></figure>
 
 
 
-<p>​    if we do not exam shard in <em>Put, Append, Get</em>, we may have inconsistency consequence</p>
-<ul>
-<li>Shard have updated(Because of asynchrony flow), and it is now not serving in this group. Data do have <em>Put, Append, Get</em> and clerkRecord updated. But it won’t be watched in new serving group</li>
-</ul>
-</li>
-</ul>
-<p>So we need a mechanism to tell previous Public interface (Put(), Append(), Get()) that our shards have changed, that there is an ErrWrongGroup out there. Thus I adapted a different way to watch progress of each operation, channel. That every operation gets its channel identified by the return index value of <em>rf.Start()</em>. So once the command is executed, the kvraft will notify interface that operation has been done by channel(as well as err).</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(kv *ShardKV)</span> <span class="title">getChan</span><span class="params">(raftIndex <span class="keyword">int</span>, create <span class="keyword">bool</span>)</span><span class="title">chan</span> <span class="title">Op</span></span>&#123;</span><br><span class="line">	kv.mu.Lock()</span><br><span class="line">	<span class="keyword">defer</span> kv.mu.Unlock()</span><br><span class="line">	<span class="keyword">if</span> _,ok := kv.chanMap[raftIndex]; !ok&#123;</span><br><span class="line">		<span class="keyword">if</span> !create&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">		&#125;</span><br><span class="line">		kv.chanMap[raftIndex] = <span class="built_in">make</span>(<span class="keyword">chan</span> Op,<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> kv.chanMap[raftIndex]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> kv.chanMap[raftIndex]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(kv *ShardKV)</span> <span class="title">listen</span><span class="params">(ch <span class="keyword">chan</span> Op, index <span class="keyword">int</span>)</span> <span class="title">Op</span></span>&#123;</span><br><span class="line">	<span class="keyword">select</span> &#123;</span><br><span class="line">	<span class="keyword">case</span> op,ok := &lt;-ch:</span><br><span class="line">		<span class="keyword">if</span> ok&#123;</span><br><span class="line">			<span class="built_in">close</span>(ch)</span><br><span class="line">		&#125;</span><br><span class="line">		kv.mu.Lock()</span><br><span class="line">		<span class="built_in">delete</span>(kv.chanMap, index)</span><br><span class="line">		kv.mu.Unlock()</span><br><span class="line">		<span class="keyword">return</span> op</span><br><span class="line">	<span class="keyword">case</span> &lt;- time.After(time.Duration(<span class="number">500</span>) * time.Millisecond):</span><br><span class="line">		<span class="keyword">return</span> Op&#123;Err: ErrWrongLeader&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2>Code</h2>
 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="comment">// int res = 0;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        vector&lt;unordered_map&lt;LL,<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(nums.<span class="built_in">size</span>()+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                LL d = <span class="number">1LL</span> * nums[i] - nums[j];</span><br><span class="line">                <span class="keyword">int</span> cnt = ((dp[j].<span class="built_in">find</span>(d) != dp[j].<span class="built_in">end</span>()) ? dp[j][d] : <span class="number">0</span>);</span><br><span class="line">                res += cnt;</span><br><span class="line">                dp[i][d] += cnt+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-
-<p>Test Result:</p>
-<p><img src="/2021/08/09/6.824-lab4/Lab4SingleTest.png" alt="Lab4 SingleTest"></p>
-<p>100 times tests result:<img src="/2021/08/09/6.824-lab4/lab4TestA.png" alt="lab4 TestA"></p>
-<p><img src="/2021/08/09/6.824-lab4/lab4TestB.png" alt="lab4 TestB"></p>
+<p><img src="/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/446-3.png" alt="image-20210811234154579"></p>
 
       
     </div>
@@ -492,7 +425,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://zjuytw.github.io/2021/08/09/6.824-lab4/" title="6.824 Lab4" target="_blank" rel="external">https://zjuytw.github.io/2021/08/09/6.824-lab4/</a>
+      <a href="https://zjuytw.github.io/2021/08/11/446.%20Arithmetic%20Slices%20II%20-%20Subsequence/" title="446. Arithmetic Slices II - Subsequence" target="_blank" rel="external">https://zjuytw.github.io/2021/08/11/446. Arithmetic Slices II - Subsequence/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -538,13 +471,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2021/08/09/6.824-8.ZooKeeper/" title="6.824 ZooKeeper lecture note"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2021/08/09/6.824-lab4-Conclusion/" title="6.824 Lab4 Conclusion"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/08/11/679.%2024%20Game/" title="679. 24 Game"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
