@@ -6,7 +6,7 @@
   <link href="https://zjuytw.github.io/atom.xml" rel="self"/>
   
   <link href="https://zjuytw.github.io/"/>
-  <updated>2021-08-12T15:52:17.278Z</updated>
+  <updated>2021-08-13T15:59:27.260Z</updated>
   <id>https://zjuytw.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>233. Number of Digit One</title>
+    <link href="https://zjuytw.github.io/2021/08/13/233.%20Number%20of%20Digit%20One/"/>
+    <id>https://zjuytw.github.io/2021/08/13/233.%20Number%20of%20Digit%20One/</id>
+    <published>2021-08-13T15:59:46.108Z</published>
+    <updated>2021-08-13T15:59:27.260Z</updated>
+    
+    <content type="html"><![CDATA[<h1>233. Number of Digit One</h1><h2>Description</h2><p><img src="/2021/08/13/233.%20Number%20of%20Digit%20One/233-1.png" alt="image-20210813235350161"></p><h2>Solution</h2><p>We can calculate the number of one on each digit, for example</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">To count one&#x27;s number on 1234567</span><br><span class="line">we can count one on 1, 10, 100...</span><br><span class="line">If we need to count one on 100, we can have 1234 * 100 + 200</span><br></pre></td></tr></table></figure><p>So we can have</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">k&#x27;s digit count = [n/10^(k+1)] * 10 ^ k + </span><br><span class="line">min(max(n mod 10^(k+1) - 100, 0), 10^k)</span><br></pre></td></tr></table></figure><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countDigitOne</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// mulk 表示 10^k</span></span><br><span class="line">        <span class="comment">// 在下面的代码中，可以发现 k 并没有被直接使用到（都是使用 10^k）</span></span><br><span class="line">        <span class="comment">// 但为了让代码看起来更加直观，这里保留了 k</span></span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> mulk = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; n &gt;= mulk; ++k) &#123;</span><br><span class="line">            ans += (n / (mulk * <span class="number">10</span>)) * mulk + <span class="built_in">min</span>(<span class="built_in">max</span>(n % (mulk * <span class="number">10</span>) - mulk + <span class="number">1</span>, <span class="number">0LL</span>), mulk);</span><br><span class="line">            mulk *= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;233. Number of Digit One&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/13/233.%20Number%20of%20Digit%20One/233-1.png&quot; alt=&quot;image-202</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="tricky" scheme="https://zjuytw.github.io/tags/tricky/"/>
+    
+  </entry>
   
   <entry>
     <title>388. Longest Absolute File Path</title>
@@ -574,36 +602,6 @@
     <category term="Aurora" scheme="https://zjuytw.github.io/tags/Aurora/"/>
     
     <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 CRAQ lecture note</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-9.CRAQ/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-9.CRAQ/</id>
-    <published>2021-08-09T09:08:08.068Z</published>
-    <updated>2021-08-09T10:05:27.977Z</updated>
-    
-    <content type="html"><![CDATA[<h1>CRAQ</h1><h2>Introduce</h2><p>Start with awareness that Paxos, Raft’s consensus algorithms have bottleneck in leader, because leader need to send logs to all followers and wait for majority of their reply.</p><p>Chain replication is purposed in 2004, its scheme ensures serializability meanwhile the whole workload is distributed among the system(to each node).</p><p>CRAQ is an improvement on Chain Replication, maintains strong consistency while greatly improving read throughput. <strong>But in this article, I will just mainly talk about Chain Replication.</strong></p><h2>Chain Replication</h2><p><img src="/2021/08/09/6.824-9.CRAQ/CR.png" alt="CR"></p><p>Use the chain on Figure 1 and a remote coordinating cluster like ZK, Raft or Paxos to check heartbeat and send configurations to nodes on the chain.</p> <h3>Failure Recovery</h3><ul><li>Head fails: Its successor becomes head</li><li>Tail fails: Its predecessor becomes tail</li><li>Intermediate fails: predecessor send MSG to its successor</li></ul><h3> Evaluation </h3><ul><li>Pros:<ul><li>Head’s workload is far less than Raft’s leader’s. Because leader needs to send sync. packets and handle R/W log</li></ul></li><li>Cons:<ul><li>Every node can slow down the whole system. Raft, instead, just need a majority of nodes keep running.</li></ul></li></ul><h2> Extend</h2><p>To read more about CRAQ, you may find articles in <a href="https://zhuanlan.zhihu.com/p/344808961">浅谈Primary-Back Replication和Chain Replication</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;CRAQ&lt;/h1&gt;
-
-&lt;h2&gt;Introduce&lt;/h2&gt;
-
-&lt;p&gt;Start with awareness that Paxos, Raft’s consensus algorithms have bottleneck in leader, because leader</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
-    
-    <category term="CRAQ" scheme="https://zjuytw.github.io/tags/CRAQ/"/>
     
   </entry>
   
