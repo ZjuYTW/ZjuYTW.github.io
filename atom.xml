@@ -6,7 +6,7 @@
   <link href="https://zjuytw.github.io/atom.xml" rel="self"/>
   
   <link href="https://zjuytw.github.io/"/>
-  <updated>2021-08-14T06:51:16.805Z</updated>
+  <updated>2021-08-14T13:17:50.809Z</updated>
   <id>https://zjuytw.github.io/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>399. Evaluate Division</title>
+    <link href="https://zjuytw.github.io/2021/08/14/399.%20Evaluate%20Division/"/>
+    <id>https://zjuytw.github.io/2021/08/14/399.%20Evaluate%20Division/</id>
+    <published>2021-08-14T13:18:15.761Z</published>
+    <updated>2021-08-14T13:17:50.809Z</updated>
+    
+    <content type="html"><![CDATA[<h1>399. Evaluate Division</h1><h2>Description</h2><p><img src="/2021/08/14/399.%20Evaluate%20Division/399-1.png" alt="image-20210814211436494"></p><p><img src="/2021/08/14/399.%20Evaluate%20Division/399-2.png" alt="image-20210814211447126"></p><h2>Solution</h2><p>Record each equations’ string name and its corresponding index, used later.</p><p>Then do a <code>floyd search</code> to all strings, find their division.</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">double</span>&gt; <span class="title">calcEquation</span><span class="params">(vector&lt;vector&lt;string&gt;&gt;&amp; equations, vector&lt;<span class="keyword">double</span>&gt;&amp; values, vector&lt;vector&lt;string&gt;&gt;&amp; queries)</span> </span>&#123;</span><br><span class="line">        vector&lt;string&gt; names;</span><br><span class="line">        unordered_map&lt;string, unordered_map&lt;string, <span class="keyword">double</span>&gt;&gt; Map;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; equations.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Map.<span class="built_in">find</span>(equations[i][<span class="number">0</span>]) == Map.<span class="built_in">end</span>())&#123;</span><br><span class="line">                Map[equations[i][<span class="number">0</span>]][equations[i][<span class="number">0</span>]] = <span class="number">1.0</span>;</span><br><span class="line">                names.<span class="built_in">push_back</span>(equations[i][<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(Map.<span class="built_in">find</span>(equations[i][<span class="number">1</span>]) == Map.<span class="built_in">end</span>())&#123;</span><br><span class="line">                Map[equations[i][<span class="number">1</span>]][equations[i][<span class="number">1</span>]] = <span class="number">1.0</span>;</span><br><span class="line">                names.<span class="built_in">push_back</span>(equations[i][<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            Map[equations[i][<span class="number">0</span>]][equations[i][<span class="number">1</span>]] = values[i];</span><br><span class="line">            Map[equations[i][<span class="number">1</span>]][equations[i][<span class="number">0</span>]] = <span class="number">1.0</span>/values[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>;k &lt; Map.<span class="built_in">size</span>();k++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Map.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; Map.<span class="built_in">size</span>(); j++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(i == j || i == k || j == k)</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    string a = names[i], b= names[j], c= names[k];</span><br><span class="line">                    <span class="keyword">if</span>(Map[a].<span class="built_in">find</span>(c) != Map[a].<span class="built_in">end</span>() &amp;&amp; Map[b].<span class="built_in">find</span>(c) != Map[b].<span class="built_in">end</span>())&#123;</span><br><span class="line">                        Map[a][b] = Map[a][c] / Map[b][c];</span><br><span class="line">                        Map[b][a] = Map[b][c] / Map[a][c];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;<span class="keyword">double</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; queries.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            string a = queries[i][<span class="number">0</span>], b = queries[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(Map.<span class="built_in">find</span>(a) == Map.<span class="built_in">end</span>() || Map.<span class="built_in">find</span>(b) == Map.<span class="built_in">end</span>())</span><br><span class="line">                res.<span class="built_in">push_back</span>(<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(Map[a].<span class="built_in">find</span>(b) == Map[a].<span class="built_in">end</span>())</span><br><span class="line">                res.<span class="built_in">push_back</span>(<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                res.<span class="built_in">push_back</span>(Map[a][b]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;399. Evaluate Division&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/14/399.%20Evaluate%20Division/399-1.png&quot; alt=&quot;image-20210814211</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="Floyd" scheme="https://zjuytw.github.io/tags/Floyd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>1583. Count Unhappy Friends</title>
+    <link href="https://zjuytw.github.io/2021/08/14/1583.%20Count%20Unhappy%20Friends/"/>
+    <id>https://zjuytw.github.io/2021/08/14/1583.%20Count%20Unhappy%20Friends/</id>
+    <published>2021-08-14T13:18:15.685Z</published>
+    <updated>2021-08-14T13:12:40.008Z</updated>
+    
+    <content type="html"><![CDATA[<h1>1583. Count Unhappy Friends</h1><h2>Description</h2><p><img src="/2021/08/14/1583.%20Count%20Unhappy%20Friends/1583-1.png" alt="image-20210814210934272"></p><p><img src="/2021/08/14/1583.%20Count%20Unhappy%20Friends/1583-2.png" alt="image-20210814210946985"></p><h2>Solution</h2><p>Iterate all potential pair<code>(i,j)</code> to see if they are ranked higher in each <code>preference</code> </p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">unhappyFriends</span><span class="params">(<span class="keyword">int</span> n, vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; preferences, vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; pairs)</span> </span>&#123;</span><br><span class="line">        vector&lt;unordered_map&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt; <span class="built_in">perfers</span>(n);</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; Map;</span><br><span class="line">        <span class="keyword">int</span> res  = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n<span class="number">-1</span>; i++)&#123;</span><br><span class="line">                perfers[j][preferences[j][i]] = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> pair: pairs)&#123;</span><br><span class="line">            Map[pair[<span class="number">0</span>]] = pair[<span class="number">1</span>];</span><br><span class="line">            Map[pair[<span class="number">1</span>]] = pair[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">visited</span><span class="params">(n,<span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(Map[i] == j)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(perfers[i][j] &lt; perfers[i][Map[i]] &amp;&amp; perfers[j][i] &lt; perfers[j][Map[j]])&#123;</span><br><span class="line">                    res += visited[i] == <span class="number">0</span>;</span><br><span class="line">                    res += visited[j] == <span class="number">0</span>;</span><br><span class="line">                    visited[i] = <span class="number">1</span>;</span><br><span class="line">                    visited[j] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;1583. Count Unhappy Friends&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/14/1583.%20Count%20Unhappy%20Friends/1583-1.png&quot; alt=&quot;imag</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="Tricky" scheme="https://zjuytw.github.io/tags/Tricky/"/>
+    
+  </entry>
   
   <entry>
     <title>6.S081 Page Table</title>
@@ -534,66 +590,6 @@
     <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
     
     <category term="Memcache@FB" scheme="https://zjuytw.github.io/tags/Memcache-FB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 Spark lecture note</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-15.Spark(Big%20Data%20Process)/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-15.Spark(Big%20Data%20Process)/</id>
-    <published>2021-08-09T09:13:23.335Z</published>
-    <updated>2021-08-09T10:06:04.918Z</updated>
-    
-    <content type="html"><![CDATA[<h1>Spark</h1><h2>Introduce</h2><p>Spark is a successor of MapReduce to process distributed big-data computing tasks.  Frameworks like MapReduce, Dryad, and Spark help data scientists to focus on their business rather than wasting time on designing the distributed tasks and fault-tolerance. </p><p>There are some constraints in previous frameworks that MapReduce lacks abstractions for leveraging distributed memory so makes it inefficient for those that reuse intermediate results across multiple computations and lacks high interactive flexibility, programmers may have trouble implementing some complex algorithms. </p><p>Spark is an implementation of a new abstraction called resilient distributed datasets(RDDs), which are fault-tolerant, parallel data structures that let users explicitly persist intermediate results in memory, control their partitioning to optimize data placement, and manipulate them using a rich set of operators.</p><h2> RDD</h2><p>RDD(Resilient Distributed Dataset) is a collection of Read-Only and Partitioned records. RDDs can only be created through deterministic operations on either 1) data in stable storage or 2) other RDDs. Spark uses <em>Lineage</em> to keep track of how each RDD is transformed from previous datasets.<img src="/2021/08/09/6.824-15.Spark(Big%20Data%20Process)/lineage.jpg" alt="lineage"></p><p>Spark provides <em>Action</em> as well as <em>Transformation</em>. Action calculate RDDs and gets a result. Transformation imports data from external sources or transform an old RDD to a new Read-Only RDD.</p><p><img src="/2021/08/09/6.824-15.Spark(Big%20Data%20Process)/Transformation_Action.jpg" alt="Transformation_Action"></p><h2>Computation Schedule</h2><p>RDDs are stored in distributed servers, so when we need to do Transformation,  systems need to fetch previous RDD in the corresponding servers. There are two kinds of Transformations that forms different dependency between RDDs</p><ul><li>Narrow Dependency : Each partition of the parent RDD is used by at most one partition of  the child RDD.</li><li>Wide Dependency : Multiple child partitions may depend on the parent RDD.</li></ul><p><img src="/2021/08/09/6.824-15.Spark(Big%20Data%20Process)/Dependencies.png" alt="Dependencies"></p><p>Spark speeds up Transformation by optimizing the Transformations related to <em>Narrow Dependency</em>. First, narrow dependencies allow for pipelined execution on one cluster node, which can compute all the parent partitions.  Second, recovery after a node failure is more efficient with a narrow dependency, as only the lost parent partitions need to be recomputed.</p><p>In contrast, in a lineage graph with wide dependencies, a single failed node might cause the loss of some partition form all the ancestors of an RDD, requiring a complete re-execution.</p><p>Overall, a RDD are consistent of  the following elements:</p><ul><li>Its partitions</li><li>Its parent partitions</li><li>Transformation</li><li>Its metadata(eg, data type, storage position etc.)</li></ul><p><img src="/2021/08/09/6.824-15.Spark(Big%20Data%20Process)/stage.jpg" alt="stage"></p><p>When user calls Action to process computation on RDD, Spark will build different stages according to lineages. Hence, Spark can build a job stage that contains as many Narrow Dependencies as possible to speed up the whole system’s efficiency. The boundaries of the stages are the shuffle operations required for wide dependencies, or any already computed partitions that can short-circuit the computations of a parent RDD. After building the job stages, Spark then launches tasks to compute missing partitions from each stage until it has computed the target RDD.</p><p>While scheduling Tasks, Spark assigns tasks to machines based on data locality. The task will directly be processed by those nodes that is already holds the partition needed in memory. Otherwise, if a task processes a partition for which the containing RDD provides preferred locations(eg, an HDFS file), we send it to those.</p><h2>Fault-Tolerance</h2><p>Spark can re-compute the content of a failed RDD by dependencies from lineage graph. But there is a wide dependency during the re-computation, which means we have to re-compute all the RDD it depends, also, Spark won’t store all the RDD in the memory, or it will soon run out of memory. So we have to manually do persist, if necessary. </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdd.persist(REPLICATE)</span><br></pre></td></tr></table></figure><h2>Conclusion</h2><p>Spark RDD has the feature of:</p><ul><li>Store all info directly on memory</li><li>Interactive API</li><li>Find both Narrow and Wide Dependencies, while narrow one is more efficiency</li><li>Have Checkpoint to failover from wide dependency failure</li></ul><p>But we still need to be aware that Spark is not a replacement for MapReduce: For those model and algorithms already fit in MapReduce, Spark won’t have a more efficient result for them.</p><p>&lt;h2</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;Spark&lt;/h1&gt;
-
-&lt;h2&gt;Introduce&lt;/h2&gt;
-
-&lt;p&gt;Spark is a successor of MapReduce to process distributed big-data computing tasks.  Frameworks like M</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
-    
-    <category term="Spark" scheme="https://zjuytw.github.io/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 CRAQ lecture note(Pending for updated)</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-14.OCC(FaRM)/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-14.OCC(FaRM)/</id>
-    <published>2021-08-09T09:13:23.329Z</published>
-    <updated>2021-08-09T10:44:28.217Z</updated>
-    
-    <content type="html"><![CDATA[<h1>FaRM (To be updated...)</h1><h2>Introduce</h2><p>Microsoft’s main memory distributed computing platform, FaRM can provide distributed transactions with serializability, high performance, durability, and high availability using RDMA and a new, inexpensive approach to providing non-volatile DRAM.</p><h3>NVRAM</h3><ul><li>Strategy to become non-volatile:<ul><li>Using battery as back-up power, once the electric power fails, the system goes with battery and do all context saving work then shut down</li><li><strong>Note:</strong> This scheme is just helpful when encounters power failure, is not applicable for hardware/ software failure. –Because otherwise the system just shut down directly.</li></ul></li></ul><h2>Optimistic Concurrency Control</h2><p>For a optimistic lock, we have</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Xaction begin</span><br><span class="line">read all values without lock</span><br><span class="line">use a buffer to store write</span><br><span class="line">commit write</span><br><span class="line">Xaction end</span><br></pre></td></tr></table></figure><p>Before commit transaction to storage, system need to verify the validation of the transaction. If success, then commit, else abort all the operation related to transaction.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tx.create()</span><br><span class="line">o = tx.copyRead(OID)</span><br><span class="line">o.value += 1</span><br><span class="line">tx.write(OID, o)</span><br><span class="line">ok := tx.commt()</span><br></pre></td></tr></table></figure><h2>Transaction Management</h2><p><img src="/2021/08/09/6.824-14.OCC(FaRM)/Farm1.jpg" alt="Farm1"></p><p> <img src="/2021/08/09/6.824-14.OCC(FaRM)/OCC_commit_protocol.png" alt="OCC commit protocol"></p><p>Refer to the above figures about server layout and OCC commit protocol. Let’s talk about FaRM’s transaction management. FaRM uses OCC and 2PC to achieve its serializability.</p><p><strong>2PC strategy</strong></p><ul><li> Read without lock, read(&amp; value, &amp;version)</li><li>use one-side RDMA to read</li><li>Lock the revised data<ul><li>primary polling for data which is (use DRMA to poll)<ul><li>locked, so send reject</li><li>VERS changed, then send reject</li><li>else, then set the lock and send yes.( To avoid racing, use CHECK&amp;SET atomic operation here)</li></ul></li></ul></li><li>do validation for those no changed shard<ul><li>To check if version changed or locked]</li></ul></li><li>Commit</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;FaRM (To be updated...)&lt;/h1&gt;
-
-&lt;h2&gt;Introduce&lt;/h2&gt;
-
-&lt;p&gt;Microsoft’s main memory distributed computing platform, FaRM can provide distribute</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
-    
-    <category term="FaRM" scheme="https://zjuytw.github.io/tags/FaRM/"/>
     
   </entry>
   

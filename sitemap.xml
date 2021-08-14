@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zjuytw.github.io/2021/08/14/399.%20Evaluate%20Division/</loc>
+    
+    <lastmod>2021-08-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/08/14/1583.%20Count%20Unhappy%20Friends/</loc>
+    
+    <lastmod>2021-08-14</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zjuytw.github.io/2021/08/14/Lab1%20Unix%20utilities/</loc>
     
     <lastmod>2021-08-14</lastmod>
@@ -565,6 +579,20 @@
   
   <url>
     <loc>https://zjuytw.github.io/tags/Memory-Management/</loc>
+    <lastmod>2021-08-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Tricky/</loc>
+    <lastmod>2021-08-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Floyd/</loc>
     <lastmod>2021-08-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
