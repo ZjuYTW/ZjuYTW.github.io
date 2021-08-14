@@ -6,7 +6,7 @@
   <link href="https://zjuytw.github.io/atom.xml" rel="self"/>
   
   <link href="https://zjuytw.github.io/"/>
-  <updated>2021-08-13T15:59:27.260Z</updated>
+  <updated>2021-08-14T06:51:16.805Z</updated>
   <id>https://zjuytw.github.io/</id>
   
   <author>
@@ -17,13 +17,95 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>6.S081 Page Table</title>
+    <link href="https://zjuytw.github.io/2021/08/14/Lab3%20Page%20Table/"/>
+    <id>https://zjuytw.github.io/2021/08/14/Lab3%20Page%20Table/</id>
+    <published>2021-08-14T06:51:27.776Z</published>
+    <updated>2021-08-14T06:51:16.805Z</updated>
+    
+    <content type="html"><![CDATA[<h1>Page Table(No Completed)</h1><p>In this section, we are about to explore page tables and modify them to simplify the functions that copy data from user space to kernel space.</p><p>Before start the lab, we shall have a well understand on how page table works and how the functions in <code>vm.c</code> and <code>proc.c</code> works. Especially <code>walk, map, unmap...</code></p><p><strong>Note:</strong> Because the new semester has began and I am a little overwhelmed by the workload. So I decided to stop the lab and go to recollect the algorithm analysis tools I learned in undergraduate.(TUT, or I may have a unhappy semester)</p><h2>Lab</h2><ul><li><p>Vmprint</p><p>This part is easy, just look <code>freewalk()</code>,then mimic the procedural of  look at page table use the index to find pte-&gt; go to next page table…</p></li><li><p>Kernel page table per process</p><p>This part need us to give each process its own copy of the kernel page. Before we modify, when the kernel need to user a user pointer’s value, it need first translate the pointer to a physical address then because kernel page table is a direct mapping to physical address, we can directly treat these PA as VA.</p><p>After this part and next part, we shall be able to directly dereference user’s pointer in kernel.</p><ul><li>To achieve the copy of kernel page table<ul><li>First, <code>alloc</code> a new page table to each process</li><li>Map the kernel stack to this page table, as well as many other address under ‘KERNBASE aka <code>0x80000000</code>‘ and Trampoline</li><li>Modify the <code>scheduler</code> to make sure whenever a proc is running on CPU, <code>satp</code> will change its MMU to the new kernel page table</li><li>Also, when execute <code>freeproc</code>, we need to free process’s kernel page table. Note that we should not free the physical memory, so we need to implement our own <code>freewalk</code>.</li></ul></li></ul></li><li><p>Simplify copyin() / copyinstr()</p><p>In this part, we should do furtherly to copy <code>user_pagetable</code> into <code>kernel_pagetable</code>, so we need to walk the <code>user_pagetable</code> ‘s <code>pa</code> and mapping the <code>pa</code> into <code>kernel_pagetable</code> </p><ul><li>First, change the <code>copyin &amp; copyinstr</code> functions to use <code>copyin_new &amp; copyinstr_new</code> in kernel/vmcopyin.c</li><li>Because <code>exec, fork, growproc</code> will change process’s page table, so we change <code>kernel_pagetable</code> after process’s page table is changed.</li><li>Copy page table to <code>kernel_pagetable</code> from [0, p-&gt;sz]<ul><li>We simply walk the va of <code>user_pagetable</code> to find pa then map (va, pa)’s record in kernel page table</li><li>Remember to set off the <code>PTE_U</code></li></ul></li><li>Revise <code>exec, fork, growproc</code> functions<ul><li>In <code>growproc</code>, if argument <code>n</code> &lt; 0, we need to unmap the page table</li></ul></li><li>Don’t forget to copy pagetable for first user process in <code>user_init</code></li></ul></li></ul><p><img src="/2021/08/14/Lab3%20Page%20Table/lab3-2.jpg" alt="lab3-2"></p><p><img src="/2021/08/14/Lab3%20Page%20Table/lab3-3.jpg" alt="lab3-3"></p><p>(The failed information is I haven’t wrote questions and time text, just ignore it!)</p><h2> Questions</h2><p><strong>I just stopped here, for helping me to resume the page table stuff after this semester.</strong></p><blockquote><p>Explain the output of vmprint in terms of Fig 3-4 from the text. What does page 0 contain? What is in page 2? When running in user mode, could the process read/write the memory mapped by page 1?</p></blockquote><p>Answer: </p><blockquote><p>Explain why the third test srcva + len &lt; srcva is necessary in copyin_new(): give values for srcva and len for which the first two test fail (i.e., they will not cause to return -1) but for which the third one is true (resulting in returning -1).</p></blockquote><p>Answer:</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;Page Table(No Completed)&lt;/h1&gt;
+
+&lt;p&gt;In this section, we are about to explore page tables and modify them to simplify the functions that co</summary>
+      
+    
+    
+    
+    <category term="6.S081" scheme="https://zjuytw.github.io/categories/6-S081/"/>
+    
+    
+    <category term="xv6" scheme="https://zjuytw.github.io/tags/xv6/"/>
+    
+    <category term="Memory Management" scheme="https://zjuytw.github.io/tags/Memory-Management/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>6.S081 System Calls</title>
+    <link href="https://zjuytw.github.io/2021/08/14/Lab2%20Syscalls/"/>
+    <id>https://zjuytw.github.io/2021/08/14/Lab2%20Syscalls/</id>
+    <published>2021-08-14T06:51:27.773Z</published>
+    <updated>2021-08-14T06:50:49.420Z</updated>
+    
+    <content type="html"><![CDATA[<h1>System Calls(pending the challenge)</h1><p>In the lab, we will get deeper into OS than the previous one. We are about to implement the ‘bridge’ between user and kernel mode, then implement two specific <code>syscall</code> to be called by user’s program.</p><h2>Lab</h2><p>The two labs are symmetry overall, so I just describe how to do a system call.</p><p>To make our own <code>syscall</code>s,we should know how the syscall works between user &amp; kernel mode.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   user function</span><br><span class="line">     ↓</span><br><span class="line">      wrapped interface</span><br><span class="line">-----------------------------↓(ecall)--------------------------------------</span><br><span class="line">     syscall()</span><br><span class="line">      ↓</span><br><span class="line">kernel sys_(syscall&#x27;s name)</span><br></pre></td></tr></table></figure><p>In this framework, there are some points:</p><ul><li>How to use ecall?<ul><li>We first declare a wrapped function in <code>user/user.h</code>, then implement it in <code>user/usys.S</code> which are assembly code generated by <code>user/usys.pl</code>, the assembly code are used to load the syscall number into <code>a7</code> register.</li></ul></li><li>In kernel mode how to fetch argument?<ul><li>Refer to other functions in <code>kernel/sysproc.c</code>, we can use <code>argint()</code> in <code>kernel/syscall.c</code> to fetch argument from stack</li></ul></li><li>syscall() in <code>kernel/syscall.c</code> , what’s its function?<ul><li>It precedes after ecall, fetches the <code>a7</code> then executes corresponding syscall, then put the return value into <code>a0</code></li></ul></li></ul><h3> Trace</h3><ul><li><p>Remember to put your new syscall number into every part a syscall can involve with, especially don’t forget set the function point entry in <code>syscall.c</code>‘s array.</p></li><li><p>The function uses mask to mark all system call it wants to trace, so each bit on mask is a syscall you should check. Use <code>mask &amp; 1 &lt;&lt; syscallnum </code> to check it.</p></li></ul><p><img src="/2021/08/14/Lab2%20Syscalls/Lab2-1.png" alt="Lab2-1"></p><h3>Sysinfo</h3><ul><li>The way kernel mode gives back argument to user mode is to call <code>copyout</code> which maps return args’ virtual memory back to physical memory then revises it to target value.</li><li>The collections of free memory and processes is not too hard, we can just iterate the freemem linklist and process array.</li></ul><p><img src="/2021/08/14/Lab2%20Syscalls/lab2-2.png" alt="lab2-2"></p><h2>Conclusion</h2><p>In this lab, we breakthrough the barrier between u/k mode, the whole detailed system call process is in front of us. But there are still many information we need to get into, <code>mmap, pages management , process management</code>, etc.</p><p>Also, I have not started challenges, because I am about to begin my graduate life in NUS, hopefully I can go back here and finish them someday!</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;System Calls(pending the challenge)&lt;/h1&gt;
+
+&lt;p&gt;In the lab, we will get deeper into OS than the previous one. We are about to implement the</summary>
+      
+    
+    
+    
+    <category term="6.S081" scheme="https://zjuytw.github.io/categories/6-S081/"/>
+    
+    
+    <category term="xv6" scheme="https://zjuytw.github.io/tags/xv6/"/>
+    
+    <category term="Syscall" scheme="https://zjuytw.github.io/tags/Syscall/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>6.S081 Lab1 Unix Utilities</title>
+    <link href="https://zjuytw.github.io/2021/08/14/Lab1%20Unix%20utilities/"/>
+    <id>https://zjuytw.github.io/2021/08/14/Lab1%20Unix%20utilities/</id>
+    <published>2021-08-14T06:51:27.770Z</published>
+    <updated>2021-08-14T06:51:21.854Z</updated>
+    
+    <content type="html"><![CDATA[<h1>Xv6 and Unix utilities</h1><p>In this lab, we gonna implement many interesting and useful programs like, <code>sleep, pingpong, primes, find, and xargs </code>. There are some points I want to emphasize, though this lab is not so hard.</p><h2>Before Start</h2><p>My experiment environment:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VM: VMware workstation</span><br><span class="line">Linux ubuntu 20.04</span><br></pre></td></tr></table></figure><p> I can not find corresponding software in <code>apt-get</code> when my kernel was at 16.04 or 18.04, so I have to update to 20.04.</p><h2>Lab</h2><p>The structure we should know before programming is that, there are kernel’s and user’s code, when I need to do something on <code>system level</code>, we should call kernel’s function. Gracefully, we have many wrapped interface on users’ functions that we can directly call them. Check them in <code>user/user.h</code></p><h3>sleep</h3><p>Skip</p><h3>    pingpong</h3><p>Note that in pipe[2], pipe[0] is for receiving data and pipe[1] is for writing into.</p><h3>primes</h3><p>The brief of this algorithm is used in the situation that, assume you have a bunch of machines, to find primes given a list of numbers which continuously +1 one after another. And each stage selects one minimum number and it is exactly prime, then verify other numbers do not have the prime as their factor. Then send left numbers into next stage…</p><p><img src="/2021/08/14/Lab1%20Unix%20utilities/lab1-1.png" alt="lab1-1"></p><p>Just use recursion to find next stage’s number and send to the child’s process</p><h3>find</h3><p>Refer to <code>user/ls.c</code>, that is a good template.</p><p>What I want to mention is some points of File System</p><p><strong>struct state</strong> is the information a file descriptor refers to, stored in inode and can be fetched by fstat(fd, &amp;st)</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#define T_DIR 1 // Directory</span><br><span class="line">#define T_FILE 2 // File</span><br><span class="line">#define T_DEVICE 3 // Device</span><br><span class="line">struct stat &#123;</span><br><span class="line">int dev; // File system’s disk device</span><br><span class="line">uint ino; // Inode number</span><br><span class="line">short type; // Type of file</span><br><span class="line">short nlink; // Number of links to file</span><br><span class="line">uint64 size; // Size of file in bytes</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><strong>struct dirent</strong> serves the same a file descriptor’s information, but it mainly provides file’s name</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct dirent</span><br><span class="line">&#123;</span><br><span class="line">    long d_ino; /* inode number */</span><br><span class="line">    off_t d_off; /* offset to this dirent */</span><br><span class="line">    unsigned short d_reclen; /* length of this d_name */</span><br><span class="line">    unsigned char d_type; /* the type of d_name */</span><br><span class="line">    char d_name [NAME_MAX+1]; /* file name (null-terminated) */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2>xargs</h2><p>This program helps me to understand xargs a lot, thanks gosh.</p><p>To implement <code>xargs</code>, we need first process <code>stdin</code> because <code>pipe</code> will redirect xargs’s stdin to last program’s stdout. When this done, we can user<code>exec()</code> to execute the command after xargs. Note that when processing stdin, we should read or gets byte by byte and when once encounter ‘\n’, do command.</p><h2>Conclusion</h2><p>This programs helps me to review the usage of them and help me dabble into <code>fork(), exec(), pipe(), and file systems</code></p><p><strong>Note:</strong> when programming for a child process, just use <code>exit</code></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;Xv6 and Unix utilities&lt;/h1&gt;
+
+&lt;p&gt;In this lab, we gonna implement many interesting and useful programs like, &lt;code&gt;sleep, pingpong, primes</summary>
+      
+    
+    
+    
+    <category term="6.S081" scheme="https://zjuytw.github.io/categories/6-S081/"/>
+    
+    
+    <category term="xv6" scheme="https://zjuytw.github.io/tags/xv6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>233. Number of Digit One</title>
     <link href="https://zjuytw.github.io/2021/08/13/233.%20Number%20of%20Digit%20One/"/>
     <id>https://zjuytw.github.io/2021/08/13/233.%20Number%20of%20Digit%20One/</id>
     <published>2021-08-13T15:59:46.108Z</published>
-    <updated>2021-08-13T15:59:27.260Z</updated>
+    <updated>2021-08-13T16:05:32.013Z</updated>
     
-    <content type="html"><![CDATA[<h1>233. Number of Digit One</h1><h2>Description</h2><p><img src="/2021/08/13/233.%20Number%20of%20Digit%20One/233-1.png" alt="image-20210813235350161"></p><h2>Solution</h2><p>We can calculate the number of one on each digit, for example</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">To count one&#x27;s number on 1234567</span><br><span class="line">we can count one on 1, 10, 100...</span><br><span class="line">If we need to count one on 100, we can have 1234 * 100 + 200</span><br></pre></td></tr></table></figure><p>So we can have</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">k&#x27;s digit count = [n/10^(k+1)] * 10 ^ k + </span><br><span class="line">min(max(n mod 10^(k+1) - 100, 0), 10^k)</span><br></pre></td></tr></table></figure><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countDigitOne</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// mulk 表示 10^k</span></span><br><span class="line">        <span class="comment">// 在下面的代码中，可以发现 k 并没有被直接使用到（都是使用 10^k）</span></span><br><span class="line">        <span class="comment">// 但为了让代码看起来更加直观，这里保留了 k</span></span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> mulk = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; n &gt;= mulk; ++k) &#123;</span><br><span class="line">            ans += (n / (mulk * <span class="number">10</span>)) * mulk + <span class="built_in">min</span>(<span class="built_in">max</span>(n % (mulk * <span class="number">10</span>) - mulk + <span class="number">1</span>, <span class="number">0LL</span>), mulk);</span><br><span class="line">            mulk *= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1>233. Number of Digit One</h1><h2>Description</h2><p><img src="/2021/08/13/233.%20Number%20of%20Digit%20One/233-1.png" alt="image-20210813235350161"></p><h2>Solution</h2><p>We can calculate the number of one on each digit, for example</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">To count one&#x27;s number on 1234567</span><br><span class="line">we can count one on 1, 10, 100...</span><br><span class="line">If we need to count one on 100, we can have 1234 * 100 + 100</span><br></pre></td></tr></table></figure><p>So we can have</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">k&#x27;s digit count = [n/10^(k+1)] * 10 ^ k + </span><br><span class="line">min(max(n mod 10^(k+1) - 100, 0), 10^k)</span><br></pre></td></tr></table></figure><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countDigitOne</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// mulk 表示 10^k</span></span><br><span class="line">        <span class="comment">// 在下面的代码中，可以发现 k 并没有被直接使用到（都是使用 10^k）</span></span><br><span class="line">        <span class="comment">// 但为了让代码看起来更加直观，这里保留了 k</span></span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> mulk = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; n &gt;= mulk; ++k) &#123;</span><br><span class="line">            ans += (n / (mulk * <span class="number">10</span>)) * mulk + <span class="built_in">min</span>(<span class="built_in">max</span>(n % (mulk * <span class="number">10</span>) - mulk + <span class="number">1</span>, <span class="number">0LL</span>), mulk);</span><br><span class="line">            mulk *= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
@@ -512,96 +594,6 @@
     <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
     
     <category term="FaRM" scheme="https://zjuytw.github.io/tags/FaRM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 Spanner lecture note</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-13.Spanner(Strong%20Consistency%20RW)/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-13.Spanner(Strong%20Consistency%20RW)/</id>
-    <published>2021-08-09T09:13:19.948Z</published>
-    <updated>2021-08-09T10:05:42.935Z</updated>
-    
-    <content type="html"><![CDATA[<h1>Spanner </h1><h1>Introduce</h1><p>Spanner is Google’s scalable, multi-version, globally-distributed, and synchronously-replicated data. Spanner is the first global distributed Database and support external consistency. It is a big framework, but I just want to focus on some particular points – Mainly about external consistency and True-Time mechanism.</p><p>You may look for more detailed illustration on Google’s Spanner paper or other’s blog about spanner.</p><h2>Consistency</h2><p><img src="/2021/08/09/6.824-13.Spanner(Strong%20Consistency%20RW)/spanner1.webp" alt="spanner1"></p><p>Assume that if we have 3 Data Centers, we have to send data across all data centers to keep consistency.  To keep a strong consistency, Google uses paxos to send logs and reach consensus. Moreover, google has its True-Time mechanism to reach external consistency, but let’s talk about it later.</p><h3>R/W transactions</h3><p>For a transaction both need to read and write,spanner uses 2PC.</p><ul><li>Pick a unique transaction ID to identify</li><li>Do all the reads first then do all writes</li><li>Send read request to all leaders in DCs, then DC lock the resources and reply</li><li>Choose a leader as transaction coordinator</li><li>Send writes request to all leaders, and leader gonna send prepared msg to followers into paxos log to make sure leader isn’t crashed and lost lock</li><li>Once one leader finishes promising to followers, it sends a Yes to the coordinator</li><li>Once coordinate received all Yes signal, it start to commit writes to its followers</li><li>Then tell other leader to commit</li></ul><h3>R/O transactions</h3><p>For Read-Only transactions, spanner speeds up this type by no 2PC and no locks.</p><blockquote><p> Start with a question that why we not directly read the latest value of each key needed?</p><p>Answer: </p><p>For a transaction T3 that print(x,y), if we have the timeline of below:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">T1 :  wx,wy,commit</span><br><span class="line">T2 :                      wx,wy,commit               </span><br><span class="line">T3 :                 Rx                 Ry</span><br></pre></td></tr></table></figure><p>T3 just saw x,y yielded by different transaction which breaks the serializability.</p></blockquote><p>From the example above, we know that our read need to fetch data in the same version. So spanner need to at least reach level of <em>Snapshot Isolation</em>.</p><pre><code>&lt;h4&gt; Snapshot Isolation&lt;/h4&gt;</code></pre><p>Spanner gives each transaction a timestamp, which makes all transactions execute in Timestamp order.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R/W&#x27;s TS = commit time</span><br><span class="line">R/O&#x27;s TS = start time</span><br></pre></td></tr></table></figure><p> Because Spanner has a multi-versions DB, that stores many versions (Not all version but a transient period’s versions). For R/O Xactions, DB can find the value with latest version less than R/O’s start time.</p><p><strong>Example:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">T1 @TS10:  wx,wy,commit()</span><br><span class="line">                    ⬆x@10 = 9, y@10 = 10</span><br><span class="line">T2 @TS20:                      wx,wy,commit</span><br><span class="line">                               ⬆x@20 = 8, y@10 = 12</span><br><span class="line">T3 @TS15:                 Rx                 Ry</span><br><span class="line">   ⬆ read the TS of 10</span><br></pre></td></tr></table></figure><blockquote><p>Q: what if local replica is minority, how to get latest version less than TS?</p><p>A: Every paxos peer gets log from leader, if one follower’s last log’s Timestamp &lt; TS, it will wait for leader’s msg till last log’s TS exceeds required TS</p></blockquote><h2> True-Time mechanism</h2><p>Because of working volts and inner CPU frequency , it is likely every DC’s time can not keep sync without outside’s help. We have two consequence:</p><blockquote><ol><li><p>R/O transaction’s TS too large</p><p> Answer: correct in practice but slow, it will wait for paxo replicas to catch up</p></li><li><p>R/O transaction’s TS too small</p><p>Answer: it may miss recent writes, and not external consistent</p></li></ol></blockquote><p>In Spanner’s scheme, Google has a satellites to keep synchronize its official time to each DC.  In considering of latency in transportation, Spanner give each TT a range to mark its {earliest, latest} arrival time.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TT interval = [Earliest, Latest]</span><br></pre></td></tr></table></figure><p>And we have a start rule: </p><ul><li><p>TS = TT.now(). latest</p></li><li><p>For R/O, TS is the latest TT on start</p></li><li><p>For R/W, TS is the latest TT on commit</p></li><li><p>Commit Delay strategy</p><ul><li>R/W transaction delays till transaction’s commit time &lt; TS.now().earliest</li><li>To make sure commit time in the past.</li></ul></li></ul><h2>Extends</h2><p>There are many details I haven’t covered, if you are interest in them. You can just search on Google for English Blogs, as for Chinese Blogs, I do recommend <a href="https://www.jianshu.com/p/6ae6e7989161">Google-Spanner 论文的思考</a> and <a href="https://toutiao.io/posts/zdqrx0/preview">Spanner, 真时和CAP理论</a></p><p>​    </p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;Spanner &lt;/h1&gt;
-
-&lt;h1&gt;Introduce&lt;/h1&gt;
-
-&lt;p&gt;Spanner is Google’s scalable, multi-version, globally-distributed, and synchronously-replicated da</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
-    
-    <category term="Spanner" scheme="https://zjuytw.github.io/tags/Spanner/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 Frangipani lecture note</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-11.Frangipani(Cache%20Consitency)/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-11.Frangipani(Cache%20Consitency)/</id>
-    <published>2021-08-09T09:12:42.351Z</published>
-    <updated>2021-08-09T10:05:31.237Z</updated>
-    
-    <content type="html"><![CDATA[<h1>Frangipani(To be updaed)</h1><h2>Introduce</h2><p>While Frangipani is a paper published in 1997, I just want to talk about cache consistency in detail.</p><p>The paper are mainly discussed following 3 aspects:</p><ul><li>cache coherence</li><li>distributed transactions</li><li>distributed crash recovery</li></ul><h2>Cache consistency</h2><p>Rules for cache coherence</p><ul><li>No cached data without data’s lock</li><li>acquire lock then read from petal</li><li>write to petal then release lock</li></ul><h2>Extends</h2><p>For more details, you may refer to this Blog<a href="https://www.cnblogs.com/jamgun/p/14668522.html">Frangipani: A Scalable Distributed File System 论文阅读</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;Frangipani(To be updaed)&lt;/h1&gt;
-
-&lt;h2&gt;Introduce&lt;/h2&gt;
-
-&lt;p&gt;While Frangipani is a paper published in 1997, I just want to talk about cache con</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
-    
-    <category term="Frangipani" scheme="https://zjuytw.github.io/tags/Frangipani/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 Aurora lecture note</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-10.Aurora/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-10.Aurora/</id>
-    <published>2021-08-09T09:11:36.427Z</published>
-    <updated>2021-08-09T10:05:22.628Z</updated>
-    
-    <content type="html"><![CDATA[<h1>Aurora</h1><h2>Introduce</h2><p>Amazon Aurora is a relational database service for OLTP workloads offered as part of Amazon Web Services. Aurora is designed to address the constraint of bottleneck of network throughput, it also allows for fast crash recovery, failovers to replicas and fault-tolerant.</p><h2> History</h2><h3> EC2</h3><p>EC2 is Elastic Cloud 2 for short. Users can rent instances of EC to deploy their Web Server or DB services. </p><p>Each instance of EC2 are running in the Virtual Machine on the physical node, and all their storage is redirected to a external locally attached disk via VMM(Virtual Machine Monitor). </p><ul><li>For stateless web server, EC2 is convenient for its scalability and high-performance</li><li>For a storage system like DB service, there are bunch of contraint:<ul><li>Limited expansion : MySQL on EC2 is not able to do write expansion</li><li>Limited fault-tolerance : Once the node fails, we can not access to locally attached disk for data</li></ul></li></ul><p><img src="/2021/08/09/6.824-10.Aurora/EC2.png" alt="EC2"></p><h3>EBS</h3><p>EBS is Elastic Block Store for short. It is the progress of EC2 that Amazon uses a multiple instances of EBS to do a <em>Chain-Replication</em> to have fault-tolerance.</p><p>Constraints:</p><ul><li>Network bottleneck because of large amount of data is sending by network</li><li>Not FT, for Amazon always put EBS in same Data Center.</li></ul><h3>RDS</h3><p>To deal with the constraints mentioned above, Amazon provides a more fault-tolerance system,  Relational Database Service<img src="/2021/08/09/6.824-10.Aurora/Aurora-RDS.png" alt="Aurora-RDS"></p><p>Compared with EBS, RDS can survive if a whole AZ(Available Zone) fails, but have to send write between primary and replica, which means the performance of write decreases as well as the data of cross-AZ increases dramatically.</p><h2> Aurora</h2><p>For a new system, Amazon was eager to have both fault-tolerance and performance done well, as following:</p><ul><li>Write although one AZ down</li><li>Read although one AZ down + one replica down</li><li>Minor slow won’t affect overall efficiency</li><li>Fast Re-replication</li></ul><p><img src="/2021/08/09/6.824-10.Aurora/Aurora.png" alt="Aurora"></p><p>Feature of Aurora:</p><ul><li>Only send log record– The storage server can apply the log to page, so Aurora can just apply log without applying dirty page, which reduces the network workload</li><li>Only 4 Nodes required to make consensus</li></ul><h3>Quorum Scheme</h3><p>If we have:</p><ul><li>N Replicas<ul><li>W for Writers’ consensus to move</li><li>R for Readers’ consensus to move</li></ul></li><li>R + W = N +1, this makes sure W &amp; R will get least one overlap</li></ul><p><strong>Example:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">N = 3</span><br><span class="line">R = W = 2 or R=3, W = 1</span><br><span class="line">We can adjust speed of R or W by adjusting the number of them</span><br></pre></td></tr></table></figure><p>In Aurora, N = 6, W = 4, R =3</p><h3>Conclusion</h3><p>In a word, Aurora optimized data transportation type and used quorum write scheme which got 35 times speeds up compared with RDS’s MySQL.</p><h2>Extends</h2><p>You can find more detailed description of Aurora’s work flow in <a href="https://zhuanlan.zhihu.com/p/319806107">Amazon Aurora: 避免分布式一致性</a> and <a href="https://zhuanlan.zhihu.com/p/338582762">浅谈Amazon Aurora</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;Aurora&lt;/h1&gt;
-
-&lt;h2&gt;Introduce&lt;/h2&gt;
-
-&lt;p&gt;Amazon Aurora is a relational database service for OLTP workloads offered as part of Amazon Web Serv</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="Aurora" scheme="https://zjuytw.github.io/tags/Aurora/"/>
-    
-    <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
     
   </entry>
   
