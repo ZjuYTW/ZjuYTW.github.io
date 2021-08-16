@@ -6,7 +6,7 @@
   <link href="https://zjuytw.github.io/atom.xml" rel="self"/>
   
   <link href="https://zjuytw.github.io/"/>
-  <updated>2021-08-15T17:29:17.300Z</updated>
+  <updated>2021-08-16T14:25:54.194Z</updated>
   <id>https://zjuytw.github.io/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>526. Beautiful Arrangement</title>
+    <link href="https://zjuytw.github.io/2021/08/16/526.%20Beautiful%20Arrangement/"/>
+    <id>https://zjuytw.github.io/2021/08/16/526.%20Beautiful%20Arrangement/</id>
+    <published>2021-08-16T15:42:31.275Z</published>
+    <updated>2021-08-16T14:25:54.194Z</updated>
+    
+    <content type="html"><![CDATA[<h1>526. Beautiful Arrangement</h1><h2>Description</h2><p><img src="/2021/08/16/526.%20Beautiful%20Arrangement/526-1.png" alt="image-20210816183414471"></p><h2>Solution</h2><ol><li><p>Naively do backtracking</p></li><li><p>DP + State Compression</p><p>use <code>mask</code> to record first <code>num</code> ‘s integer’s combinations, for example</p><p><code>0101</code> means 1 and 3 are in the first 2 slots of the array. </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[mask] = sum of dp[mask^i], which i is suitable for popcount(mask) slot</span><br></pre></td></tr></table></figure></li></ol><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countArrangement</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;unordered_set&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">suitable</span>(n+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i % j == <span class="number">0</span> || j % i == <span class="number">0</span>)</span><br><span class="line">                    suitable[i].<span class="built_in">insert</span>(j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        unordered_set&lt;<span class="keyword">int</span>&gt; visited;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">backtracking</span>(n,<span class="number">1</span>,visited, suitable);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> curPos, unordered_set&lt;<span class="keyword">int</span>&gt;&amp; visited, <span class="keyword">const</span> vector&lt;unordered_set&lt;<span class="keyword">int</span>&gt;&gt;&amp; suitable)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curPos == n+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(visited.<span class="built_in">count</span>(i) || suitable[curPos].<span class="built_in">count</span>(i) == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            visited.<span class="built_in">insert</span>(i);</span><br><span class="line">            res += <span class="built_in">backtracking</span>(n, curPos+<span class="number">1</span>, visited, suitable);</span><br><span class="line">            visited.<span class="built_in">erase</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>Solution2</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countArrangement</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(<span class="number">1</span> &lt;&lt; n)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> mask = <span class="number">0</span>; mask &lt; (<span class="number">1</span> &lt;&lt;n); mask++)&#123;</span><br><span class="line">            <span class="keyword">int</span> num = __builtin_popcount(mask);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((mask &amp; (<span class="number">1</span>&lt;&lt;i)) &amp;&amp; (num % (i+<span class="number">1</span>) == <span class="number">0</span> || (i+<span class="number">1</span>) % num == <span class="number">0</span>))&#123;</span><br><span class="line">                    dp[mask] += dp[mask^(<span class="number">1</span>&lt;&lt;i)];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[(<span class="number">1</span>&lt;&lt;n) - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;526. Beautiful Arrangement&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/16/526.%20Beautiful%20Arrangement/526-1.png&quot; alt=&quot;image-202</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="DP" scheme="https://zjuytw.github.io/tags/DP/"/>
+    
+    <category term="Back Tracking" scheme="https://zjuytw.github.io/tags/Back-Tracking/"/>
+    
+    <category term="State Compression" scheme="https://zjuytw.github.io/tags/State-Compression/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>282. Expression Add Operators</title>
+    <link href="https://zjuytw.github.io/2021/08/16/282.%20Expression%20Add%20Operators/"/>
+    <id>https://zjuytw.github.io/2021/08/16/282.%20Expression%20Add%20Operators/</id>
+    <published>2021-08-16T15:42:31.273Z</published>
+    <updated>2021-08-16T15:41:23.696Z</updated>
+    
+    <content type="html"><![CDATA[<h1>282. Expression Add Operators</h1><h2>Description</h2><p><img src="/2021/08/16/282.%20Expression%20Add%20Operators/282-1.png" alt="image-20210816233523653"></p><h2>Solution</h2><p>Use tricky DFS to solve it.</p><p><strong>The most important trick:</strong> Because we need to give each expression that leads to the target, so we need to record current string. Then, for<code>+</code> and <code>-</code>, in fact we just need to record the <code>exep value</code> in previous expression. But to treat <code>*</code> rightly, we need record one more variable – lastValue to calculate the expression rightly.</p><p>So if we have, for example 1 2 3 4 5 6 7 8</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 + 2 * 3 DFS(45678)</span><br></pre></td></tr></table></figure><p>​                 ↑</p><p>To treat this 2 * 3 correctly, we need first record <code>1 + 2</code>= 3, then use <code>3 - 2 + 2 * 3</code> to get the right answer.</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;string&gt; res;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">addOperators</span><span class="params">(string num, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(num, (LL)target, <span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(string&amp; num, LL target, string prevStr, <span class="keyword">int</span> curPos, LL curVal, LL lastVal)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(num.<span class="built_in">size</span>() == curPos)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curVal == target)</span><br><span class="line">                res.<span class="built_in">push_back</span>(prevStr);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = curPos; i &lt; num.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            string curStr = num.<span class="built_in">substr</span>(curPos, i - curPos+<span class="number">1</span>);</span><br><span class="line">            <span class="comment">// cout &lt;&lt; curStr &lt;&lt;endl;</span></span><br><span class="line">            LL val = <span class="built_in">stoll</span>(curStr);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(curStr.<span class="built_in">size</span>() &gt; <span class="number">1</span> &amp;&amp; curStr[<span class="number">0</span>] ==<span class="string">&#x27;0&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(curPos==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(num, target, curStr, i+<span class="number">1</span>, val, val);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(num, target, prevStr + <span class="string">&quot;+&quot;</span> + curStr, i+<span class="number">1</span>, curVal + val, val);</span><br><span class="line">                <span class="built_in">dfs</span>(num, target, prevStr + <span class="string">&quot;-&quot;</span> + curStr, i+<span class="number">1</span>, curVal - val, -val);</span><br><span class="line">                <span class="built_in">dfs</span>(num, target, prevStr + <span class="string">&quot;*&quot;</span> + curStr, i+<span class="number">1</span>, curVal - lastVal + lastVal * val, lastVal * val);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/16/282.%20Expression%20Add%20Operators/282-2.png" alt="image-20210816234051340"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;282. Expression Add Operators&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/16/282.%20Expression%20Add%20Operators/282-1.png&quot; alt=&quot;i</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="DFS" scheme="https://zjuytw.github.io/tags/DFS/"/>
+    
+    <category term="Tricky" scheme="https://zjuytw.github.io/tags/Tricky/"/>
+    
+  </entry>
   
   <entry>
     <title>576. Out of Boundary Paths</title>
@@ -530,64 +592,6 @@
     
     
     <category term="Priority Queue" scheme="https://zjuytw.github.io/tags/Priority-Queue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 Bitcoin lecture note</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-19.%20Bitcoin/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-19.%20Bitcoin/</id>
-    <published>2021-08-09T09:13:23.361Z</published>
-    <updated>2021-08-09T10:06:13.523Z</updated>
-    
-    <content type="html"><![CDATA[<h1>Bitcoin</h1><p>As mentioned in Satoshi Nakamoto’s paper that bitcoin is aimed to prevent double-spending as well as reduce the cost of third party involvement. </p><p>Bitcoin has three features that makes it Epoch-making</p><ul><li>Decentralization</li><li>Using Peer-to-Peer Technology</li><li>Low-cost transaction</li></ul><h2>Brief Intro </h2><p>Bitcoin is a distributed ledger which implement decentralization. Bitcoin ‘s design should solve Byzantine Generals Problem because it is running through public Internet. Bitcoin systems reply on <em>Proof of Work</em> to verify each node’s validation to prove itself running on a true CPU. Bitcoin also promise that : Malicious nodes’ blockchain won’t grow long, if most of nodes in the network are meritorious.</p><p>For double-spending problem, block-chain ensures that even if blockchain may fork at some point, but only one fork will be accepted in the end.</p><h3>Drawbacks</h3><ul><li>Every new transaction need 10 min before recording on the blockchain</li><li>The trustworthiness grows as the chain grows longer, but still have chance to be waived by receiving a longer chain from other node.</li><li>Waste energy</li></ul><h2>Extends</h2><p>You may read paper and watch lecture to get more detailed information about bitcoin.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;Bitcoin&lt;/h1&gt;
-
-&lt;p&gt;As mentioned in Satoshi Nakamoto’s paper that bitcoin is aimed to prevent double-spending as well as reduce the cost of</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
-    
-    <category term="Bitcoin" scheme="https://zjuytw.github.io/tags/Bitcoin/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.824 CT lecture note</title>
-    <link href="https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/"/>
-    <id>https://zjuytw.github.io/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/</id>
-    <published>2021-08-09T09:13:23.356Z</published>
-    <updated>2021-08-09T10:45:57.253Z</updated>
-    
-    <content type="html"><![CDATA[<h1> Certificate Transparency</h1><h2>Introduce</h2><p>First review the vulnerability of HTTP and an example of  Man in the Middle Attack.</p><h4> HTTP</h4><blockquote><p>HTTP is a request response protocol to communicate asynchronously between client and server.</p><p>For websites and pages the browser acts as a client and a web-server like Apache or IIS acts as server. The server hosts the files (like html , audio , video files etc) and returns are responds to client requests with the data. Depending on the request a response contains the status of the request.</p><p>The process involves a series of messages that go back and forth between the client and server. The process starts with initiating a connection. After that a process known as TCP slow start kicks in. At this point data is passed between the two parties via data packets and often requires multiple round trips.</p><p>TCP slow start is designed to gradually expand the amount of data traversing the wire each round trip. The initial packet size is 16kb and doubles on subsequent round trips until a max size is reached. This can vary, but tends to be around 4MB for most connections.</p><p>This process is used because the server does not know how much bandwidth the client can handle. Rather than overflowing the client the server uses a gentle size and continues to increase until a limit is found.</p><p>As data or request bodies move between the client and the server it is done using clear or plain text. This is viewable by anyone or software watching the network traffic.</p><p>This is not that important for general content. However, today even when you don’t think sensitive data is moving between the two parties more sessions do transport identifying information. This is why every website should use TLS to secure HTTP connections.</p></blockquote><h4> Man in the Middle Attack</h4><p><img src="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/man-in-the-middle-mitm-attack.png" alt="man-in-the-middle-mitm-attack"></p><p>A third-party may easily hijack the connection towards target website and redirect to its own rogue web, for no further check mechanism in HTTP.</p><h4>Certificate, SSL, TLS, HTTPS</h4><p><strong>HTTPS work flow:</strong></p><p><img src="https-connection-sequence-diagram.png" alt="https-connection-sequence-diagram"></p><p>Particularly, server should request a certificate from <em>CA(Certificate Authority)</em>. Whenever client send a connection request to server, it will receive a CERT from server.</p><table><thead><tr><th>Certificate</th></tr></thead><tbody><tr><td>Server name, eg: “gmail.com”</td></tr><tr><td>Public Key of server</td></tr><tr><td>CA’s Signature</td></tr></tbody></table><p>CA’s unique signature ensures that just CA can issue the certificate to server that no one else can counterfeit.</p><p><strong>NOTE:</strong> A vulnerability of this scheme is that once a CA was broken into or something else happened and caused CA issued a malicious certificate. Client may have chance to talk to a rogue web and info may get leaked.</p><h2>Certificate Transparency</h2><p>Certificate Transparency is a system that stores certificate logs which are stored distributed and append-only on CT. CT can provide user certificate verification to keep CA from issuing malicious certificate and the certificate even keep in CA for longer time.</p><p><img src="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/CT_work_flow.png" alt="CT work flow"></p><p>CT promises following:</p><ul><li>Certificates are deposited in public, transparent logs</li><li>Logs are cryptographically monitored</li></ul><h3>Implementation</h3><p>Each certificates are stored as a node in Merkle Tree in CT. <img src="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/MerkleTree.png" alt="Merkle Tree"></p><p>Each node in each level is the value of the output of <em>cryptographic hash function</em> that maps an arbitrary-size message <em>M</em> to a small fixed-size output H(<em>M</em>), with the property that it is infeasible in practice to produce any pair of distinct messages <em>M1</em> ≠ <em>M2</em> with identical hashes H(<em>M1</em>) = H(<em>M2</em>). And the we have</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h(0, K) = H(record K)</span><br><span class="line">h(L+1, K) = H(h(L, 2 K), h(L, 2 K+1))</span><br></pre></td></tr></table></figure><p>With the property of above, we can determine whether a specific certificate stored in the tree, we can recompute hash(<em>the certificate</em>) and the hash value of its siblings and relatives to finally get the top-level’s hash. If H(4,0) == recomputed H(4,0), then proved.</p><p><strong>Example:</strong></p><p>For example, suppose we want to prove that a certain bit string <em>B</em> is in fact record 9 in a tree of 16 records with top-level hash <em>T</em>. We can provide those bits along with the other hash inputs needed to reconstruct the overall tree hash using those bits. Specifically, the client can derive as well as we can that:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">T = h(4, 0)</span><br><span class="line">= H(h(3, 0), h(3, 1))</span><br><span class="line">= H(h(3, 0), H(h(2, 2), h(2, 3)))</span><br><span class="line">= H(h(3, 0), H(H(h(1, 4), h(1, 5)), h(2, 3)))</span><br><span class="line">= H(h(3, 0), H(H(H(h(0, 8), h(0, 9)), h(1, 5)), h(2, 3)))</span><br><span class="line">= H(h(3, 0), H(H(H(h(0, 8), H(record 9)), h(1, 5)), h(2, 3)))</span><br><span class="line">= H(h(3, 0), H(H(H(h(0, 8), H(B)), h(1, 5)), h(2, 3)))</span><br></pre></td></tr></table></figure><h3> Fork Attack (Fork Consistency)</h3><p>The proof of fork consistency, image a log servers have a chain of logs and once the log server wants to fork (like, to trick a user for a malicious certificate but not seen by other monitors etc.) CT has a mechanism to detect the inconsistency by <em>gossip</em></p><p><img src="/2021/08/09/6.824-18.%20Certificate%20Transparency(Fork%20Consistency)/ForkConsistencyEg.png" alt="Fork Consistency eg"></p><p>Like the example, once a log server has a fork line that starts with B for bogus and have a current STH(signed tree head, the top-level hash value). We can simply calculate if STH1’s log a prefix log of STH2’s log by the same way prove if STH1’s log is inside STH2’s log tree.</p><p>If return a false, which means STH1 is on a different fork.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt; Certificate Transparency&lt;/h1&gt;
-
-&lt;h2&gt;Introduce&lt;/h2&gt;
-
-&lt;p&gt;First review the vulnerability of HTTP and an example of  Man in the Middle Attac</summary>
-      
-    
-    
-    
-    <category term="6.824" scheme="https://zjuytw.github.io/categories/6-824/"/>
-    
-    
-    <category term="Distributed Systems" scheme="https://zjuytw.github.io/tags/Distributed-Systems/"/>
-    
-    <category term="Certificate Transparency" scheme="https://zjuytw.github.io/tags/Certificate-Transparency/"/>
     
   </entry>
   
