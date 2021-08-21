@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>650. 2 Keys Keyboard | Yitao&#39;s Blog</title>
+  <meta name="description" content="650. 2 Keys Keyboard  Description   Solution   O(n^2), search from 1 to i-1 to find the smallest operation number for dp[i]  O(sqrt(n)), all the operations sequences are like : CPPPCPPPPCP..., can be">
+<meta property="og:type" content="article">
+<meta property="og:title" content="650. 2 Keys Keyboard">
+<meta property="og:url" content="https://zjuytw.github.io/2021/08/22/650.%202%20Keys%20Keyboard/index.html">
+<meta property="og:site_name" content="Yitao&#39;s Blog">
+<meta property="og:description" content="650. 2 Keys Keyboard  Description   Solution   O(n^2), search from 1 to i-1 to find the smallest operation number for dp[i]  O(sqrt(n)), all the operations sequences are like : CPPPCPPPPCP..., can be">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zjuytw.github.io/2021/08/22/650.%202%20Keys%20Keyboard/650-1.png">
+<meta property="article:published_time" content="2021-08-21T17:02:24.581Z">
+<meta property="article:modified_time" content="2021-08-21T17:02:11.504Z">
+<meta property="article:author" content="Wang Yitao">
+<meta property="article:tag" content="Tricky">
+<meta property="article:tag" content="Math">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjuytw.github.io/2021/08/22/650.%202%20Keys%20Keyboard/650-1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://zjuytw.github.io/2021/08/22/650.%202%20Keys%20Keyboard/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Yitao&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/ZjuYTW" target="_blank">
+          <img class="img-circle img-rotate" src="/images/ichigo1.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Yitao</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">To become what I want to be!</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Singapore</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/null">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/null">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/null">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ZjuYTW" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>My personal website, writing for fun and sharding knowledge</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/6-824/">6.824</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/6-S081/">6.S081</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-at-Scale/">Algorithm at Scale</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Leetcode/">Leetcode</a><span class="category-list-count">33</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Aurora/" rel="tag">Aurora</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BST/" rel="tag">BST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Back-Tracking/" rel="tag">Back Tracking</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bitcoin/" rel="tag">Bitcoin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COPS/" rel="tag">COPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRAQ/" rel="tag">CRAQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Certificate-Transparency/" rel="tag">Certificate Transparency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/" rel="tag">DP</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-Systems/" rel="tag">Distributed Systems</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FaRM/" rel="tag">FaRM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fast-Slow-pointers/" rel="tag">Fast-Slow pointers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Finite-State-Machine/" rel="tag">Finite State Machine</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Floyd/" rel="tag">Floyd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Frangipani/" rel="tag">Frangipani</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Greedy/" rel="tag">Greedy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heap/" rel="tag">Heap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Iteration/" rel="tag">Iteration</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KV-Raft/" rel="tag">KV Raft</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lab-Note/" rel="tag">Lab Note</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MapReduce/" rel="tag">MapReduce</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maximum-Increasing-Subsequence/" rel="tag">Maximum Increasing Subsequence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Memcache-FB/" rel="tag">Memcache@FB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Memory-Management/" rel="tag">Memory Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Monotone-Stack/" rel="tag">Monotone Stack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/No-AC-first-time/" rel="tag">No AC first time</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Priority-Queue/" rel="tag">Priority Queue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raft/" rel="tag">Raft</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampling-Algorithm/" rel="tag">Sampling Algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ShardKV-Storage/" rel="tag">ShardKV Storage</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spanner/" rel="tag">Spanner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/" rel="tag">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stack/" rel="tag">Stack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/State-Compression/" rel="tag">State Compression</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stringstream/" rel="tag">Stringstream</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Syscall/" rel="tag">Syscall</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tricky/" rel="tag">Tricky</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Trie-Tree/" rel="tag">Trie Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-Pointers/" rel="tag">Two Pointers</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Union-Find-Set/" rel="tag">Union Find Set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ZooKeeper/" rel="tag">ZooKeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xv6/" rel="tag">xv6</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Aurora/" style="font-size: 13px;">Aurora</a> <a href="/tags/BFS/" style="font-size: 13.29px;">BFS</a> <a href="/tags/BST/" style="font-size: 13px;">BST</a> <a href="/tags/Back-Tracking/" style="font-size: 13.14px;">Back Tracking</a> <a href="/tags/Bitcoin/" style="font-size: 13px;">Bitcoin</a> <a href="/tags/COPS/" style="font-size: 13px;">COPS</a> <a href="/tags/CRAQ/" style="font-size: 13px;">CRAQ</a> <a href="/tags/Certificate-Transparency/" style="font-size: 13px;">Certificate Transparency</a> <a href="/tags/DFS/" style="font-size: 13.43px;">DFS</a> <a href="/tags/DP/" style="font-size: 13.71px;">DP</a> <a href="/tags/Distributed-Systems/" style="font-size: 14px;">Distributed Systems</a> <a href="/tags/FaRM/" style="font-size: 13px;">FaRM</a> <a href="/tags/Fast-Slow-pointers/" style="font-size: 13px;">Fast-Slow pointers</a> <a href="/tags/Finite-State-Machine/" style="font-size: 13.14px;">Finite State Machine</a> <a href="/tags/Floyd/" style="font-size: 13px;">Floyd</a> <a href="/tags/Frangipani/" style="font-size: 13px;">Frangipani</a> <a href="/tags/Greedy/" style="font-size: 13.29px;">Greedy</a> <a href="/tags/Heap/" style="font-size: 13px;">Heap</a> <a href="/tags/Iteration/" style="font-size: 13px;">Iteration</a> <a href="/tags/KV-Raft/" style="font-size: 13.14px;">KV Raft</a> <a href="/tags/Lab-Note/" style="font-size: 13.57px;">Lab Note</a> <a href="/tags/MapReduce/" style="font-size: 13px;">MapReduce</a> <a href="/tags/Math/" style="font-size: 13px;">Math</a> <a href="/tags/Maximum-Increasing-Subsequence/" style="font-size: 13px;">Maximum Increasing Subsequence</a> <a href="/tags/Memcache-FB/" style="font-size: 13px;">Memcache@FB</a> <a href="/tags/Memory-Management/" style="font-size: 13px;">Memory Management</a> <a href="/tags/Monotone-Stack/" style="font-size: 13.14px;">Monotone Stack</a> <a href="/tags/No-AC-first-time/" style="font-size: 14px;">No AC first time</a> <a href="/tags/Priority-Queue/" style="font-size: 13.14px;">Priority Queue</a> <a href="/tags/Raft/" style="font-size: 13.14px;">Raft</a> <a href="/tags/Sampling-Algorithm/" style="font-size: 13px;">Sampling Algorithm</a> <a href="/tags/ShardKV-Storage/" style="font-size: 13.14px;">ShardKV Storage</a> <a href="/tags/Spanner/" style="font-size: 13px;">Spanner</a> <a href="/tags/Spark/" style="font-size: 13px;">Spark</a> <a href="/tags/Stack/" style="font-size: 13px;">Stack</a> <a href="/tags/State-Compression/" style="font-size: 13.14px;">State Compression</a> <a href="/tags/String/" style="font-size: 13px;">String</a> <a href="/tags/Stringstream/" style="font-size: 13px;">Stringstream</a> <a href="/tags/Syscall/" style="font-size: 13px;">Syscall</a> <a href="/tags/Tricky/" style="font-size: 13.86px;">Tricky</a> <a href="/tags/Trie-Tree/" style="font-size: 13px;">Trie Tree</a> <a href="/tags/Two-Pointers/" style="font-size: 13.14px;">Two Pointers</a> <a href="/tags/Union-Find-Set/" style="font-size: 13px;">Union Find Set</a> <a href="/tags/ZooKeeper/" style="font-size: 13px;">ZooKeeper</a> <a href="/tags/xv6/" style="font-size: 13.29px;">xv6</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a><span class="archive-list-count">55</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Leetcode/">Leetcode</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/22/212.%20Word%20Search%20II/" class="title">212. Word Search II</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-21T17:02:24.607Z" itemprop="datePublished">2021-08-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Leetcode/">Leetcode</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/22/650.%202%20Keys%20Keyboard/" class="title">650. 2 Keys Keyboard</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-21T17:02:24.581Z" itemprop="datePublished">2021-08-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Algorithm-at-Scale/">Algorithm at Scale</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/20/Lec1/" class="title">CS5234--Lecture1 Sampling Algorithm of Array</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-20T14:07:30.229Z" itemprop="datePublished">2021-08-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Leetcode/">Leetcode</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/20/481.%20Magical%20String/" class="title">481. Magical String</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-20T14:05:20.659Z" itemprop="datePublished">2021-08-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Leetcode/">Leetcode</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/20/553.%20Optimal%20Division/" class="title">553. Optimal Division</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-20T14:05:20.643Z" itemprop="datePublished">2021-08-20</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">650. 2 Keys Keyboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">Solution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">Code</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-650. 2 Keys Keyboard" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      650. 2 Keys Keyboard
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/08/22/650.%202%20Keys%20Keyboard/" class="article-date">
+	  <time datetime="2021-08-21T17:02:24.581Z" itemprop="datePublished">2021-08-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Math/" rel="tag">Math</a>, <a class="article-tag-link-link" href="/tags/Tricky/" rel="tag">Tricky</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/08/22/650.%202%20Keys%20Keyboard/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2>650. 2 Keys Keyboard</h2>
+
+<h2>Description</h2>
+
+<p><img src="/2021/08/22/650.%202%20Keys%20Keyboard/650-1.png" alt="image-20210822003910383"></p>
+<h2>Solution</h2>
+
+<ul>
+<li><p>O(n^2), search from 1 to i-1 to find the smallest operation number for dp[i]</p>
+</li>
+<li><p>O(sqrt(n)), all the operations sequences are like : <code>CPPPCPPPPCP...</code>, can be divided into groups (CPPP)(CPP)(CP)…. .If we have each group’s length like <code>g1, g2,g3...</code>, so after first group, there are <code>g1</code> A’s, after second group <code>g1 * g2</code> A’s…</p>
+<p>We want have <code>N = g1 * g2 * g3...*gn</code> A’s, if <code>gi</code> can be divided into product of other two numbers,  denote as <code>gi = p * q</code>, so it can be divided into 2 group, first contains 1<code>C</code> and p-1<code>P</code>, second one contains 1<code>C</code> and q-1<code>P</code>. It is easy to prove that after dividing, we need fewer steps.</p>
+</li>
+</ul>
+<h2>Code</h2>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minSteps</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> f = <span class="built_in">getFactors</span>(n);</span><br><span class="line">        <span class="keyword">if</span>(f == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(f+<span class="number">1</span>,INT_MAX)</span></span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> res = INT_MAX;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= f; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> sf = <span class="built_in">getFactors</span>(i);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= sf; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i % j == <span class="number">0</span>)&#123;</span><br><span class="line">                    dp[i] = <span class="built_in">min</span>(dp[i], dp[j] + i/j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(n % i == <span class="number">0</span>)&#123;</span><br><span class="line">                res = <span class="built_in">min</span>(res, dp[i] + n/i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getFactors</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-1</span>; i &gt;= <span class="number">1</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(n%i==<span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minSteps</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        d = <span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> n &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">while</span> n % d == <span class="number">0</span>:</span><br><span class="line">                ans += d</span><br><span class="line">                n /= d</span><br><span class="line">            d += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://zjuytw.github.io/2021/08/22/650.%202%20Keys%20Keyboard/" title="650. 2 Keys Keyboard" target="_blank" rel="external">https://zjuytw.github.io/2021/08/22/650. 2 Keys Keyboard/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/ZjuYTW" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/ichigo1.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/ZjuYTW" target="_blank"><span class="text-dark">Yitao</span><small class="ml-1x">To become what I want to be!</small></a></h3>
+        <div>A graduate student currently pursuing MS in Computer Science at Nantional University of Singapore. BSc at Zhejiang University.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/08/22/212.%20Word%20Search%20II/" title="212. Word Search II"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/08/20/Lec1/" title="CS5234--Lecture1 Sampling Algorithm of Array"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ZjuYTW" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/null" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
