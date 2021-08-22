@@ -6,7 +6,7 @@
   <link href="https://zjuytw.github.io/atom.xml" rel="self"/>
   
   <link href="https://zjuytw.github.io/"/>
-  <updated>2021-08-21T15:03:03.983Z</updated>
+  <updated>2021-08-22T15:35:52.846Z</updated>
   <id>https://zjuytw.github.io/</id>
   
   <author>
@@ -15,6 +15,70 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>5852. Minimize the Difference Between Target and Chosen Elements</title>
+    <link href="https://zjuytw.github.io/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/"/>
+    <id>https://zjuytw.github.io/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/</id>
+    <published>2021-08-22T15:36:07.532Z</published>
+    <updated>2021-08-22T15:35:52.846Z</updated>
+    
+    <content type="html"><![CDATA[<h1>5852. Minimize the Difference Between Target and Chosen Elements</h1><h2>Description</h2><p><img src="/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/5852-1.png" alt="image-20210822232736812"></p><p><img src="/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/5852-2.png" alt="image-20210822232747878"></p><p><img src="/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/5852-3.png" alt="image-20210822232755203"></p><h2>Solution</h2><p>DFS + memorize visited + pruning</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; visited;</span><br><span class="line">    <span class="keyword">int</span> res = INT_MAX;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minimizeTheDifference</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; mat, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = mat.<span class="built_in">size</span>(), n = mat[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">            <span class="built_in">sort</span>(mat[i].<span class="built_in">begin</span>(), mat[i].<span class="built_in">end</span>());</span><br><span class="line">        visited.<span class="built_in">resize</span>(m, vector&lt;<span class="keyword">int</span>&gt;(<span class="number">4901</span>,<span class="number">0</span>));</span><br><span class="line">        stack&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; stk;</span><br><span class="line">        stk.<span class="built_in">push</span>(&#123;<span class="number">0</span>,<span class="number">0</span>&#125;);</span><br><span class="line">        <span class="keyword">while</span>(!stk.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="keyword">auto</span> [level, sum] = stk.<span class="built_in">top</span>();</span><br><span class="line">            stk.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span>(level == mat.<span class="built_in">size</span>())&#123;</span><br><span class="line">                res = <span class="built_in">min</span>(res, <span class="built_in">abs</span>(sum - target));</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mat[<span class="number">0</span>].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(visited[level][sum + mat[level][i]])</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                visited[level][sum + mat[level][i]] = <span class="number">1</span>;</span><br><span class="line">                stk.<span class="built_in">push</span>(&#123;level+<span class="number">1</span>, sum + mat[level][i]&#125;);</span><br><span class="line">                <span class="comment">//important pruning situation</span></span><br><span class="line">                <span class="keyword">if</span>(sum + mat[level][i] &gt; target)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/5852-4.png" alt="image-20210822233549504"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;5852. Minimize the Difference Between Target and Chosen Elements&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/22/5852.%20Minimize%2</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="DFS" scheme="https://zjuytw.github.io/tags/DFS/"/>
+    
+    <category term="Pruning" scheme="https://zjuytw.github.io/tags/Pruning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>5853. Find Array Given Subset Sums</title>
+    <link href="https://zjuytw.github.io/2021/08/22/5853.%20Find%20Array%20Given%20Subset%20Sums/"/>
+    <id>https://zjuytw.github.io/2021/08/22/5853.%20Find%20Array%20Given%20Subset%20Sums/</id>
+    <published>2021-08-22T15:36:07.515Z</published>
+    <updated>2021-08-22T15:24:37.139Z</updated>
+    
+    <content type="html"><![CDATA[<h1>5853. Find Array Given Subset Sums</h1><h2>Description</h2><p><img src="/2021/08/22/5853.%20Find%20Array%20Given%20Subset%20Sums/5853-1.png" alt="image-20210822225103422"></p><p><img src="/2021/08/22/5853.%20Find%20Array%20Given%20Subset%20Sums/5853-2.png" alt="image-20210822225113726"></p><h2>Solution</h2><p>Firstly, let’s think about a easier question—If <code>sums</code>‘s elements are all positive, how would you solve this?</p><ul><li>Obviously, the minimum one <code>m</code> is the front one in the <code>ans</code> array.</li><li>How to find the next answers?<ul><li>Delete all subset in <code>sums</code> from <code>ans</code> array, which should be $2^{ans.size()-1}$ elements to be deleted</li><li>How to do this in programming?<ul><li> In each iteration, use a <code>mask</code> to mark the combination of <code>ans</code>‘s numbers, note that we just need to delete the combination of new found number and other’s</li><li>Use <code>multiset</code></li></ul></li></ul></li></ul><p>Then how to apply this to this problem? We can add up a positive number to convert the array into with all positive one. Especially,  we add the number of <code>-(sum of all negative number)</code> . Then we apply the algorithm described above into new one, then we could get a temp <code>ans</code> array.</p><ul><li>How to convert the <code>ans</code> into what we want?<ul><li>We notice that after round up, <code>sums</code> array always starts with 0, then the next value is the largest negative value (Because the next value should be like (a + b + c - a- b- c -d), d is exactly the largest negative value)</li><li>So in the <code>ans</code> array, if we could find a serial of numbers which sum up to <code>m</code>, which means we could negate them them to make whole array sum up to <code>0</code>. Then we negate them.</li></ul></li></ul><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">recoverArray</span><span class="params">(<span class="keyword">int</span> n, vector&lt;<span class="keyword">int</span>&gt;&amp; sums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(sums.<span class="built_in">begin</span>(), sums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> front = -sums[<span class="number">0</span>];</span><br><span class="line">        multiset&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> sum : sums)&#123;</span><br><span class="line">            st.<span class="built_in">insert</span>(sum + front);</span><br><span class="line">        &#125;</span><br><span class="line">        st.<span class="built_in">erase</span>(st.<span class="built_in">begin</span>());</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        ans.<span class="built_in">push_back</span>(*st.<span class="built_in">begin</span>());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> mask = <span class="number">1</span>; mask &lt; (<span class="number">1</span>&lt;&lt;i); mask++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((mask &gt;&gt; (i<span class="number">-1</span>)) &amp; <span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="keyword">int</span> sm = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; ans.<span class="built_in">size</span>(); j++)</span><br><span class="line">                        <span class="keyword">if</span>(mask &gt;&gt; j &amp; <span class="number">1</span>)</span><br><span class="line">                            sm += ans[j];</span><br><span class="line">                    st.<span class="built_in">erase</span>(st.<span class="built_in">find</span>(sm));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            ans.<span class="built_in">push_back</span>(*st.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> sm = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) <span class="keyword">if</span> (i &gt;&gt; j &amp; <span class="number">1</span>) sm += ans[j];</span><br><span class="line">            <span class="keyword">if</span> (sm == front) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) <span class="keyword">if</span> (i &gt;&gt; j &amp; <span class="number">1</span>) ans[j] = -ans[j];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;5853. Find Array Given Subset Sums&lt;/h1&gt;
+
+
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/22/5853.%20Find%20Array%20Given%20Subset%20Sums/5</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="No AC first time" scheme="https://zjuytw.github.io/tags/No-AC-first-time/"/>
+    
+    <category term="Tricky" scheme="https://zjuytw.github.io/tags/Tricky/"/>
+    
+    <category term="Math" scheme="https://zjuytw.github.io/tags/Math/"/>
+    
+  </entry>
   
   <entry>
     <title>212. Word Search II</title>
@@ -547,60 +611,6 @@
     <category term="xv6" scheme="https://zjuytw.github.io/tags/xv6/"/>
     
     <category term="Syscall" scheme="https://zjuytw.github.io/tags/Syscall/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>6.S081 Lab1 Unix Utilities</title>
-    <link href="https://zjuytw.github.io/2021/08/14/Lab1%20Unix%20utilities/"/>
-    <id>https://zjuytw.github.io/2021/08/14/Lab1%20Unix%20utilities/</id>
-    <published>2021-08-14T06:51:27.770Z</published>
-    <updated>2021-08-14T06:51:21.854Z</updated>
-    
-    <content type="html"><![CDATA[<h1>Xv6 and Unix utilities</h1><p>In this lab, we gonna implement many interesting and useful programs like, <code>sleep, pingpong, primes, find, and xargs </code>. There are some points I want to emphasize, though this lab is not so hard.</p><h2>Before Start</h2><p>My experiment environment:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VM: VMware workstation</span><br><span class="line">Linux ubuntu 20.04</span><br></pre></td></tr></table></figure><p> I can not find corresponding software in <code>apt-get</code> when my kernel was at 16.04 or 18.04, so I have to update to 20.04.</p><h2>Lab</h2><p>The structure we should know before programming is that, there are kernel’s and user’s code, when I need to do something on <code>system level</code>, we should call kernel’s function. Gracefully, we have many wrapped interface on users’ functions that we can directly call them. Check them in <code>user/user.h</code></p><h3>sleep</h3><p>Skip</p><h3>    pingpong</h3><p>Note that in pipe[2], pipe[0] is for receiving data and pipe[1] is for writing into.</p><h3>primes</h3><p>The brief of this algorithm is used in the situation that, assume you have a bunch of machines, to find primes given a list of numbers which continuously +1 one after another. And each stage selects one minimum number and it is exactly prime, then verify other numbers do not have the prime as their factor. Then send left numbers into next stage…</p><p><img src="/2021/08/14/Lab1%20Unix%20utilities/lab1-1.png" alt="lab1-1"></p><p>Just use recursion to find next stage’s number and send to the child’s process</p><h3>find</h3><p>Refer to <code>user/ls.c</code>, that is a good template.</p><p>What I want to mention is some points of File System</p><p><strong>struct state</strong> is the information a file descriptor refers to, stored in inode and can be fetched by fstat(fd, &amp;st)</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#define T_DIR 1 // Directory</span><br><span class="line">#define T_FILE 2 // File</span><br><span class="line">#define T_DEVICE 3 // Device</span><br><span class="line">struct stat &#123;</span><br><span class="line">int dev; // File system’s disk device</span><br><span class="line">uint ino; // Inode number</span><br><span class="line">short type; // Type of file</span><br><span class="line">short nlink; // Number of links to file</span><br><span class="line">uint64 size; // Size of file in bytes</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><strong>struct dirent</strong> serves the same a file descriptor’s information, but it mainly provides file’s name</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct dirent</span><br><span class="line">&#123;</span><br><span class="line">    long d_ino; /* inode number */</span><br><span class="line">    off_t d_off; /* offset to this dirent */</span><br><span class="line">    unsigned short d_reclen; /* length of this d_name */</span><br><span class="line">    unsigned char d_type; /* the type of d_name */</span><br><span class="line">    char d_name [NAME_MAX+1]; /* file name (null-terminated) */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2>xargs</h2><p>This program helps me to understand xargs a lot, thanks gosh.</p><p>To implement <code>xargs</code>, we need first process <code>stdin</code> because <code>pipe</code> will redirect xargs’s stdin to last program’s stdout. When this done, we can user<code>exec()</code> to execute the command after xargs. Note that when processing stdin, we should read or gets byte by byte and when once encounter ‘\n’, do command.</p><h2>Conclusion</h2><p>This programs helps me to review the usage of them and help me dabble into <code>fork(), exec(), pipe(), and file systems</code></p><p><strong>Note:</strong> when programming for a child process, just use <code>exit</code></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;Xv6 and Unix utilities&lt;/h1&gt;
-
-&lt;p&gt;In this lab, we gonna implement many interesting and useful programs like, &lt;code&gt;sleep, pingpong, primes</summary>
-      
-    
-    
-    
-    <category term="6.S081" scheme="https://zjuytw.github.io/categories/6-S081/"/>
-    
-    
-    <category term="xv6" scheme="https://zjuytw.github.io/tags/xv6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>233. Number of Digit One</title>
-    <link href="https://zjuytw.github.io/2021/08/13/233.%20Number%20of%20Digit%20One/"/>
-    <id>https://zjuytw.github.io/2021/08/13/233.%20Number%20of%20Digit%20One/</id>
-    <published>2021-08-13T15:59:46.108Z</published>
-    <updated>2021-08-15T17:49:08.496Z</updated>
-    
-    <content type="html"><![CDATA[<h1>233. Number of Digit One</h1><h2>Description</h2><p><img src="/2021/08/13/233.%20Number%20of%20Digit%20One/233-1.png" alt="image-20210813235350161"></p><h2>Solution</h2><p>We can calculate the number of one on each digit, for example</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">To count one&#x27;s number on 1234567</span><br><span class="line">we can count one on 1, 10, 100...</span><br><span class="line">If we need to count one on 100, we can have 1234 * 100 + 100</span><br></pre></td></tr></table></figure><p>So we can have</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">k&#x27;s digit count = [n/10^(k+1)] * 10 ^ k + </span><br><span class="line">min(max(n mod 10^(k+1) - 100, 0), 10^k)</span><br></pre></td></tr></table></figure><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countDigitOne</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// mulk 表示 10^k</span></span><br><span class="line">        <span class="comment">// 在下面的代码中，可以发现 k 并没有被直接使用到（都是使用 10^k）</span></span><br><span class="line">        <span class="comment">// 但为了让代码看起来更加直观，这里保留了 k</span></span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> mulk = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; n &gt;= mulk; ++k) &#123;</span><br><span class="line">            ans += (n / (mulk * <span class="number">10</span>)) * mulk + <span class="built_in">min</span>(<span class="built_in">max</span>(n % (mulk * <span class="number">10</span>) - mulk + <span class="number">1</span>, <span class="number">0LL</span>), mulk);</span><br><span class="line">            mulk *= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;233. Number of Digit One&lt;/h1&gt;
-
-&lt;h2&gt;Description&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/2021/08/13/233.%20Number%20of%20Digit%20One/233-1.png&quot; alt=&quot;image-202</summary>
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="Tricky" scheme="https://zjuytw.github.io/tags/Tricky/"/>
     
   </entry>
   
