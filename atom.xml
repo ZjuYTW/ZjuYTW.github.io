@@ -6,7 +6,7 @@
   <link href="https://zjuytw.github.io/atom.xml" rel="self"/>
   
   <link href="https://zjuytw.github.io/"/>
-  <updated>2021-08-25T05:18:30.669Z</updated>
+  <updated>2021-08-27T15:41:35.849Z</updated>
   <id>https://zjuytw.github.io/</id>
   
   <author>
@@ -15,6 +15,96 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>295. Find Median from Data Stream</title>
+    <link href="https://zjuytw.github.io/2021/08/27/295.%20Find%20Median%20from%20Data%20Stream/"/>
+    <id>https://zjuytw.github.io/2021/08/27/295.%20Find%20Median%20from%20Data%20Stream/</id>
+    <published>2021-08-27T15:43:53.678Z</published>
+    <updated>2021-08-27T15:41:35.849Z</updated>
+    
+    <content type="html"><![CDATA[<h1>295. Find Median from Data Stream</h1><h2>Description</h2><p><img src="/2021/08/27/295.%20Find%20Median%20from%20Data%20Stream/295-1.png" alt="image-20210827232342741"></p><p><img src="/2021/08/27/295.%20Find%20Median%20from%20Data%20Stream/295-2.png" alt="image-20210827232353015"></p><h2>Solution</h2><p>Because we are handling a stream problem, if we need resort the array each time it is a costy solution. So if we could have a self-balance binary search tree, we could use the top of the tree as the answer, but just writing a AVL or RBT is not very troublesome. A better solution is to use two priority queue, one is min heap and other is max heap. </p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/** initialize your data structure here. */</span></span><br><span class="line">    priority_queue&lt;<span class="keyword">int</span>,vector&lt;<span class="keyword">int</span>&gt;, greater&lt;&gt;&gt; heapMin;</span><br><span class="line">    priority_queue&lt;<span class="keyword">int</span>,vector&lt;<span class="keyword">int</span>&gt;, less&lt;&gt;&gt; heapMax;</span><br><span class="line">    <span class="built_in">MedianFinder</span>() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(heapMin.<span class="built_in">empty</span>() || heapMin.<span class="built_in">top</span>() &lt;= num)&#123;</span><br><span class="line">            heapMin.<span class="built_in">push</span>(num);</span><br><span class="line">            <span class="keyword">if</span>(heapMin.<span class="built_in">size</span>() &gt; heapMax.<span class="built_in">size</span>() + <span class="number">1</span>)&#123;</span><br><span class="line">                heapMax.<span class="built_in">push</span>(heapMin.<span class="built_in">top</span>());</span><br><span class="line">                heapMin.<span class="built_in">pop</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            heapMax.<span class="built_in">push</span>(num);</span><br><span class="line">            <span class="keyword">if</span>(heapMax.<span class="built_in">size</span>() &gt;= heapMin.<span class="built_in">size</span>() + <span class="number">1</span>)&#123;</span><br><span class="line">                heapMin.<span class="built_in">push</span>(heapMax.<span class="built_in">top</span>());</span><br><span class="line">                heapMax.<span class="built_in">pop</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(heapMax.<span class="built_in">size</span>() == heapMin.<span class="built_in">size</span>())</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1.0</span> * (heapMax.<span class="built_in">top</span>() + heapMin.<span class="built_in">top</span>()) /<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> heapMin.<span class="built_in">top</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/27/295.%20Find%20Median%20from%20Data%20Stream/295-3.png" alt="image-20210827233938645"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;295. Find Median from Data Stream&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/27/295.%20Find%20Median%20from%20Data%20Stream/295-1</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="No AC first time" scheme="https://zjuytw.github.io/tags/No-AC-first-time/"/>
+    
+    <category term="Priority Queue" scheme="https://zjuytw.github.io/tags/Priority-Queue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>1000. Minimum Cost to Merge Stones</title>
+    <link href="https://zjuytw.github.io/2021/08/27/1000.%20Minimum%20Cost%20to%20Merge%20Stones/"/>
+    <id>https://zjuytw.github.io/2021/08/27/1000.%20Minimum%20Cost%20to%20Merge%20Stones/</id>
+    <published>2021-08-27T15:43:53.669Z</published>
+    <updated>2021-08-27T15:42:41.226Z</updated>
+    
+    <content type="html"><![CDATA[<h1>1000. Minimum Cost to Merge Stones</h1><h2>Description</h2><p><img src="/2021/08/27/1000.%20Minimum%20Cost%20to%20Merge%20Stones/1000-1.png" alt="image-20210827225529258"></p><p><img src="/2021/08/27/1000.%20Minimum%20Cost%20to%20Merge%20Stones/1000-2.png" alt="image-20210827225539779"></p><h2>Solution</h2><p>Using DP to solve the problem, we have </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j][k] = from ith to jth, the cost to form k&#x27;s piles</span><br></pre></td></tr></table></figure><p>So we have</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j][k] = min(dp[i][p][1] + dp[p+1][j][k-1]) (p from i to j-1, step is k-1)</span><br></pre></td></tr></table></figure><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">mergeStones</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; stones, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>((stones.<span class="built_in">size</span>()<span class="number">-1</span>) % (k<span class="number">-1</span>) != <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> n = stones.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">prefix</span><span class="params">(n+<span class="number">1</span>)</span></span>;</span><br><span class="line">        vector&lt;vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&gt; <span class="built_in">dp</span>(n+<span class="number">1</span>,vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;(n+<span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(k+<span class="number">1</span>, <span class="number">9999999</span>)));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">            prefix[i] = prefix[i<span class="number">-1</span>] + stones[i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//initializing...</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            dp[i][i][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//DP</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> len = <span class="number">2</span>; len &lt;= n; len++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i + len - <span class="number">1</span> &lt;= n; i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> j = i + len - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">2</span>; m &lt;= k; m++)&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> p = i; p &lt; j; p+=k<span class="number">-1</span>)&#123;</span><br><span class="line">                        dp[i][j][m] = <span class="built_in">min</span>(dp[i][j][m], dp[i][p][<span class="number">1</span>] + dp[p+<span class="number">1</span>][j][m<span class="number">-1</span>]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                dp[i][j][<span class="number">1</span>] = dp[i][j][k] + prefix[j] - prefix[i<span class="number">-1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">1</span>][n][<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;1000. Minimum Cost to Merge Stones&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/27/1000.%20Minimum%20Cost%20to%20Merge%20Stones/100</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="No AC first time" scheme="https://zjuytw.github.io/tags/No-AC-first-time/"/>
+    
+    <category term="DP" scheme="https://zjuytw.github.io/tags/DP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>881. Boats to Save People</title>
+    <link href="https://zjuytw.github.io/2021/08/27/881.%20Boats%20to%20Save%20People/"/>
+    <id>https://zjuytw.github.io/2021/08/27/881.%20Boats%20to%20Save%20People/</id>
+    <published>2021-08-27T15:43:53.666Z</published>
+    <updated>2021-08-27T15:43:34.946Z</updated>
+    
+    <content type="html"><![CDATA[<h1>881. Boats to Save People</h1><h2>Description</h2><p><img src="/2021/08/27/881.%20Boats%20to%20Save%20People/881-1.png" alt="image-20210827222615085"></p><h2>Solution</h2><p>Greedy, because every boat is required to save most 2 people, so we could greedily let every boat loads 2 people. But a tricky point is, intuitively we should let each boat takes as heavier as possible, but actually, if we could put<code>people[-1] with people[1]</code> instead of <code>people[-1] with people[0]</code>, we still could let <code>people[-2] with people[1]</code>, so just let first and last together and we will get the correct answer.</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numRescueBoats</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;people, <span class="keyword">int</span> limit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">sort</span>(people.<span class="built_in">begin</span>(), people.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> light = <span class="number">0</span>, heavy = people.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (light &lt;= heavy) &#123;</span><br><span class="line">            <span class="keyword">if</span> (people[light] + people[heavy] &gt; limit) &#123;</span><br><span class="line">                --heavy;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ++light;</span><br><span class="line">                --heavy;</span><br><span class="line">            &#125;</span><br><span class="line">            ++ans;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;881. Boats to Save People&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/27/881.%20Boats%20to%20Save%20People/881-1.png&quot; alt=&quot;image-2</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="No AC first time" scheme="https://zjuytw.github.io/tags/No-AC-first-time/"/>
+    
+    <category term="Greedy" scheme="https://zjuytw.github.io/tags/Greedy/"/>
+    
+  </entry>
   
   <entry>
     <title>479. Largest Palindrome Product</title>
@@ -531,92 +621,6 @@
     <category term="DFS" scheme="https://zjuytw.github.io/tags/DFS/"/>
     
     <category term="Tricky" scheme="https://zjuytw.github.io/tags/Tricky/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>576. Out of Boundary Paths</title>
-    <link href="https://zjuytw.github.io/2021/08/16/576.%20Out%20of%20Boundary%20Paths/"/>
-    <id>https://zjuytw.github.io/2021/08/16/576.%20Out%20of%20Boundary%20Paths/</id>
-    <published>2021-08-15T17:46:55.651Z</published>
-    <updated>2021-08-15T17:29:17.300Z</updated>
-    
-    <content type="html"><![CDATA[<h1>576. Out of Boundary Paths</h1><h2>Description</h2><p><img src="/2021/08/16/576.%20Out%20of%20Boundary%20Paths/576-1.png" alt="image-20210816011409956"></p><p><img src="/2021/08/16/576.%20Out%20of%20Boundary%20Paths/576-2.png" alt="image-20210816011436730"></p><h2>Solution</h2><p>DP for each stage.</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">int</span> MOD = <span class="number">1&#x27;000&#x27;000&#x27;007</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findPaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> maxMove, <span class="keyword">int</span> startRow, <span class="keyword">int</span> startColumn)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; directions = &#123;&#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">int</span> outCounts = <span class="number">0</span>;</span><br><span class="line">        vector&lt;vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&gt; <span class="built_in">dp</span>(<span class="number">2</span>, vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;(m, vector&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>)));</span><br><span class="line">        dp[<span class="number">0</span>][startRow][startColumn] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> curcol = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxMove; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; j++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; k++)&#123;</span><br><span class="line">                    <span class="keyword">int</span> cur = dp[curcol][j][k];</span><br><span class="line">                    <span class="keyword">if</span>(!cur)</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> z = <span class="number">0</span>; z &lt; <span class="number">4</span>; z++)&#123;</span><br><span class="line">                        <span class="keyword">int</span> x = j + directions[z][<span class="number">0</span>], y = k + directions[z][<span class="number">1</span>];</span><br><span class="line">                        <span class="keyword">if</span>(x &lt; <span class="number">0</span> || x &gt;= m || y &lt; <span class="number">0</span> || y &gt;= n)&#123;</span><br><span class="line">                            outCounts = (outCounts + cur) % MOD;</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            dp[curcol^<span class="number">1</span>][x][y] = (dp[curcol^<span class="number">1</span>][x][y] + cur) %MOD;</span><br><span class="line"></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    dp[curcol][j][k] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            curcol^=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> outCounts;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/16/576.%20Out%20of%20Boundary%20Paths/576-3.png" alt="image-20210816012632281"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;576. Out of Boundary Paths&lt;/h1&gt;
-
-&lt;h2&gt;Description&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/2021/08/16/576.%20Out%20of%20Boundary%20Paths/576-1.png&quot; alt=&quot;image</summary>
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="DP" scheme="https://zjuytw.github.io/tags/DP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>5832. Array With Elements Not Equal to Average of Neighbors</title>
-    <link href="https://zjuytw.github.io/2021/08/16/5832.%20Array%20With%20Elements%20Not%20Equal%20to%20Average%20of%20Neighbors/"/>
-    <id>https://zjuytw.github.io/2021/08/16/5832.%20Array%20With%20Elements%20Not%20Equal%20to%20Average%20of%20Neighbors/</id>
-    <published>2021-08-15T17:46:55.630Z</published>
-    <updated>2021-08-15T17:46:25.708Z</updated>
-    
-    <content type="html"><![CDATA[<h1>5832. Array With Elements Not Equal to Average of Neighbors</h1><h2>Description</h2><p><img src="/2021/08/16/5832.%20Array%20With%20Elements%20Not%20Equal%20to%20Average%20of%20Neighbors/5832-1.png" alt="image-20210816013507734"></p><p><img src="/2021/08/16/5832.%20Array%20With%20Elements%20Not%20Equal%20to%20Average%20of%20Neighbors/5832-2.png" alt="image-20210816013517964"></p><h2>Solution</h2><p>To generate the array in the requirement, my strategy is pick<code>the smallest</code> <code>the largest</code> <code>the second smallest</code> …, because we have <code>the largest</code> * 2 &gt; the sum of the smallest numbers, it should always work.</p><p>Or we can keep looping the swap  the mismatched pair till we get the correct array.</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">rearrangeArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">while</span>(res.<span class="built_in">size</span>() != nums.<span class="built_in">size</span>())&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(nums[l++]);</span><br><span class="line">            <span class="keyword">if</span>(l &lt; r)</span><br><span class="line">                res.<span class="built_in">push_back</span>(nums[r--]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>Solution 2</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">rearrangeArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">while</span>(res.<span class="built_in">size</span>() != nums.<span class="built_in">size</span>())&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(nums[l++]);</span><br><span class="line">            <span class="keyword">if</span>(l &lt; r)</span><br><span class="line">                res.<span class="built_in">push_back</span>(nums[r--]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;5832. Array With Elements Not Equal to Average of Neighbors&lt;/h1&gt;
-
-&lt;h2&gt;Description&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/2021/08/16/5832.%20Array%20With%20</summary>
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="Tricky" scheme="https://zjuytw.github.io/tags/Tricky/"/>
-    
-    <category term="Two Pointers" scheme="https://zjuytw.github.io/tags/Two-Pointers/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>399. Evaluate Division</title>
-    <link href="https://zjuytw.github.io/2021/08/14/399.%20Evaluate%20Division/"/>
-    <id>https://zjuytw.github.io/2021/08/14/399.%20Evaluate%20Division/</id>
-    <published>2021-08-14T13:18:15.761Z</published>
-    <updated>2021-08-14T13:17:50.809Z</updated>
-    
-    <content type="html"><![CDATA[<h1>399. Evaluate Division</h1><h2>Description</h2><p><img src="/2021/08/14/399.%20Evaluate%20Division/399-1.png" alt="image-20210814211436494"></p><p><img src="/2021/08/14/399.%20Evaluate%20Division/399-2.png" alt="image-20210814211447126"></p><h2>Solution</h2><p>Record each equations’ string name and its corresponding index, used later.</p><p>Then do a <code>floyd search</code> to all strings, find their division.</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">double</span>&gt; <span class="title">calcEquation</span><span class="params">(vector&lt;vector&lt;string&gt;&gt;&amp; equations, vector&lt;<span class="keyword">double</span>&gt;&amp; values, vector&lt;vector&lt;string&gt;&gt;&amp; queries)</span> </span>&#123;</span><br><span class="line">        vector&lt;string&gt; names;</span><br><span class="line">        unordered_map&lt;string, unordered_map&lt;string, <span class="keyword">double</span>&gt;&gt; Map;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; equations.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Map.<span class="built_in">find</span>(equations[i][<span class="number">0</span>]) == Map.<span class="built_in">end</span>())&#123;</span><br><span class="line">                Map[equations[i][<span class="number">0</span>]][equations[i][<span class="number">0</span>]] = <span class="number">1.0</span>;</span><br><span class="line">                names.<span class="built_in">push_back</span>(equations[i][<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(Map.<span class="built_in">find</span>(equations[i][<span class="number">1</span>]) == Map.<span class="built_in">end</span>())&#123;</span><br><span class="line">                Map[equations[i][<span class="number">1</span>]][equations[i][<span class="number">1</span>]] = <span class="number">1.0</span>;</span><br><span class="line">                names.<span class="built_in">push_back</span>(equations[i][<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            Map[equations[i][<span class="number">0</span>]][equations[i][<span class="number">1</span>]] = values[i];</span><br><span class="line">            Map[equations[i][<span class="number">1</span>]][equations[i][<span class="number">0</span>]] = <span class="number">1.0</span>/values[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>;k &lt; Map.<span class="built_in">size</span>();k++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Map.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; Map.<span class="built_in">size</span>(); j++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(i == j || i == k || j == k)</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    string a = names[i], b= names[j], c= names[k];</span><br><span class="line">                    <span class="keyword">if</span>(Map[a].<span class="built_in">find</span>(c) != Map[a].<span class="built_in">end</span>() &amp;&amp; Map[b].<span class="built_in">find</span>(c) != Map[b].<span class="built_in">end</span>())&#123;</span><br><span class="line">                        Map[a][b] = Map[a][c] / Map[b][c];</span><br><span class="line">                        Map[b][a] = Map[b][c] / Map[a][c];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;<span class="keyword">double</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; queries.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            string a = queries[i][<span class="number">0</span>], b = queries[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(Map.<span class="built_in">find</span>(a) == Map.<span class="built_in">end</span>() || Map.<span class="built_in">find</span>(b) == Map.<span class="built_in">end</span>())</span><br><span class="line">                res.<span class="built_in">push_back</span>(<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(Map[a].<span class="built_in">find</span>(b) == Map[a].<span class="built_in">end</span>())</span><br><span class="line">                res.<span class="built_in">push_back</span>(<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                res.<span class="built_in">push_back</span>(Map[a][b]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;399. Evaluate Division&lt;/h1&gt;
-
-&lt;h2&gt;Description&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/2021/08/14/399.%20Evaluate%20Division/399-1.png&quot; alt=&quot;image-20210814211</summary>
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="Floyd" scheme="https://zjuytw.github.io/tags/Floyd/"/>
     
   </entry>
   
