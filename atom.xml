@@ -6,7 +6,7 @@
   <link href="https://zjuytw.github.io/atom.xml" rel="self"/>
   
   <link href="https://zjuytw.github.io/"/>
-  <updated>2021-08-27T15:41:35.849Z</updated>
+  <updated>2021-08-30T17:30:13.320Z</updated>
   <id>https://zjuytw.github.io/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>1987. Number of Unique Good Subsequences</title>
+    <link href="https://zjuytw.github.io/2021/08/31/1987.%20Number%20of%20Unique%20Good%20Subsequences/"/>
+    <id>https://zjuytw.github.io/2021/08/31/1987.%20Number%20of%20Unique%20Good%20Subsequences/</id>
+    <published>2021-08-30T17:30:23.110Z</published>
+    <updated>2021-08-30T17:30:13.320Z</updated>
+    
+    <content type="html"><![CDATA[<h1>1987. Number of Unique Good Subsequences</h1><h2>Description</h2><p><img src="/2021/08/31/1987.%20Number%20of%20Unique%20Good%20Subsequences/1987-1.png" alt="image-20210831012335939"></p><p><img src="/2021/08/31/1987.%20Number%20of%20Unique%20Good%20Subsequences/1987-2.png" alt="image-20210831012343334"></p><h2>Solution</h2><p>Refer to <a href="https://leetcode-cn.com/problems/distinct-subsequences-ii">Distinct Subsequences</a></p><p>We calculate the different subsequence end with <code>ith</code> index.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dp0[i] -&gt; stands for from begin to ith index, subsequence number end with 0</span><br><span class="line">dp1[i] -&gt; stands for from begin to ith index, subsequence number end with 1</span><br><span class="line"></span><br><span class="line">dp1[i] = dp1[i-1] + dp0[i-1] + 1 (for ith is 1)</span><br><span class="line">dp1[i] = dp1[i-1] (for ith is 0)</span><br><span class="line"></span><br><span class="line">dp0[i] = dp1[i-1] + dp0[i-1] (for ith is 0)</span><br><span class="line">dp0[i] = dp0[i-1] (for ith is 1)</span><br></pre></td></tr></table></figure><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> MOD = <span class="number">1E9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numberOfUniqueGoodSubsequences</span><span class="params">(string binary)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = binary.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp1</span><span class="params">(n)</span>, <span class="title">dp2</span><span class="params">(n)</span></span>;</span><br><span class="line">        dp1[<span class="number">0</span>] = binary[<span class="number">0</span>]-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        <span class="keyword">bool</span> flag= binary[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(binary[i] == <span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">                dp1[i] = (dp1[i<span class="number">-1</span>] + dp2[i<span class="number">-1</span>] + <span class="number">1</span>)%MOD;</span><br><span class="line">                dp2[i] = dp2[i<span class="number">-1</span>];</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                dp1[i] = dp1[i<span class="number">-1</span>];</span><br><span class="line">                dp2[i] = (dp2[i<span class="number">-1</span>] + dp1[i<span class="number">-1</span>])%MOD;</span><br><span class="line">                flag= <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; dp1[i] &lt;&lt; &quot; &quot;&lt;&lt;dp2[i] &lt;&lt;endl;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (dp1[n<span class="number">-1</span>]+dp2[n<span class="number">-1</span>] + flag)%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;1987. Number of Unique Good Subsequences&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/31/1987.%20Number%20of%20Unique%20Good%20Subs</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="No AC first time" scheme="https://zjuytw.github.io/tags/No-AC-first-time/"/>
+    
+    <category term="DP" scheme="https://zjuytw.github.io/tags/DP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>1986. Minimum Number of Work Sessions to Finish the Tasks</title>
+    <link href="https://zjuytw.github.io/2021/08/31/1986.%20Minimum%20Number%20of%20Work%20Sessions%20to%20Finish%20the%20Tasks/"/>
+    <id>https://zjuytw.github.io/2021/08/31/1986.%20Minimum%20Number%20of%20Work%20Sessions%20to%20Finish%20the%20Tasks/</id>
+    <published>2021-08-30T17:30:23.090Z</published>
+    <updated>2021-08-30T17:22:57.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1>1986. Minimum Number of Work Sessions to Finish the Tasks</h1><h2>Description</h2><p><img src="/2021/08/31/1986.%20Minimum%20Number%20of%20Work%20Sessions%20to%20Finish%20the%20Tasks/1986-1.png" alt="image-20210831011729066"></p><p><img src="/2021/08/31/1986.%20Minimum%20Number%20of%20Work%20Sessions%20to%20Finish%20the%20Tasks/1986-2.png" alt="image-20210831011741385"></p><h2>Solution</h2><p>State Compress + DP</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firstly compute cost[mask].</span><br><span class="line">dp[mask] = min(dp[subset] + cost[mask ^ subset] &lt;= TimeSession ? 1 : 0)</span><br></pre></td></tr></table></figure><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minSessions</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; tasks, <span class="keyword">int</span> sessionTime)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = tasks.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(<span class="number">1</span> &lt;&lt; n, <span class="number">15</span>)</span></span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">cost</span><span class="params">(<span class="number">1</span> &lt;&lt; n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> mask = <span class="number">0</span>; mask &lt; (<span class="number">1</span>&lt;&lt;i); mask++)&#123;</span><br><span class="line">                cost[mask|(<span class="number">1</span>&lt;&lt;i)] = cost[mask] + tasks[i]; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//dp[mask] = min(dp[mask ^ i] + dp[i])</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> mask = <span class="number">0</span>; mask &lt; (<span class="number">1</span> &lt;&lt; n); mask++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = mask; i &gt; <span class="number">0</span>; i = (i<span class="number">-1</span>) &amp; mask)&#123;</span><br><span class="line">                <span class="keyword">if</span>(cost[i] &lt;= sessionTime)</span><br><span class="line">                    dp[mask] = <span class="built_in">min</span>(dp[mask^i] + <span class="number">1</span>, dp[mask]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/31/1986.%20Minimum%20Number%20of%20Work%20Sessions%20to%20Finish%20the%20Tasks/1986-3.png" alt="image-20210831012210092"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;1986. Minimum Number of Work Sessions to Finish the Tasks&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/08/31/1986.%20Minimum%20Number%</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="No AC first time" scheme="https://zjuytw.github.io/tags/No-AC-first-time/"/>
+    
+    <category term="DP" scheme="https://zjuytw.github.io/tags/DP/"/>
+    
+    <category term="State Compression" scheme="https://zjuytw.github.io/tags/State-Compression/"/>
+    
+  </entry>
   
   <entry>
     <title>295. Find Median from Data Stream</title>
@@ -549,68 +611,6 @@
 &lt;h2&gt;Description&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/2021/08/18/1012.%20Numbers%20With%20Repeated%20Digits/1012-</summary>
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="DFS" scheme="https://zjuytw.github.io/tags/DFS/"/>
-    
-    <category term="Tricky" scheme="https://zjuytw.github.io/tags/Tricky/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>526. Beautiful Arrangement</title>
-    <link href="https://zjuytw.github.io/2021/08/16/526.%20Beautiful%20Arrangement/"/>
-    <id>https://zjuytw.github.io/2021/08/16/526.%20Beautiful%20Arrangement/</id>
-    <published>2021-08-16T15:42:31.275Z</published>
-    <updated>2021-08-16T14:25:54.194Z</updated>
-    
-    <content type="html"><![CDATA[<h1>526. Beautiful Arrangement</h1><h2>Description</h2><p><img src="/2021/08/16/526.%20Beautiful%20Arrangement/526-1.png" alt="image-20210816183414471"></p><h2>Solution</h2><ol><li><p>Naively do backtracking</p></li><li><p>DP + State Compression</p><p>use <code>mask</code> to record first <code>num</code> ‘s integer’s combinations, for example</p><p><code>0101</code> means 1 and 3 are in the first 2 slots of the array. </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[mask] = sum of dp[mask^i], which i is suitable for popcount(mask) slot</span><br></pre></td></tr></table></figure></li></ol><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countArrangement</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;unordered_set&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">suitable</span>(n+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i % j == <span class="number">0</span> || j % i == <span class="number">0</span>)</span><br><span class="line">                    suitable[i].<span class="built_in">insert</span>(j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        unordered_set&lt;<span class="keyword">int</span>&gt; visited;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">backtracking</span>(n,<span class="number">1</span>,visited, suitable);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> curPos, unordered_set&lt;<span class="keyword">int</span>&gt;&amp; visited, <span class="keyword">const</span> vector&lt;unordered_set&lt;<span class="keyword">int</span>&gt;&gt;&amp; suitable)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curPos == n+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(visited.<span class="built_in">count</span>(i) || suitable[curPos].<span class="built_in">count</span>(i) == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            visited.<span class="built_in">insert</span>(i);</span><br><span class="line">            res += <span class="built_in">backtracking</span>(n, curPos+<span class="number">1</span>, visited, suitable);</span><br><span class="line">            visited.<span class="built_in">erase</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>Solution2</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countArrangement</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(<span class="number">1</span> &lt;&lt; n)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> mask = <span class="number">0</span>; mask &lt; (<span class="number">1</span> &lt;&lt;n); mask++)&#123;</span><br><span class="line">            <span class="keyword">int</span> num = __builtin_popcount(mask);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((mask &amp; (<span class="number">1</span>&lt;&lt;i)) &amp;&amp; (num % (i+<span class="number">1</span>) == <span class="number">0</span> || (i+<span class="number">1</span>) % num == <span class="number">0</span>))&#123;</span><br><span class="line">                    dp[mask] += dp[mask^(<span class="number">1</span>&lt;&lt;i)];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[(<span class="number">1</span>&lt;&lt;n) - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;526. Beautiful Arrangement&lt;/h1&gt;
-
-&lt;h2&gt;Description&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/2021/08/16/526.%20Beautiful%20Arrangement/526-1.png&quot; alt=&quot;image-202</summary>
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="DP" scheme="https://zjuytw.github.io/tags/DP/"/>
-    
-    <category term="Back Tracking" scheme="https://zjuytw.github.io/tags/Back-Tracking/"/>
-    
-    <category term="State Compression" scheme="https://zjuytw.github.io/tags/State-Compression/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>282. Expression Add Operators</title>
-    <link href="https://zjuytw.github.io/2021/08/16/282.%20Expression%20Add%20Operators/"/>
-    <id>https://zjuytw.github.io/2021/08/16/282.%20Expression%20Add%20Operators/</id>
-    <published>2021-08-16T15:42:31.273Z</published>
-    <updated>2021-08-16T15:41:23.696Z</updated>
-    
-    <content type="html"><![CDATA[<h1>282. Expression Add Operators</h1><h2>Description</h2><p><img src="/2021/08/16/282.%20Expression%20Add%20Operators/282-1.png" alt="image-20210816233523653"></p><h2>Solution</h2><p>Use tricky DFS to solve it.</p><p><strong>The most important trick:</strong> Because we need to give each expression that leads to the target, so we need to record current string. Then, for<code>+</code> and <code>-</code>, in fact we just need to record the <code>exep value</code> in previous expression. But to treat <code>*</code> rightly, we need record one more variable – lastValue to calculate the expression rightly.</p><p>So if we have, for example 1 2 3 4 5 6 7 8</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 + 2 * 3 DFS(45678)</span><br></pre></td></tr></table></figure><p>​                 ↑</p><p>To treat this 2 * 3 correctly, we need first record <code>1 + 2</code>= 3, then use <code>3 - 2 + 2 * 3</code> to get the right answer.</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;string&gt; res;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">addOperators</span><span class="params">(string num, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(num, (LL)target, <span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(string&amp; num, LL target, string prevStr, <span class="keyword">int</span> curPos, LL curVal, LL lastVal)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(num.<span class="built_in">size</span>() == curPos)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curVal == target)</span><br><span class="line">                res.<span class="built_in">push_back</span>(prevStr);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = curPos; i &lt; num.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            string curStr = num.<span class="built_in">substr</span>(curPos, i - curPos+<span class="number">1</span>);</span><br><span class="line">            <span class="comment">// cout &lt;&lt; curStr &lt;&lt;endl;</span></span><br><span class="line">            LL val = <span class="built_in">stoll</span>(curStr);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(curStr.<span class="built_in">size</span>() &gt; <span class="number">1</span> &amp;&amp; curStr[<span class="number">0</span>] ==<span class="string">&#x27;0&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(curPos==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(num, target, curStr, i+<span class="number">1</span>, val, val);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(num, target, prevStr + <span class="string">&quot;+&quot;</span> + curStr, i+<span class="number">1</span>, curVal + val, val);</span><br><span class="line">                <span class="built_in">dfs</span>(num, target, prevStr + <span class="string">&quot;-&quot;</span> + curStr, i+<span class="number">1</span>, curVal - val, -val);</span><br><span class="line">                <span class="built_in">dfs</span>(num, target, prevStr + <span class="string">&quot;*&quot;</span> + curStr, i+<span class="number">1</span>, curVal - lastVal + lastVal * val, lastVal * val);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/16/282.%20Expression%20Add%20Operators/282-2.png" alt="image-20210816234051340"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;282. Expression Add Operators&lt;/h1&gt;
-
-&lt;h2&gt;Description&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/2021/08/16/282.%20Expression%20Add%20Operators/282-1.png&quot; alt=&quot;i</summary>
       
     
     
