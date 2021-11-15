@@ -6,7 +6,7 @@
   <link href="https://zjuytw.github.io/atom.xml" rel="self"/>
   
   <link href="https://zjuytw.github.io/"/>
-  <updated>2021-09-23T15:02:55.955Z</updated>
+  <updated>2021-11-15T16:53:04.381Z</updated>
   <id>https://zjuytw.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>1627. Graph Connectivity With Threshold</title>
+    <link href="https://zjuytw.github.io/2021/11/16/1627.%20Graph%20Connectivity%20With%20Threshold/"/>
+    <id>https://zjuytw.github.io/2021/11/16/1627.%20Graph%20Connectivity%20With%20Threshold/</id>
+    <published>2021-11-15T16:53:17.255Z</published>
+    <updated>2021-11-15T16:53:04.381Z</updated>
+    
+    <content type="html"><![CDATA[<h1>1627. Graph Connectivity With Threshold</h1><h2>Description</h2><p><img src="/2021/11/16/1627.%20Graph%20Connectivity%20With%20Threshold/1627-1.png" alt="image-20211116004400708"></p><p><img src="/2021/11/16/1627.%20Graph%20Connectivity%20With%20Threshold/1627-2.png" alt="image-20211116004416116"></p><p><img src="/2021/11/16/1627.%20Graph%20Connectivity%20With%20Threshold/1627-3.png" alt="image-20211116004429278"></p><p><img src="/2021/11/16/1627.%20Graph%20Connectivity%20With%20Threshold/1627-4.png" alt="image-20211116004436790"></p><h2>Solution</h2><p>Obviously we need to use UF set.</p><p>The problem here is how to enumerate the gcd of two number. I firstly just iterate <code>n^2</code> numbers pairs and try to find their common factors and got TLE.</p><p>–&gt; We could start from the factor and to enumerate its multiples. </p><h2>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UF</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; uf, size;</span><br><span class="line">    <span class="built_in">UF</span>(<span class="keyword">int</span> n):<span class="built_in">uf</span>(n), <span class="built_in">size</span>(n)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            uf[i] = i;</span><br><span class="line">            size[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> fx = <span class="built_in">find</span>(x), fy = <span class="built_in">find</span>(y);</span><br><span class="line">        <span class="keyword">if</span>(fx == fy) <span class="keyword">return</span>;</span><br><span class="line">        uf[fx] = fy;</span><br><span class="line">        size[fy] += size[fx];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(uf[x] != x)&#123;</span><br><span class="line">            uf[x] = <span class="built_in">find</span>(uf[x]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uf[x];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get_size</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> fx = <span class="built_in">find</span>(x);</span><br><span class="line">        <span class="keyword">return</span> size[fx];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">bool</span>&gt; <span class="title">areConnected</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> threshold, vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; queries)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//factorization + UF</span></span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">bool</span>&gt; <span class="title">res</span><span class="params">(queries.size(), <span class="literal">true</span>)</span></span>;</span><br><span class="line">        <span class="keyword">if</span>(threshold == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">UF <span class="title">uf</span><span class="params">(n+<span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = threshold + <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> p = i, q = <span class="number">2</span> * i; q &lt;= n; p += i, q += i)&#123;</span><br><span class="line">                uf.<span class="built_in">Union</span>(p,q);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ; i &lt; queries.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            res[i] = uf.<span class="built_in">find</span>(queries[i][<span class="number">0</span>]) == uf.<span class="built_in">find</span>(queries[i][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/11/16/1627.%20Graph%20Connectivity%20With%20Threshold/1627-5.png" alt="image-20211116004923385"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;1627. Graph Connectivity With Threshold&lt;/h1&gt;
+
+&lt;h2&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/2021/11/16/1627.%20Graph%20Connectivity%20With%20Thres</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
+    
+    
+    <category term="No AC first time" scheme="https://zjuytw.github.io/tags/No-AC-first-time/"/>
+    
+    <category term="Tricky" scheme="https://zjuytw.github.io/tags/Tricky/"/>
+    
+    <category term="Union-Find" scheme="https://zjuytw.github.io/tags/Union-Find/"/>
+    
+  </entry>
   
   <entry>
     <title>1944. Number of Visible People in a Queue</title>
@@ -582,36 +614,6 @@
     <category term="No AC first time" scheme="https://zjuytw.github.io/tags/No-AC-first-time/"/>
     
     <category term="DP" scheme="https://zjuytw.github.io/tags/DP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>5852. Minimize the Difference Between Target and Chosen Elements</title>
-    <link href="https://zjuytw.github.io/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/"/>
-    <id>https://zjuytw.github.io/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/</id>
-    <published>2021-08-22T15:36:07.532Z</published>
-    <updated>2021-08-22T15:35:52.846Z</updated>
-    
-    <content type="html"><![CDATA[<h1>5852. Minimize the Difference Between Target and Chosen Elements</h1><h2>Description</h2><p><img src="/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/5852-1.png" alt="image-20210822232736812"></p><p><img src="/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/5852-2.png" alt="image-20210822232747878"></p><p><img src="/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/5852-3.png" alt="image-20210822232755203"></p><h2>Solution</h2><p>DFS + memorize visited + pruning</p><h2>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; visited;</span><br><span class="line">    <span class="keyword">int</span> res = INT_MAX;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minimizeTheDifference</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; mat, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = mat.<span class="built_in">size</span>(), n = mat[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">            <span class="built_in">sort</span>(mat[i].<span class="built_in">begin</span>(), mat[i].<span class="built_in">end</span>());</span><br><span class="line">        visited.<span class="built_in">resize</span>(m, vector&lt;<span class="keyword">int</span>&gt;(<span class="number">4901</span>,<span class="number">0</span>));</span><br><span class="line">        stack&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; stk;</span><br><span class="line">        stk.<span class="built_in">push</span>(&#123;<span class="number">0</span>,<span class="number">0</span>&#125;);</span><br><span class="line">        <span class="keyword">while</span>(!stk.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="keyword">auto</span> [level, sum] = stk.<span class="built_in">top</span>();</span><br><span class="line">            stk.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span>(level == mat.<span class="built_in">size</span>())&#123;</span><br><span class="line">                res = <span class="built_in">min</span>(res, <span class="built_in">abs</span>(sum - target));</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mat[<span class="number">0</span>].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(visited[level][sum + mat[level][i]])</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                visited[level][sum + mat[level][i]] = <span class="number">1</span>;</span><br><span class="line">                stk.<span class="built_in">push</span>(&#123;level+<span class="number">1</span>, sum + mat[level][i]&#125;);</span><br><span class="line">                <span class="comment">//important pruning situation</span></span><br><span class="line">                <span class="keyword">if</span>(sum + mat[level][i] &gt; target)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/5852-4.png" alt="image-20210822233549504"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;5852. Minimize the Difference Between Target and Chosen Elements&lt;/h1&gt;
-
-&lt;h2&gt;Description&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/2021/08/22/5852.%20Minimize%2</summary>
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://zjuytw.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="DFS" scheme="https://zjuytw.github.io/tags/DFS/"/>
-    
-    <category term="Pruning" scheme="https://zjuytw.github.io/tags/Pruning/"/>
     
   </entry>
   
