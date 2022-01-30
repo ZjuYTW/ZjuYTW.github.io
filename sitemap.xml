@@ -2,6 +2,153 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lec13--%20Ex3%20Recovery/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lec11--%20File%20System/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lec9--%20Thread%20Switch/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lec10--%20synchronize/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lec8--%20Lock/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lec7--%20Interrupt/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lec6--%20Page%20Fault/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lec5--%20Trap/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab11%20NIC/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab10%20Mmap/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab7%20Lock/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab5%20Lazy%20Allocation/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab6%20COW/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab3%20Page%20Table/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab2%20Syscalls/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab1%20Unix%20utilities/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lec12--%20Crash%20Recovery/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab9%20Multithreading/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab8--%20File%20System/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2022/01/30/Lab4%20Traps/</loc>
+    
+    <lastmod>2022-01-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/2021/12/14/484.%20Find%20Permutation/</loc>
+    
+    <lastmod>2021-12-14</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zjuytw.github.io/2021/12/06/757.%20Set%20Intersection%20Size%20At%20Least%20Two/</loc>
     
     <lastmod>2021-12-06</lastmod>
@@ -324,27 +471,6 @@
   </url>
   
   <url>
-    <loc>https://zjuytw.github.io/2021/08/14/Lab1%20Unix%20utilities/</loc>
-    
-    <lastmod>2021-08-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/2021/08/14/Lab3%20Page%20Table/</loc>
-    
-    <lastmod>2021-08-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/2021/08/14/Lab2%20Syscalls/</loc>
-    
-    <lastmod>2021-08-14</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://zjuytw.github.io/2021/08/12/516.%20Longest%20Palindromic%20Subsequence/</loc>
     
     <lastmod>2021-08-12</lastmod>
@@ -592,7 +718,7 @@
 
   <url>
     <loc>https://zjuytw.github.io/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -600,357 +726,350 @@
   
   <url>
     <loc>https://zjuytw.github.io/tags/BFS/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/No-AC-first-time/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/DFS/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Priority-Queue/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/DP/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Heap/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Iteration/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Fast-Slow-pointers/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Back-Tracking/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Aurora/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Distributed-Systems/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Frangipani/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Spanner/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/FaRM/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Spark/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Memcache-FB/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/COPS/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Certificate-Transparency/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Bitcoin/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/ZooKeeper/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/CRAQ/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/KV-Raft/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Lab-Note/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/MapReduce/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Raft/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/ShardKV-Storage/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Finite-State-Machine/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/State-Compression/</loc>
-    <lastmod>2021-12-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/tags/xv6/</loc>
-    <lastmod>2021-12-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/tags/Syscall/</loc>
-    <lastmod>2021-12-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/tags/Memory-Management/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Tricky/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Floyd/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Monotone-Stack/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Greedy/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Stringstream/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Two-Pointers/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Stack/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Maximum-Increasing-Subsequence/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/BST/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Union-Find-Set/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Trie-Tree/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/String/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Math/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Sampling-Algorithm/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Pruning/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Prefix-Sum/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Union-Find/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Union-Find/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Binary-Search/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/tags/Interval/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/Permutation/</loc>
+    <lastmod>2022-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/tags/MIT6-S081/</loc>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -959,28 +1078,28 @@
   
   <url>
     <loc>https://zjuytw.github.io/categories/Leetcode/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/categories/6-824/</loc>
-    <lastmod>2021-12-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zjuytw.github.io/categories/6-S081/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://zjuytw.github.io/categories/Algorithm-at-Scale/</loc>
-    <lastmod>2021-12-06</lastmod>
+    <lastmod>2022-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zjuytw.github.io/categories/MIT6-S081/</loc>
+    <lastmod>2022-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

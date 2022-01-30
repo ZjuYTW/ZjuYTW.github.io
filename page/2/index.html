@@ -53,7 +53,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2021-12-06 15:51:47'
+  postUpdate: '2022-01-30 17:11:29'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -143,7 +143,46 @@
     }
     detectApple()
     })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Yitao's Blog" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/ichigo1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">81</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div></div></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/GbjolrOH.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yitao's Blog</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Yitao's Blog</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/31/1987.%20Number%20of%20Unique%20Good%20Subsequences/" title="1987. Number of Unique Good Subsequences">1987. Number of Unique Good Subsequences</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-30T17:30:23.110Z" title="Created 2021-08-31 01:30:23">2021-08-31</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">1987. Number of Unique Good Subsequences
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/ichigo1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">99</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">50</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div></div></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/GbjolrOH.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yitao's Blog</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Yitao's Blog</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/01/30/Lab5%20Lazy%20Allocation/" title="MIT6.S081 Lab5">MIT6.S081 Lab5</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-30T09:02:37.010Z" title="Created 2022-01-30 17:02:37">2022-01-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/MIT6-S081/">MIT6.S081</a></span></div><div class="content">Lab 5 Lazy AllocationIn this lab, we gonna implement lazy allocation which means delay the true memory allocation till we actually needs it.
+lazy sbrk()To start with, we should modify the sbrk() from eager allocation to lazy one.But we should note that the parameter n can be arbitary number, either + or - so once the number is positve do the lazy allocation, but if the number is negative, we should do the deallocation immediately.
+Lazy AllocationThe time to truely allocate a page, is when kernel ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/01/30/Lab4%20Traps/" title="MIT6.S081 Lab4">MIT6.S081 Lab4</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-30T09:02:37.008Z" title="Created 2022-01-30 17:02:37">2022-01-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/MIT6-S081/">MIT6.S081</a></span></div><div class="content">Lab4Part2 –Backtracebacktrace is the method that prints the address of call stack. To implement backtrace, we should know some key points :  
+
+In RISC-V, stack grows from high to low.
+fp points to the start of a function(highest address), then Return Address (offset by -8), then previous frame pointer address(offset by -16)
+We should print the address of Return Address(means the address of code)
+Stack size are 1 PGSIZE and aligned.  
+
+So we just need to fetch the frame pointer by the follower as ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/01/30/Lab3%20Page%20Table/" title="MIT6.S081 Lab3">MIT6.S081 Lab3</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-30T09:02:37.006Z" title="Created 2022-01-30 17:02:37">2022-01-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/MIT6-S081/">MIT6.S081</a></span></div><div class="content">Lab3 pagetable In this lab, we will modify the pagetable, and finally be able to dereference pointers in the kernel mode.
+Lab1–Print page table In this lab, it’s much easier than later two lab that we just need to write a DFS recursive function to walk down the 3-level pagetable and print out the path.  
+Check vm.c/freewalk() and dfs the pagetable, note the format of a virtual memory address.![](Lab3 Page Table/lab3-pic1.png)We should notice that different from intel’s pagetable, xv6 store the P ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/01/30/Lab2%20Syscalls/" title="MIT6.S081 Lab2">MIT6.S081 Lab2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-30T09:02:37.004Z" title="Created 2022-01-30 17:02:37">2022-01-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/MIT6-S081/">MIT6.S081</a></span></div><div class="content">System Calls(pending the challenge)
+
+In the lab, we will get deeper into OS than the previous one. We are about to implement the ‘bridge’ between user and kernel mode, then implement two specific syscall to be called by user’s program.
+Lab
+
+The two labs are symmetry overall, so I just describe how to do a system call.
+To make our own syscalls,we should know how the syscall works between user &amp; kernel mode.
+1234567						   user function							     ↓					      wrapped interface---------------- ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/01/30/Lab1%20Unix%20utilities/" title="MIT6.S081 Lab1">MIT6.S081 Lab1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-30T09:02:37.002Z" title="Created 2022-01-30 17:02:37">2022-01-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/MIT6-S081/">MIT6.S081</a></span></div><div class="content">Xv6 and Unix utilities
+
+In this lab, we gonna implement many interesting and useful programs like, sleep, pingpong, primes, find, and xargs . There are some points I want to emphasize, though this lab is not so hard.
+Before Start
+
+My experiment environment:
+12VM: VMware workstationLinux ubuntu 20.04
+
+ I can not find corresponding software in apt-get when my kernel was at 16.04 or 18.04, so I have to update to 20.04.
+Lab
+
+The structure we should know before programming is that, there are kernel’s ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/12/14/484.%20Find%20Permutation/" title="484. Find Permutation">484. Find Permutation</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-12-14T08:27:10.099Z" title="Created 2021-12-14 16:27:10">2021-12-14</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">484. Find PermutationDescription
+
+
+Solution
+
+Recall how to generate a next_permutation, the way we do to keep the permutation small is just reverse the left-most reverse pair. In this question, we just keep a ‘123456… n’ basic permutation then reverse the substr that contiguous ‘D’ point at. 
+eg.
+
+Code
+
+1234567891011121314151617181920212223class Solution &#123;public:    vector&lt;int&gt; findPermutation(string s) &#123;        int n = s.size() + 1;        vector&lt;int&gt; res;        for(int i ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/12/06/668.%20Kth%20Smallest%20Number%20in%20Multiplication%20Table/" title="668. Kth Smallest Number in Multiplication Table">668. Kth Smallest Number in Multiplication Table</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-12-06T07:51:11.036Z" title="Created 2021-12-06 15:51:11">2021-12-06</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">668. Kth Smallest Number in Multiplication Table
 
 Description
 
@@ -151,200 +190,121 @@ Description
 
 Solution
 
-Refer to Distinct Subsequences
-We calculate the different subsequence end with ith index.
-12345678dp0[i] -&gt; stands for from begin to ith index, subsequence number end with 0dp1[i] -&gt; stands for from begin to ith index, subsequence number end with 1dp1[i] = dp1[i-1] + dp0[i-1] + 1 (for ith is 1)dp1[i] = dp1[i-1] (for ith is 0)dp0[i] = dp1[i-1] + dp0[i-1] (for ith is 0)dp0[i] = dp0[i-1] (for ith is 1)
+Generally, k-th related problem could be solved by binary search to guess the right answer and verify.  Once we enumerate a number, we could calculate its rank. 
+Another important thing we should notice is that we calculate the elements number that less equal than the target one.
+Code
+
+123456789101112131415161718192021222324class Solution &#123;public:    int findKthNumber(int m, int n, int k) &#123;        int l = 1, r = ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/12/06/757.%20Set%20Intersection%20Size%20At%20Least%20Two/" title="757. Set Intersection Size At Least Two">757. Set Intersection Size At Least Two</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-12-06T07:51:11.034Z" title="Created 2021-12-06 15:51:11">2021-12-06</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">757. Set Intersection Size At Least TwoDescription
+
+
+
+Solution
+
+Refer to 452 452. Minimum Number of Arrows to Burst Balloons. These two questions are very similar.
+We need to greedily find the maximum non-overlapping intervals.
+And the template should always sort the intervals by endpoints and see if we could pick elements greedily to fit the requirement.
+Code
+
+12345678910111213141516171819202122232425262728class Solution &#123;public:    int intersectionSizeTwo(vector&lt;vector&lt;int&gt;&gt;&a ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/11/17/1235.%20Maximum%20Profit%20in%20Job%20Scheduling/" title="1235. Maximum Profit in Job Scheduling">1235. Maximum Profit in Job Scheduling</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-11-17T07:41:52.466Z" title="Created 2021-11-17 15:41:52">2021-11-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">1235. Maximum Profit in Job Scheduling
+
+Description
+
+
+
+Solution
+
+Time interval question.
+An simple intuition should be, if we find a best solution for a previous time, then we could use this information to calculate the later one with startTime[i] &gt; endTime[i-1].
+So we could use binary search to find the endTime suitable for current startTime.
+To use bs, we need sort by endTime.
+Code
+
+1234567891011121314151617181920212223242526272829303132class Solution &#123;public:    int jobScheduling(vect ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/11/16/1627.%20Graph%20Connectivity%20With%20Threshold/" title="1627. Graph Connectivity With Threshold">1627. Graph Connectivity With Threshold</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-11-15T16:53:17.255Z" title="Created 2021-11-16 00:53:17">2021-11-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">1627. Graph Connectivity With Threshold
+
+Description
+
+
+
+
+
+Solution
+
+Obviously we need to use UF set.
+The problem here is how to enumerate the gcd of two number. I firstly just iterate n^2 numbers pairs and try to find their common factors and got TLE.
+–&gt; We could start from the factor and to enumerate its multiples. 
+Code
+
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class UF&#123;    public:    vector&lt;int&gt; uf, size;    UF(int n):uf(n), size ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/09/23/1944.%20Number%20of%20Visible%20People%20in%20a%20Queue/" title="1944. Number of Visible People in a Queue">1944. Number of Visible People in a Queue</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-09-23T15:03:16.859Z" title="Created 2021-09-23 23:03:16">2021-09-23</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">1944. Number of Visible People in a Queue
+
+Description
+
+
+
+Solution
+
+Using monotone stack, look into preceding first number larger than current one.
+Code
+
+123456789101112131415161718class Solution &#123;public:    vector&lt;int&gt; canSeePersonsCount(vector&lt;int&gt;&amp; heights) &#123;        int n = heights.size();        vector&lt;int&gt; res(n, 0);        stack&lt;int&gt; stk;        for(int i = n-1; i &gt;= 0; i--)&#123;            while(!stk.empty() &amp;&amp; stk.top() &lt; heights[i])&# ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/09/16/1998.%20GCD%20Sort%20of%20an%20Array/" title="1998. GCD Sort of an Array">1998. GCD Sort of an Array</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-09-15T16:17:28.049Z" title="Created 2021-09-16 00:17:28">2021-09-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">1998. GCD Sort of an Array
+
+Description
+
+
+
+Solution
+
+Because we are using gcd to transfer numbers, so the number which shares the same factor should in the same set. So we could use Union-Find to mark numbers.
+There is also a tricky point that how to get the prime factor of one number.
+https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
+Code
+
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546const  int N = 1E5+1;class Solution &#123;        i ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/09/16/2002.%20Maximum%20Product%20of%20the%20Length%20of%20Two%20Palindromic%20Subsequences/" title="2002. Maximum Product of the Length of Two Palindromic Subsequences">2002. Maximum Product of the Length of Two Palindromic Subsequences</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-09-15T16:17:28.046Z" title="Created 2021-09-16 00:17:28">2021-09-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">2002. Maximum Product of the Length of Two Palindromic Subsequences
+
+Description
+
+
+
+Solution
+
+We could enumerate all the potential substring then check if they are palindromic by using state compression.
+Then we iterate the subset of the inverse state to check if two substring are compatible.
+Code
+
+1234567891011121314151617181920212223242526272829303132333435363738394041424344class Solution &#123;public:    int maxProduct(string s) &#123;        int n = s.size();        vector&lt;bool&gt; dp(1 & ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/09/11/1894.%20Find%20the%20Student%20that%20Will%20Replace%20the%20Chalk/" title="1894. Find the Student that Will Replace the Chalk">1894. Find the Student that Will Replace the Chalk</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-09-10T17:11:51.276Z" title="Created 2021-09-11 01:11:51">2021-09-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">1894. Find the Student that Will Replace the Chalk
+
+Description
+
+
+
+Solution
+
+presum + binary search
+Code
+
+12345678910111213class Solution &#123;public:    int chalkReplacer(vector&lt;int&gt;&amp; chalk, int k) &#123;        if(chalk[0] &gt; k) return 0;        for(int i = 1; i &lt; chalk.size(); i++)&#123;            chalk[i] += chalk[i-1];            if(chalk[i] &gt; k) return i;         &#125;        k %= chalk.back();        int pos = upper_bound(chalk.begin(), chalk.end(), k) - chalk.begin() ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/09/11/808.%20Soup%20Servings/" title="808. Soup Servings">808. Soup Servings</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-09-10T17:11:51.257Z" title="Created 2021-09-11 01:11:51">2021-09-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">808. Soup Servings
+
+Description
+
+
+
+Solution
+
+In this problem, because all soup are decresed in multiple 25, so we could divid N by 25 then do dp on each one step.
+dp[i] [j] -&gt; the desired value with i ml and j ml soup.
+1dp[i][j] = 0.25 * (dp[i-4][j] + dp[i-3][j-1] + dp[i-2][j-2] + dp[i-1][j-3])
+
+And we note the corner case are:
+123dp[i][j] = 0.5 (for i &lt;= 0 and j &lt;= 0)dp[i][j] = 1 (for i = 0, j &gt;= 1)dp[i][j] = 0 (for i &gt;= 1, j = 0)
 
 
 
 Code
 
-123456789101112 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/31/1986.%20Minimum%20Number%20of%20Work%20Sessions%20to%20Finish%20the%20Tasks/" title="1986. Minimum Number of Work Sessions to Finish the Tasks">1986. Minimum Number of Work Sessions to Finish the Tasks</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-30T17:30:23.090Z" title="Created 2021-08-31 01:30:23">2021-08-31</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">1986. Minimum Number of Work Sessions to Finish the Tasks
-
-Description
-
-
-
-Solution
-
-State Compress + DP
-12firstly compute cost[mask].dp[mask] = min(dp[subset] + cost[mask ^ subset] &lt;= TimeSession ? 1 : 0)
-
-
-
-Code
-
-12345678910111213141516171819202122class Solution &#123;public:    int minSessions(vector&lt;int&gt;&amp; tasks, int sessionTime) &#123;        int n = tasks.size();        vector&lt;int&gt; dp(1 &lt;&lt; n, 15);        vector&lt;int&gt; cost(1 &lt;&lt; n);        for(int i = 0; i & ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/27/295.%20Find%20Median%20from%20Data%20Stream/" title="295. Find Median from Data Stream">295. Find Median from Data Stream</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-27T15:43:53.678Z" title="Created 2021-08-27 23:43:53">2021-08-27</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">295. Find Median from Data Stream
-
-Description
-
-
-
-Solution
-
-Because we are handling a stream problem, if we need resort the array each time it is a costy solution. So if we could have a self-balance binary search tree, we could use the top of the tree as the answer, but just writing a AVL or RBT is not very troublesome. A better solution is to use two priority queue, one is min heap and other is max heap. 
-Code
-
-123456789101112131415161718192021222324252627282930class MedianFinder &#123;public:  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/27/1000.%20Minimum%20Cost%20to%20Merge%20Stones/" title="1000. Minimum Cost to Merge Stones">1000. Minimum Cost to Merge Stones</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-27T15:43:53.669Z" title="Created 2021-08-27 23:43:53">2021-08-27</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">1000. Minimum Cost to Merge Stones
-
-Description
-
-
-
-Solution
-
-Using DP to solve the problem, we have 
-1dp[i][j][k] = from ith to jth, the cost to form k&#x27;s piles
-
-So we have
-1dp[i][j][k] = min(dp[i][p][1] + dp[p+1][j][k-1]) (p from i to j-1, step is k-1)
-
-
-
-Code
-
-123456789101112131415161718192021222324252627282930class Solution &#123;public:    int mergeStones(vector&lt;int&gt;&amp; stones, int k) &#123;        if((stones.size()-1) % (k-1) != 0)            return -1;        int n = stones.siz ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/27/881.%20Boats%20to%20Save%20People/" title="881. Boats to Save People">881. Boats to Save People</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-27T15:43:53.666Z" title="Created 2021-08-27 23:43:53">2021-08-27</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">881. Boats to Save People
-
-Description
-
-
-Solution
-
-Greedy, because every boat is required to save most 2 people, so we could greedily let every boat loads 2 people. But a tricky point is, intuitively we should let each boat takes as heavier as possible, but actually, if we could putpeople[-1] with people[1] instead of people[-1] with people[0], we still could let people[-2] with people[1], so just let first and last together and we will get the correct answer.
-Code
-
-123456789101112131415161718cl ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/25/479.%20Largest%20Palindrome%20Product/" title="479. Largest Palindrome Product">479. Largest Palindrome Product</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-25T06:04:07.642Z" title="Created 2021-08-25 14:04:07">2021-08-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">479. Largest Palindrome Product
-
-Description
-
-
-Solution
-
-Because two n-digits intergers’ product are range from 2n-1 digits to 2n digits. Our strategy is constructing palindrome by str + reverse(str) . Then we detect from highest n-digits interger to sqrt(palin) to see if it can be divided into 2  n digits numbers.
-Code
-
-12345678910111213141516class Solution:    def largestPalindrome(self, n: int) -&gt; int:        def getPalin(i):            s = str(i)            s += s[::-1]            return  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/25/787.%20Cheapest%20Flights%20Within%20K%20Stops/" title="787. Cheapest Flights Within K Stops">787. Cheapest Flights Within K Stops</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-25T06:04:07.640Z" title="Created 2021-08-25 14:04:07">2021-08-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">787. Cheapest Flights Within K Stops
-
-Description
-
-
-
-Solution
-
-BFS+cost[] array
-Ignore the vertex with more step &amp;&amp; more cost, just to prune
-Code
-
-1234567891011121314151617181920212223class Solution:    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -&gt; int:        adjacent = defaultdict(list)        cost = [sys.maxsize] * n        queue = [src]        cost[src] = 0        step = 0        for f in flights:            adjacent[f[0]].append((f[1 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/25/790.%20Domino%20and%20Tromino%20Tiling/" title="790. Domino and Tromino Tiling">790. Domino and Tromino Tiling</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-25T06:04:07.639Z" title="Created 2021-08-25 14:04:07">2021-08-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">790. Domino and Tromino Tiling
-
-Description
-
-
-
-Solution
-
-Check the dp state illustrated in picture
-
-Code
-
-1234567891011121314151617class Solution &#123;    static const int MOD = 1E9 + 7;public:    int numTilings(int n) &#123;        if(n == 1)            return 1;        vector&lt;vector&lt;long long&gt;&gt; dp(2, vector&lt;long long&gt;(1+n,0));        dp[0][1] = 1;        dp[1][2] = 2;        dp[0][2] = 2;        for(int i = 3; i &lt;= n; i++)&#123;            dp[0][i] = (dp[0][i-1] + dp[1][i ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/22/5852.%20Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/" title="5852. Minimize the Difference Between Target and Chosen Elements">5852. Minimize the Difference Between Target and Chosen Elements</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-22T15:36:07.532Z" title="Created 2021-08-22 23:36:07">2021-08-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">5852. Minimize the Difference Between Target and Chosen Elements
-
-Description
-
-
-
-
-Solution
-
-DFS + memorize visited + pruning
-Code
-
-1234567891011121314151617181920212223242526272829303132class Solution &#123;    vector&lt;vector&lt;int&gt;&gt; visited;    int res = INT_MAX;public:    int minimizeTheDifference(vector&lt;vector&lt;int&gt;&gt;&amp; mat, int target) &#123;        int m = mat.size(), n = mat[0].size();        for(int i = 0; i &lt; m; i++)            sort(mat[i].begin(), mat[i].end()); ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/22/5853.%20Find%20Array%20Given%20Subset%20Sums/" title="5853. Find Array Given Subset Sums">5853. Find Array Given Subset Sums</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-22T15:36:07.515Z" title="Created 2021-08-22 23:36:07">2021-08-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">5853. Find Array Given Subset Sums
-
-
-
-Description
-
-
-
-Solution
-
-Firstly, let’s think about a easier question—If sums‘s elements are all positive, how would you solve this?
-
-Obviously, the minimum one m is the front one in the ans array.
-How to find the next answers?
-Delete all subset in sums from ans array, which should be $2^{ans.size()-1}$ elements to be deleted
-How to do this in programming?
- In each iteration, use a mask to mark the combination of ans‘s numbers, note that we just need to dele ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/22/212.%20Word%20Search%20II/" title="212. Word Search II">212. Word Search II</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-21T17:02:24.607Z" title="Created 2021-08-22 01:02:24">2021-08-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">212. Word Search II
-
-Description
-
-
-
-Solution
-
-A classic usage of Trie Tree(prefix tree).
-
-Template: 
-123456789class Trie&#123;    Trie *next[26];    bool isEnd;    Trie()&#123;        for(int i = 0; i&lt; 26; i++)            next[i] = nullptr;        isEnd = false;    &#125;&#125;;
-
-
-
-Code
-
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162class Trie&#123;public:    Trie* next[26];    bool isEnd;    Trie()&#123;        for(int i =  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/22/650.%202%20Keys%20Keyboard/" title="650. 2 Keys Keyboard">650. 2 Keys Keyboard</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-21T17:02:24.581Z" title="Created 2021-08-22 01:02:24">2021-08-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">650. 2 Keys Keyboard
-
-Description
-
-
-Solution
-
-
-O(n^2), search from 1 to i-1 to find the smallest operation number for dp[i]
-
-O(sqrt(n)), all the operations sequences are like : CPPPCPPPPCP..., can be divided into groups (CPPP)(CPP)(CP)…. .If we have each group’s length like g1, g2,g3..., so after first group, there are g1 A’s, after second group g1 * g2 A’s…
-We want have N = g1 * g2 * g3...*gn A’s, if gi can be divided into product of other two numbers,  denote as gi = p * q, so it can be divide ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/20/Lec1/" title="CS5234--Lecture1 Sampling Algorithm of Array">CS5234--Lecture1 Sampling Algorithm of Array</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-20T14:07:30.229Z" title="Created 2021-08-20 22:07:30">2021-08-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Algorithm-at-Scale/">Algorithm at Scale</a></span></div><div class="content">CS5234 --Algorithm at Scale
-
-Lec1 mainly talked about two toy problem solving by sampling.
-Array all 0's ?
-
-
-Given the algorithm,
-1234Repeat s times:	Choose random i in [1,n]	if A[i] = 1 then return Falsereturn True
-
-We’d like to guarantee the following statement:
-
-if all 0’s : return true
-if $\ge \epsilon n$ 1’s : return false (We can promise that &gt;= 2/3 probability to return false and we can adjust the probability by adjusting the sampling times)
-otherwise: return true or false
-
-Proof:
-if t ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/20/481.%20Magical%20String/" title="481. Magical String">481. Magical String</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-20T14:05:20.659Z" title="Created 2021-08-20 22:05:20">2021-08-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">481. Magical String
-
-Description
-
-
-Solution
-
-Use a pointer to record current occurrence of next segment of s. The new added segment’s consecutive number should be different from back of s.
-Code
-
-1234567891011121314151617181920class Solution:    def magicalString(self, n: int) -&gt; int:        if n &lt;= 3:            return 1                s = &quot;122&quot;        freq,size,res = 2, 3, 1 #freq postion pointer        while size &lt; n:            f = int(s[freq])            c = 1 if s[len(s)- ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/20/553.%20Optimal%20Division/" title="553. Optimal Division">553. Optimal Division</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-20T14:05:20.643Z" title="Created 2021-08-20 22:05:20">2021-08-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Leetcode/">Leetcode</a></span></div><div class="content">553. Optimal Division
-
-Description
-
-
-
-Solution
-
-To get the maxium value in the nums, we can fix the numerator and get minium denominator in the lefted numbers. So just let each number divided by later to generate a minium denominator.
-Code
-
-1234567891011121314151617class Solution:    def optimalDivision(self, nums: List[int]) -&gt; str:        res = &quot;&quot;        if len(nums) == 1:            res = str(nums[0])            return res        elif len(nums) == 2:            res = str(nums[0]) ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/ichigo1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Wang Yitao</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">81</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">51</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZjuYTW"><i class="fab fa-github"></i><span>My Github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">My personal website, writing for fun and sharing knowledge</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/12/06/668.%20Kth%20Smallest%20Number%20in%20Multiplication%20Table/" title="668. Kth Smallest Number in Multiplication Table">668. Kth Smallest Number in Multiplication Table</a><time datetime="2021-12-06T07:51:11.036Z" title="Created 2021-12-06 15:51:11">2021-12-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/12/06/757.%20Set%20Intersection%20Size%20At%20Least%20Two/" title="757. Set Intersection Size At Least Two">757. Set Intersection Size At Least Two</a><time datetime="2021-12-06T07:51:11.034Z" title="Created 2021-12-06 15:51:11">2021-12-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/11/17/1235.%20Maximum%20Profit%20in%20Job%20Scheduling/" title="1235. Maximum Profit in Job Scheduling">1235. Maximum Profit in Job Scheduling</a><time datetime="2021-11-17T07:41:52.466Z" title="Created 2021-11-17 15:41:52">2021-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/11/16/1627.%20Graph%20Connectivity%20With%20Threshold/" title="1627. Graph Connectivity With Threshold">1627. Graph Connectivity With Threshold</a><time datetime="2021-11-15T16:53:17.255Z" title="Created 2021-11-16 00:53:17">2021-11-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/09/23/1944.%20Number%20of%20Visible%20People%20in%20a%20Queue/" title="1944. Number of Visible People in a Queue">1944. Number of Visible People in a Queue</a><time datetime="2021-09-23T15:03:16.859Z" title="Created 2021-09-23 23:03:16">2021-09-23</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+12345678910111213141516171819202122class ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#content-inner">7</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/ichigo1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Wang Yitao</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">99</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">50</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZjuYTW"><i class="fab fa-github"></i><span>My Github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">My personal website, writing for fun and sharing knowledge</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/30/Lec13--%20Ex3%20Recovery/" title="MIT6.S081 Lecture14 Ext3fs crash recovery">MIT6.S081 Lecture14 Ext3fs crash recovery</a><time datetime="2022-01-30T09:02:37.100Z" title="Created 2022-01-30 17:02:37">2022-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/30/Lec12--%20Crash%20Recovery/" title="MIT6.S081 Lecture13 Crash Recovery">MIT6.S081 Lecture13 Crash Recovery</a><time datetime="2022-01-30T09:02:37.098Z" title="Created 2022-01-30 17:02:37">2022-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/30/Lec11--%20File%20System/" title="MIT6.S081 Lecture12 File system on xv6">MIT6.S081 Lecture12 File system on xv6</a><time datetime="2022-01-30T09:02:37.096Z" title="Created 2022-01-30 17:02:37">2022-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/30/Lec10--%20synchronize/" title="MIT6.S081 Lecture11 Machinery about synchronize">MIT6.S081 Lecture11 Machinery about synchronize</a><time datetime="2022-01-30T09:02:37.095Z" title="Created 2022-01-30 17:02:37">2022-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/30/Lec9--%20Thread%20Switch/" title="MIT6.S081 Lecture10 Thread Switch">MIT6.S081 Lecture10 Thread Switch</a><time datetime="2022-01-30T09:02:37.093Z" title="Created 2022-01-30 17:02:37">2022-01-30</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>Categories</span>
             
             </div>
             <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/6-824/"><span class="card-category-list-name">6.824</span><span class="card-category-list-count">18</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/6-S081/"><span class="card-category-list-name">6.S081</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Algorithm-at-Scale/"><span class="card-category-list-name">Algorithm at Scale</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Leetcode/"><span class="card-category-list-name">Leetcode</span><span class="card-category-list-count">58</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/Aurora/" style="font-size: 1.1em; color: #999">Aurora</a> <a href="/tags/BFS/" style="font-size: 1.23em; color: #999ea6">BFS</a> <a href="/tags/BST/" style="font-size: 1.1em; color: #999">BST</a> <a href="/tags/Back-Tracking/" style="font-size: 1.14em; color: #999b9d">Back Tracking</a> <a href="/tags/Binary-Search/" style="font-size: 1.14em; color: #999b9d">Binary Search</a> <a href="/tags/Bitcoin/" style="font-size: 1.1em; color: #999">Bitcoin</a> <a href="/tags/COPS/" style="font-size: 1.1em; color: #999">COPS</a> <a href="/tags/CRAQ/" style="font-size: 1.1em; color: #999">CRAQ</a> <a href="/tags/Certificate-Transparency/" style="font-size: 1.1em; color: #999">Certificate Transparency</a> <a href="/tags/DFS/" style="font-size: 1.37em; color: #99a4b2">DFS</a> <a href="/tags/DP/" style="font-size: 1.46em; color: #99a7bb">DP</a> <a href="/tags/Distributed-Systems/" style="font-size: 1.41em; color: #99a5b7">Distributed Systems</a> <a href="/tags/FaRM/" style="font-size: 1.1em; color: #999">FaRM</a> <a href="/tags/Fast-Slow-pointers/" style="font-size: 1.1em; color: #999">Fast-Slow pointers</a> <a href="/tags/Finite-State-Machine/" style="font-size: 1.14em; color: #999b9d">Finite State Machine</a> <a href="/tags/Floyd/" style="font-size: 1.1em; color: #999">Floyd</a> <a href="/tags/Frangipani/" style="font-size: 1.1em; color: #999">Frangipani</a> <a href="/tags/Greedy/" style="font-size: 1.32em; color: #99a2ae">Greedy</a> <a href="/tags/Heap/" style="font-size: 1.1em; color: #999">Heap</a> <a href="/tags/Interval/" style="font-size: 1.1em; color: #999">Interval</a> <a href="/tags/Iteration/" style="font-size: 1.1em; color: #999">Iteration</a> <a href="/tags/KV-Raft/" style="font-size: 1.14em; color: #999b9d">KV Raft</a> <a href="/tags/Lab-Note/" style="font-size: 1.37em; color: #99a4b2">Lab Note</a> <a href="/tags/MapReduce/" style="font-size: 1.1em; color: #999">MapReduce</a> <a href="/tags/Math/" style="font-size: 1.14em; color: #999b9d">Math</a> <a href="/tags/Maximum-Increasing-Subsequence/" style="font-size: 1.1em; color: #999">Maximum Increasing Subsequence</a> <a href="/tags/Memcache-FB/" style="font-size: 1.1em; color: #999">Memcache@FB</a> <a href="/tags/Memory-Management/" style="font-size: 1.1em; color: #999">Memory Management</a> <a href="/tags/Monotone-Stack/" style="font-size: 1.19em; color: #999da1">Monotone Stack</a> <a href="/tags/No-AC-first-time/" style="font-size: 1.5em; color: #99a9bf">No AC first time</a> <a href="/tags/Prefix-Sum/" style="font-size: 1.1em; color: #999">Prefix Sum</a> <a href="/tags/Priority-Queue/" style="font-size: 1.23em; color: #999ea6">Priority Queue</a> <a href="/tags/Pruning/" style="font-size: 1.1em; color: #999">Pruning</a> <a href="/tags/Raft/" style="font-size: 1.14em; color: #999b9d">Raft</a> <a href="/tags/Sampling-Algorithm/" style="font-size: 1.1em; color: #999">Sampling Algorithm</a> <a href="/tags/ShardKV-Storage/" style="font-size: 1.14em; color: #999b9d">ShardKV Storage</a> <a href="/tags/Spanner/" style="font-size: 1.1em; color: #999">Spanner</a> <a href="/tags/Spark/" style="font-size: 1.1em; color: #999">Spark</a> <a href="/tags/Stack/" style="font-size: 1.14em; color: #999b9d">Stack</a> <a href="/tags/State-Compression/" style="font-size: 1.28em; color: #99a0aa">State Compression</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">December 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/11/"><span class="card-archive-list-date">November 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/09/"><span class="card-archive-list-date">September 2021</span><span class="card-archive-list-count">11</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">August 2021</span><span class="card-archive-list-count">65</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/06/"><span class="card-archive-list-date">June 2021</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">81</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-12-06T07:51:46.672Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Wang Yitao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/6-824/"><span class="card-category-list-name">6.824</span><span class="card-category-list-count">18</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Algorithm-at-Scale/"><span class="card-category-list-name">Algorithm at Scale</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Leetcode/"><span class="card-category-list-name">Leetcode</span><span class="card-category-list-count">59</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/MIT6-S081/"><span class="card-category-list-name">MIT6.S081</span><span class="card-category-list-count">20</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/Aurora/" style="font-size: 1.1em; color: #999">Aurora</a> <a href="/tags/BFS/" style="font-size: 1.23em; color: #999ea6">BFS</a> <a href="/tags/BST/" style="font-size: 1.1em; color: #999">BST</a> <a href="/tags/Back-Tracking/" style="font-size: 1.14em; color: #999b9d">Back Tracking</a> <a href="/tags/Binary-Search/" style="font-size: 1.14em; color: #999b9d">Binary Search</a> <a href="/tags/Bitcoin/" style="font-size: 1.1em; color: #999">Bitcoin</a> <a href="/tags/COPS/" style="font-size: 1.1em; color: #999">COPS</a> <a href="/tags/CRAQ/" style="font-size: 1.1em; color: #999">CRAQ</a> <a href="/tags/Certificate-Transparency/" style="font-size: 1.1em; color: #999">Certificate Transparency</a> <a href="/tags/DFS/" style="font-size: 1.32em; color: #99a2ae">DFS</a> <a href="/tags/DP/" style="font-size: 1.41em; color: #99a5b7">DP</a> <a href="/tags/Distributed-Systems/" style="font-size: 1.37em; color: #99a4b2">Distributed Systems</a> <a href="/tags/FaRM/" style="font-size: 1.1em; color: #999">FaRM</a> <a href="/tags/Fast-Slow-pointers/" style="font-size: 1.1em; color: #999">Fast-Slow pointers</a> <a href="/tags/Finite-State-Machine/" style="font-size: 1.14em; color: #999b9d">Finite State Machine</a> <a href="/tags/Floyd/" style="font-size: 1.1em; color: #999">Floyd</a> <a href="/tags/Frangipani/" style="font-size: 1.1em; color: #999">Frangipani</a> <a href="/tags/Greedy/" style="font-size: 1.28em; color: #99a0aa">Greedy</a> <a href="/tags/Heap/" style="font-size: 1.1em; color: #999">Heap</a> <a href="/tags/Interval/" style="font-size: 1.1em; color: #999">Interval</a> <a href="/tags/Iteration/" style="font-size: 1.1em; color: #999">Iteration</a> <a href="/tags/KV-Raft/" style="font-size: 1.14em; color: #999b9d">KV Raft</a> <a href="/tags/Lab-Note/" style="font-size: 1.32em; color: #99a2ae">Lab Note</a> <a href="/tags/MIT6-S081/" style="font-size: 1.46em; color: #99a7bb">MIT6.S081</a> <a href="/tags/MapReduce/" style="font-size: 1.1em; color: #999">MapReduce</a> <a href="/tags/Math/" style="font-size: 1.14em; color: #999b9d">Math</a> <a href="/tags/Maximum-Increasing-Subsequence/" style="font-size: 1.1em; color: #999">Maximum Increasing Subsequence</a> <a href="/tags/Memcache-FB/" style="font-size: 1.1em; color: #999">Memcache@FB</a> <a href="/tags/Monotone-Stack/" style="font-size: 1.19em; color: #999da1">Monotone Stack</a> <a href="/tags/No-AC-first-time/" style="font-size: 1.5em; color: #99a9bf">No AC first time</a> <a href="/tags/Permutation/" style="font-size: 1.1em; color: #999">Permutation</a> <a href="/tags/Prefix-Sum/" style="font-size: 1.1em; color: #999">Prefix Sum</a> <a href="/tags/Priority-Queue/" style="font-size: 1.23em; color: #999ea6">Priority Queue</a> <a href="/tags/Pruning/" style="font-size: 1.1em; color: #999">Pruning</a> <a href="/tags/Raft/" style="font-size: 1.14em; color: #999b9d">Raft</a> <a href="/tags/Sampling-Algorithm/" style="font-size: 1.1em; color: #999">Sampling Algorithm</a> <a href="/tags/ShardKV-Storage/" style="font-size: 1.14em; color: #999b9d">ShardKV Storage</a> <a href="/tags/Spanner/" style="font-size: 1.1em; color: #999">Spanner</a> <a href="/tags/Spark/" style="font-size: 1.1em; color: #999">Spark</a> <a href="/tags/Stack/" style="font-size: 1.14em; color: #999b9d">Stack</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">January 2022</span><span class="card-archive-list-count">20</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">December 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/11/"><span class="card-archive-list-date">November 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/09/"><span class="card-archive-list-date">September 2021</span><span class="card-archive-list-count">11</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">August 2021</span><span class="card-archive-list-count">62</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/06/"><span class="card-archive-list-date">June 2021</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">99</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-01-30T09:11:28.723Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Wang Yitao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
