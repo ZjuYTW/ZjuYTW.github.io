@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>6.824 Conclusion | Yitao's Blog</title><meta name="keywords" content="KV Raft,Lab Note"><meta name="author" content="Wang Yitao"><meta name="copyright" content="Wang Yitao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Conclusion  Lab3 is a tough journey, especially when you finish the whole framework, then problem just starts. I took roughly two days to complete my draft and spent 2-3 times time to debug. In order">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.824 Conclusion">
+<meta property="og:url" content="https://zjuytw.github.io/2021/08/09/6.824-lab3-Conclusion/index.html">
+<meta property="og:site_name" content="Yitao&#39;s Blog">
+<meta property="og:description" content="Conclusion  Lab3 is a tough journey, especially when you finish the whole framework, then problem just starts. I took roughly two days to complete my draft and spent 2-3 times time to debug. In order">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-08-09T10:06:40.000Z">
+<meta property="article:modified_time" content="2021-08-09T10:06:40.000Z">
+<meta property="article:author" content="Wang Yitao">
+<meta property="article:tag" content="KV Raft">
+<meta property="article:tag" content="Lab Note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://zjuytw.github.io/2021/08/09/6.824-lab3-Conclusion/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '6.824 Conclusion',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-09 18:06:40'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Yitao's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/ichigo1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">100</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">52</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yitao's Blog</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">6.824 Conclusion</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-08-09T10:06:40.000Z" title="Created 2021-08-09 18:06:40">2021-08-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-08-09T10:06:40.000Z" title="Updated 2021-08-09 18:06:40">2021-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/6-824/">6.824</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="6.824 Conclusion"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>Conclusion</h1>
+
+<p>Lab3 is a tough journey, especially when you finish the whole framework, then problem just starts. I took roughly two days to complete my draft and spent 2-3 times time to debug.</p>
+<p>In order to remind me of this hard time, spending hours reading 20000 lines log, suspecting each line I wrote and make you who are reading this avoid bugs or debug smoothly, I will write problems as explicit as I can.</p>
+<p>To make my design easy to understand, I will start with design graph.</p>
+<h2> Structural Design</h2>
+
+<p><img src="/2021/08/09/6.824-lab3-Conclusion/structural1.png" alt="structural1"></p>
+<p><img src="/2021/08/09/6.824-lab3-Conclusion/structural2.jpg" alt="structural2"></p>
+<h2> Specific Implementation</h2>
+
+<h3> Overview</h3>
+
+<p>Because detailed Raft design is described in former part, so let’s just assume we all pass Lab2 perfectly (Check it every time you modify Raft’s code!)</p>
+<ul>
+<li>For KV Server<ul>
+<li>In 3A, we achieve the functions to send command and listen to channel till <em>Raft</em> peers reach agreement and persist the command, once <em>Server</em> receives specific message, it should execute the command(Without repetition).</li>
+<li>In 3B, we will implement snapshot. This idea is straightforward but we need to overcome the side-effect it brings.</li>
+</ul>
+</li>
+<li>For Raft<ul>
+<li>We need not modify our Raft design in 3A</li>
+<li>In 3B, we should modify our code to deal with what Snapshot brings<ul>
+<li>the first problem is to make your <em>Raft</em> execute more fast to pass <strong>TestSnapshotSize3B</strong>. </li>
+<li>What time to tell KVServer to snapshot</li>
+<li>Index Convert</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Concrete Plan</h3>
+
+<h4>KVServer</h4>
+
+<ul>
+<li><p>To avoid repeating execution, assign each clerk an unique ID and mark each command a monotonically increasing sequence number. So <em>Server</em> can exam this info. which stored in <em>map</em> to decide whether execute.</p>
+</li>
+<li><p>KVServer:: Get()  &amp; PutAppend()</p>
+<p>A tricky implementation here is, in Get() we can achieve faster response by check the ClerkID’s current sequence number to get value directly.</p>
+<p>You can do timeout check by <strong>Receive a event of timer.After</strong> or <strong>Condition variable of check a count value</strong></p>
+</li>
+<li><p>KVServer:: commitCommandHandler()</p>
+<p>A thread function to listen to appMsg Channel. If receives message, it will do <strong>Valid check, Index check and Command check</strong> to execute a command in right way.</p>
+<p><strong>Note:</strong> Because the channel is a FIFO sequence, <em>Server</em>‘s execution sequence is decided by Raft’s push sequence. It’s a nice point that we don’t need to pay extra attention keep <em>Raft</em> and <em>KVServer</em> in sync, especially when <em>Raft</em> requires for a Snapshot in a very index.</p>
+</li>
+<li><p>appMsg Channel with buffer</p>
+<ul>
+<li>To make execution more efficient and decouple <em>Raft</em> and <em>KVServer</em>. We can preallocate a buffer for this channel so <em>Raft</em>‘s log can be pipelined down into channel.</li>
+<li>**Note:**Don’t worry about inconsistency, <em>Server</em> will still execute in sequence and <em>Raft</em> will still get the right index’s <em>Server’s</em> state Snapshot.</li>
+</ul>
+</li>
+</ul>
+<h4>Raft</h4>
+
+<ul>
+<li>Remember to check your <em>Raft</em> first when you encounter a problem!!!(90% bug)</li>
+</ul>
+<p>I actually don’t wanna talk a lot about basic design here, for <strong>InstallSnpshot RPC</strong> is much similar as previous design. But there are still some point I want to record.</p>
+<ul>
+<li><p>To achieve high concurrency.</p>
+<ul>
+<li>In previous part, I just make <strong>HeartBeat &amp; EntriesAppend</strong> a same mechanism to send : goroutine check rf.log every 100ms and send new log if nextIndex[i] &lt;= len(log) - 1.</li>
+<li>Now we can add an extra send action in Start( )</li>
+<li><strong>Note:</strong> Be careful when you do so. Imagine a partition situation: a network-failed leader gonna send his log to others each time it receives new log. Once it’s reconnected and receives info. from current leader and is ready to become follower, but  <strong>sendAppendEntries</strong> has been called. So a packet with up-to-dated term and false log will be received and accepted by other followers.<ul>
+<li>The problem is caused by checkStatus() step and sendAppendEntries() are not atomic, and in low concurrency situation this failure somehow are less likely to happen. </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Time point of chitchat</p>
+<ul>
+<li><em>Server</em> should send <em>maxRaftState</em> to <em>Raft</em> during init(), each time Raft do a commit, it should check RaftStateSize and send signal if oversize.</li>
+<li>Each time <em>Raft</em> truncates log, <em>lastApplied</em> should be changed as well as <em>IastIncludedIndex</em></li>
+<li><strong>Note:</strong> I read other’s Blog and they all mentioned one problem of deadlock which happens between Server and Raft. In my design, we don’t need to worry about it, for each layer is working just at its own range. If you design a structure that Locks kv.mu and rf.mu in same time, you should be aware of the bad consequence it may cause.</li>
+</ul>
+</li>
+<li><p>A weird slice reference problem happened on me</p>
+<ul>
+<li><p>Problem description: Leader has a log : [A, B, C, D, E] for short, and in one moment, the AppendEntries log it send became : [C, D, C, D, E]. I checked locks and run hundreds of time of race detection with race-free. It costs nearly 1 day to locate and find reason.</p>
+</li>
+<li><p>If you aren’t interested in this problem, just keep in mind: Golang’s slice has a implicit mechanism of copy and truncate, each time you use <strong>newdata = data[start :  end]</strong>, you have the idea that newdata will be effected as long as data changed. The bug will sometimes even make no sense when you do more operation on newdata.</p>
+</li>
+<li><p>Now let me intro my bug:</p>
+<p><img src="/2021/08/09/6.824-lab3-Conclusion/bug1.png" alt="image-20210706133342852"></p>
+<p>​                                                            Think about what Test will print</p>
+<ul>
+<li><p>It seems slice are not allocate <em>b</em> a new space, so <em>b’s</em> pointer is point to data’s physical array[2], what makes thing worse is</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="number">0</span>] = data[<span class="number">4</span>]</span><br><span class="line">tmp := data[<span class="number">5</span> : ]</span><br><span class="line">data = data[:<span class="number">1</span>]</span><br><span class="line">data = <span class="built_in">append</span>(data, tmp...)</span><br></pre></td></tr></table></figure>
+
+<p>also not assign a new memory to data. </p>
+<p><img src="/2021/08/09/6.824-lab3-Conclusion/bug2.png" alt="image-20210706133933221"></p>
+<p>​                                                                  So this is the result</p>
+</li>
+<li><p>But you can just use </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = data[<span class="number">4</span>:]</span><br></pre></td></tr></table></figure>
+
+<p>to truncate your log, because it will allocate a new array to data.</p>
+</li>
+<li><p>Now let’s check my code</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Called by KVServer to set Snapshot*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span> <span class="title">SetSnapshot</span><span class="params">(snapshot []<span class="keyword">byte</span>, index <span class="keyword">int</span>)</span></span>&#123;</span><br><span class="line">	rf.mu.Lock()</span><br><span class="line">	<span class="keyword">defer</span> rf.mu.Unlock()</span><br><span class="line">	<span class="keyword">if</span> rf.lastIncludedIndex &gt;= index &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//rf.log[0] = rf.log[rf.logIndexToArrayIndex(index)]</span></span><br><span class="line">	<span class="comment">//tmp := rf.log[rf.logIndexToArrayIndex(index+1):]</span></span><br><span class="line">	<span class="comment">//rf.log = rf.log[:1]</span></span><br><span class="line">	<span class="comment">//rf.log = append(rf.log, tmp...)</span></span><br><span class="line">	rf.log = rf.log[rf.logIndexToArrayIndex(index) : ]</span><br><span class="line">	rf.lastIncludedIndex =  index</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">		Be careful, the lastApplied need to be updated as well</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	rf.lastApplied = index</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span> <span class="title">startAppendEntries</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">//c := time.Now()</span></span><br><span class="line">	rf.mu.Lock()</span><br><span class="line">	<span class="keyword">if</span> rf.status != LEADER&#123;</span><br><span class="line">		rf.mu.Unlock()</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	index := <span class="built_in">len</span>(rf.log) - <span class="number">1</span> + rf.lastIncludedIndex</span><br><span class="line">	term := rf.currentTerm</span><br><span class="line">	leaderid := rf.me</span><br><span class="line">	leaderCommit := rf.commitIndex</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(rf.peers); i++ &#123;</span><br><span class="line">		<span class="keyword">var</span> logs []Pair</span><br><span class="line">		<span class="keyword">var</span> prevLogIndex, prevLogTerm <span class="keyword">int</span></span><br><span class="line">		<span class="keyword">if</span> i == leaderid &#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> rf.nextIndex[i] &lt;= rf.lastIncludedIndex&#123;</span><br><span class="line">			<span class="comment">//gonna send snapshot</span></span><br><span class="line">			<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>, lastIncludedIndex <span class="keyword">int</span>, lastIncludedTerm <span class="keyword">int</span>, data []<span class="keyword">byte</span>)</span></span>&#123;</span><br><span class="line">                <span class="comment">/* Install Snapshot RPC*/</span></span><br><span class="line">			...</span><br><span class="line">			&#125;(i, rf.lastIncludedIndex, rf.log[<span class="number">0</span>].Term, rf.persister.ReadSnapshot())</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> index &lt; rf.nextIndex[i] &#123;</span><br><span class="line">			prevLogIndex = index</span><br><span class="line">			prevLogTerm = rf.log[rf.logIndexToArrayIndex(prevLogIndex)].Term</span><br><span class="line">			</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> index &gt;= rf.nextIndex[i] &#123;</span><br><span class="line">			logs = rf.log[rf.logIndexToArrayIndex(rf.nextIndex[i]) : rf.logIndexToArrayIndex(index+<span class="number">1</span>)]</span><br><span class="line">			prevLogIndex = rf.nextIndex[i] - <span class="number">1</span></span><br><span class="line">			prevLogTerm = rf.log[rf.logIndexToArrayIndex(prevLogIndex)].Term</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>, prevTerm <span class="keyword">int</span>, prevIndex <span class="keyword">int</span>, logs []Pair)</span></span> &#123;</span><br><span class="line">			args := AppendEntriesArgs&#123;</span><br><span class="line">				Term:         term,</span><br><span class="line">				LeaderId:     leaderid,</span><br><span class="line">				PrevLogIndex: prevIndex,</span><br><span class="line">				PrevLogTerm:  prevTerm,</span><br><span class="line">				Entries:      logs,</span><br><span class="line">				LeaderCommit: leaderCommit,</span><br><span class="line">			&#125;</span><br><span class="line">			reply := AppendEntriesReply&#123;&#125;</span><br><span class="line">			ok := rf.sendAppendEntries(i, &amp;args, &amp;reply)</span><br><span class="line">			rf.mu.Lock()</span><br><span class="line">            ...</span><br><span class="line">			&#125;</span><br><span class="line">			rf.mu.Unlock()</span><br><span class="line">		&#125;(i, prevLogTerm, prevLogIndex, logs)</span><br><span class="line">	&#125;</span><br><span class="line">	rf.mu.Unlock()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>I just implicitly use the reference of log and pass it to the closure to call RPC. Although I lock the whole body of <em>startAppendEntries()</em>, the context within the closure is not atomic, so left log a time window to make change.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>When you encounter with other bugs: DPrint is a good helper  to locate errors, and make sure every variable  goes on track.</p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Wang Yitao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zjuytw.github.io/2021/08/09/6.824-lab3-Conclusion/">https://zjuytw.github.io/2021/08/09/6.824-lab3-Conclusion/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/KV-Raft/">KV Raft</a><a class="post-meta__tags" href="/tags/Lab-Note/">Lab Note</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/08/09/6.824-lab4-Conclusion/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">6.824 Lab4 Conclusion</div></div></a></div><div class="next-post pull-right"><a href="/2021/08/09/6.824-Lab3/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">6.824 Lab3 KVRaft</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/08/09/6.824-Lab3/" title="6.824 Lab3 KVRaft"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-09</div><div class="title">6.824 Lab3 KVRaft</div></div></a></div><div><a href="/2021/08/09/6.824-lab1-MapReduce/" title="6.824 Lab1 MapReduce"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-09</div><div class="title">6.824 Lab1 MapReduce</div></div></a></div><div><a href="/2021/08/09/6.824-lab2-Conclusion/" title="6.824 Lab2 Conclusion"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-09</div><div class="title">6.824 Lab2 Conclusion</div></div></a></div><div><a href="/2021/08/09/6.824-lab2-Raft/" title="6.824 Lab2 Raft"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-09</div><div class="title">6.824 Lab2 Raft</div></div></a></div><div><a href="/2021/08/09/6.824-lab4-Conclusion/" title="6.824 Lab4 Conclusion"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-09</div><div class="title">6.824 Lab4 Conclusion</div></div></a></div><div><a href="/2021/08/09/6.824-lab4/" title="6.824 Lab4"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-09</div><div class="title">6.824 Lab4</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/ichigo1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Wang Yitao</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">100</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">52</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZjuYTW"><i class="fab fa-github"></i><span>My Github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">My personal website, writing for fun and sharing knowledge</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Conclusion</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text"> Structural Design</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text"> Specific Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text"> Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">Concrete Plan</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">KVServer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Raft</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/06/25/Memory%20Order%E6%B5%85%E6%9E%90(%E4%BB%A5LevelDB%E4%B8%AD%E7%9A%84%E8%B7%B3%E8%A1%A8%E4%B8%BA%E4%BE%8B)/" title="Memory Order浅析（以LevelDB中的跳表为例）">Memory Order浅析（以LevelDB中的跳表为例）</a><time datetime="2022-06-25T05:50:48.000Z" title="Created 2022-06-25 13:50:48">2022-06-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/30/Lec13--%20Ex3%20Recovery/" title="MIT6.S081 Lecture14 Ext3fs crash recovery">MIT6.S081 Lecture14 Ext3fs crash recovery</a><time datetime="2022-01-30T09:10:34.000Z" title="Created 2022-01-30 17:10:34">2022-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/30/Lec11--%20File%20System/" title="MIT6.S081 Lecture12 File system on xv6">MIT6.S081 Lecture12 File system on xv6</a><time datetime="2022-01-30T09:08:00.000Z" title="Created 2022-01-30 17:08:00">2022-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/30/Lec9--%20Thread%20Switch/" title="MIT6.S081 Lecture10 Thread Switch">MIT6.S081 Lecture10 Thread Switch</a><time datetime="2022-01-30T09:07:52.000Z" title="Created 2022-01-30 17:07:52">2022-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/30/Lec10--%20synchronize/" title="MIT6.S081 Lecture11 Machinery about synchronize">MIT6.S081 Lecture11 Machinery about synchronize</a><time datetime="2022-01-30T09:07:46.000Z" title="Created 2022-01-30 17:07:46">2022-01-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Wang Yitao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
